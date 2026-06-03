@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGMA Level 1 Game (Simulated Construct 2)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ECEFFC;
+      color: #494949;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(83, 180, 251, 0.12);
+      border: 3px solid #53B4FB;
+      box-sizing: border-box;
+    }
+    h2 {
+      color: #53B4FB;
+      margin-top: 0;
+      font-size: 22px;
+      text-align: center;
+    }
+    .avatar {
+      font-size: 40px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .chat-bubble {
+      background: #f0f4f8;
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-left: 5px solid #53B4FB;
+      font-size: 13px;
+    }
+    .choice-btn {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      margin: 10px 0;
+      background: white;
+      border: 2px solid #C8B6FB;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+      text-align: left;
+      color: #494949;
+      font-size: 12px;
+      box-sizing: border-box;
+    }
+    .choice-btn:hover {
+      background: #C8B6FB;
+      border-color: #a58cfc;
+    }
+    .feedback {
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .right-feedback {
+      background-color: #E8F5E9;
+      border: 2px solid #4CAF50;
+      color: #2E7D32;
+    }
+    .wrong-feedback {
+      background-color: #FFEBEE;
+      border: 2px solid #FF5A5F;
+      color: #C62828;
+    }
+    .submit-btn {
+      width: 100%;
+      background: #FFAB41;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      border-bottom: 4px solid #D97E0C;
+      transition: all 0.1s;
+      margin-top: 15px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .submit-btn:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="intro-screen">
+    <h2>Construct 2 Simulator - Level 1</h2>
+    <div class="avatar">👦</div>
+    <p style="text-align: center;">
+      <strong>Teman Baru di Game Online</strong><br>
+      Skenario: Seseorang bernama Aldi_Gamer14 mencoba berteman secara agresif di chat room game online.
+    </p>
+    <button class="submit-btn" onclick="startScenario()">Mulai Simulasi Game</button>
+  </div>
+
+  <div class="card hidden" id="game-screen">
+    <h2>Game Level 1</h2>
+    <div class="chat-bubble">
+      <strong>Aldi_Gamer14:</strong><br>
+      "Halo! Aku lihat kamu main game ini juga ya? Aku Aldi, umur 14 tahun. Mabar yuk! Btw, kamu sekolah di mana dan kelas berapa? Siapa tahu sekolah kita deketan."
+    </div>
+
+    <div id="choices-container">
+      <button class="choice-btn" onclick="choose(0)">
+        A. "Halo Aldi! Aku sekolah di SMP Merdeka kelas 7. Aku mau banget mabar sekarang!"
+      </button>
+      <button class="choice-btn" onclick="choose(1)">
+        B. "Halo. Aku mabar sama temen sekelasku saja. Aku dilarang kasih tahu nama sekolah ke orang asing."
+      </button>
+    </div>
+
+    <div class="feedback hidden" id="feedback-box"></div>
+
+    <button class="submit-btn hidden" id="next-btn" onclick="finishLevel()">Selesaikan Level</button>
+  </div>
+
+  <script>
+    let safetyScore = 100;
+
+    function startScenario() {
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+    }
+
+    function choose(choiceIdx) {
+      const fbBox = document.getElementById('feedback-box');
+      fbBox.classList.remove('hidden');
+      document.getElementById('choices-container').classList.add('hidden');
+      document.getElementById('next-btn').classList.remove('hidden');
+
+      if (choiceIdx === 1) {
+        safetyScore = 100;
+        fbBox.className = "feedback right-feedback";
+        fbBox.innerHTML = "<strong>Sikap yang Tepat (Aman)!</strong><br>Kamu menolak memberikan informasi sekolah dan menetapkan batas pertemanan. Langkah ini sangat baik untuk keamanan data pribadimu.";
+      } else {
+        safetyScore = 55;
+        fbBox.className = "feedback wrong-feedback";
+        fbBox.innerHTML = "<strong>Waspada (Berisiko)!</strong><br>Membagikan nama sekolah dan umur instan mempermudah orang asing melacakmu. Pastikan untuk menjaga rahasia data pribadimu.";
+      }
+    }
+
+    function finishLevel() {
+      // Send event message to parent window (React shell)
+      window.parent.postMessage({
+        type: 'SIGMA_LEVEL_COMPLETED',
+        levelId: 1,
+        score: safetyScore
+      }, '*');
+    }
+  </script>
+</body>
+</html>

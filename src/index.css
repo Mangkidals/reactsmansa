@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-heading: 'Fredoka', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --color-bg-light: #ECEFFC;
+  --color-primary-blue: #53B4FB;
+  --color-accent-orange: #FFAB41;
+  --color-accent-orange-dark: #FF6D00;
+  --color-text-dark: #494949;
+  --color-accent-purple: #C8B6FB;
+
+  --color-wrong-red: #FF5A5F;
+  --color-right-green: #4CAF50;
+
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-bounce-slow: bounce-slow 2s infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes bounce-slow {
+    0%, 100% {
+      transform: translateY(0);
+      animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+    }
+    50% {
+      transform: translateY(-5px);
+      animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 0.8;
+      box-shadow: 0 0 15px rgba(83, 180, 251, 0.4);
+    }
+    50% {
+      opacity: 1;
+      box-shadow: 0 0 25px rgba(83, 180, 251, 0.7);
+    }
+  }
+}
+
+/* Custom CSS Base and Resets */
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Custom premium scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ECEFFC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-blue);
+  border-radius: 9999px;
+  border: 2px solid #ECEFFC;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-orange-dark);
+}
+
+/* Selection highlight */
+::selection {
+  background: var(--color-accent-purple);
+  color: #494949;
+}
+
+/* Custom card shadow/glows */
+.premium-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(83, 180, 251, 0.08);
+}
+
+.premium-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.premium-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px 0 rgba(83, 180, 251, 0.15);
+  border-color: rgba(83, 180, 251, 0.3);
+}
+
+.game-btn-orange {
+  background: var(--color-accent-orange);
+  color: white;
+  border-bottom: 4px solid var(--color-accent-orange-dark);
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  transition: all 0.1s ease;
+}
+
+.game-btn-orange:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}
+
+.game-btn-purple {
+  background: var(--color-accent-purple);
+  color: var(--color-text-dark);
+  border-bottom: 4px solid #b099f7;
+  border-radius: 9999px;
+  font-family: var(--font-heading);
+  transition: all 0.1s ease;
+}
+
+.game-btn-purple:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+}

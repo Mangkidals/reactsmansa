@@ -1,0 +1,194 @@
+import React from 'react';
+import heroImage from '../assets/hero.png';
+
+export default function Home({ setActivePage, setGameState, setActiveMateriTab, setSelectedArticle, articles }) {
+  return (
+    <div className="space-y-16 animate-fade-in">
+      
+      {/* Hero Section */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
+        <div className="lg:col-span-7 space-y-6">
+          <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
+            <span>🚀</span>
+            <span>Strategi Monitoring Anak & Edukasi Digital</span>
+          </div>
+          
+          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
+            Kenali <span className="text-[#53B4FB]">Cyber Grooming</span>,<br />
+            Jaga Keamanan Digital Kita!
+          </h1>
+
+          <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
+            <strong>SIGMA</strong> (Strategi Identifikasi Grooming & Monitoring Anak) merupakan web game edukatif yang dirancang untuk membantu siswa dalam memahami, mengenali, dan mencegah perilaku manipulatif (cyber grooming) di dunia digital.
+          </p>
+
+          <div className="flex flex-wrap gap-4 pt-2">
+            <button
+              onClick={() => setActivePage('game')}
+              className="px-8 py-4 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-orange-200 transition-all cursor-pointer"
+            >
+              🎮 Mulai Bermain Game
+            </button>
+            <button
+              onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
+              className="px-8 py-4 bg-white hover:bg-blue-50 text-[#53B4FB] border-2 border-[#53B4FB] font-heading font-bold text-lg rounded-full transition-all shadow-sm cursor-pointer"
+            >
+              📖 Baca Modul Belajar
+            </button>
+          </div>
+        </div>
+
+        {/* Infinite-child Image Illustration */}
+        <div className="lg:col-span-5 flex justify-center relative">
+          <div className="absolute -inset-4 bg-blue-200/30 rounded-full blur-2xl z-0"></div>
+          <img
+            src={heroImage}
+            alt="SIGMA Hero Illustration"
+            className="w-full max-w-[380px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
+          />
+          
+          <div className="absolute -bottom-2 -left-2 bg-white/90 backdrop-blur border border-blue-100 p-3 rounded-2xl shadow-lg flex items-center space-x-3 z-20">
+            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+              <span className="text-xl">🛡️</span>
+            </div>
+            <div>
+              <h4 className="text-xs font-bold text-gray-700">100% Aman</h4>
+              <p className="text-[10px] text-gray-400">Direkomendasikan Guru</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Core Penjelasan / Visi & Misi Card Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8">
+        
+        {/* Card Penjelasan */}
+        <div className="premium-card rounded-3xl p-8 space-y-4">
+          <h3 className="font-heading text-2xl font-bold text-blue-600 flex items-center space-x-2">
+            <span>💡</span>
+            <span>Tentang SIGMA</span>
+          </h3>
+          <p className="text-gray-600 leading-relaxed text-sm">
+            Melalui berbagai skenario dan tantangan di dalam permainan simulasi, siswa diajak untuk menganalisis situasi obrolan, menentukan keputusan yang tepat, serta meningkatkan kewaspadaan terhadap interaksi mencurigakan di media sosial maupun platform game.
+          </p>
+          <p className="text-gray-600 leading-relaxed text-sm">
+            Selain berfungsi sebagai media edukasi mandiri, web ini juga menerapkan konsep <strong>monitoring pembelajaran</strong> yang memungkinkan siswa, guru, dan orang tua memantau tingkat pemahaman keamanan anak secara real-time.
+          </p>
+        </div>
+
+        {/* Card Visi & Misi */}
+        <div className="premium-card rounded-3xl p-8 space-y-4 border-l-4 border-l-[#C8B6FB]">
+          <h3 className="font-heading text-2xl font-bold text-[#b099f7] flex items-center space-x-2">
+            <span>🎯</span>
+            <span>Visi & Misi</span>
+          </h3>
+          
+          <div className="space-y-4">
+            <div>
+              <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400">Visi</h4>
+              <p className="text-xs text-gray-600 italic mt-0.5">
+                "Menjadi web game edukatif berbasis strategi dan monitoring anak yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming."
+              </p>
+            </div>
+
+            <div>
+              <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-1">Misi Utama</h4>
+              <ul className="space-y-1.5 text-xs text-gray-600">
+                <li className="flex items-start space-x-2">
+                  <span className="text-[#FFAB41]">1.</span>
+                  <span>Menyajikan materi edukasi cyber grooming dalam bentuk permainan yang interaktif dan menyenangkan.</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <span className="text-[#FFAB41]">2.</span>
+                  <span>Membantu siswa mengenali tanda, pola, dan tahapan perilaku cyber grooming di media sosial.</span>
+                </li>
+                <li className="flex items-start space-x-2">
+                  <span className="text-[#FFAB41]">3.</span>
+                  <span>Menumbuhkan sikap berani, peduli, dan tanggap untuk melindungi diri sendiri maupun teman sebaya.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Quick Access Banners */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        {/* Access Game */}
+        <div className="premium-card rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden group premium-card-hover border border-blue-100">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#FFAB41]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
+          <div className="w-14 h-14 bg-[#FFAB41]/20 rounded-2xl flex items-center justify-center text-3xl shadow-inner shrink-0">🎮</div>
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="font-heading text-xl font-bold text-gray-800">Uji Kewaspadaanmu!</h3>
+            <p className="text-xs text-gray-500">Masuk ke ruang chat simulasi dan pelajari cara mengenali penipu atau pelaku kejahatan siber.</p>
+            <button
+              onClick={() => { setActivePage('game'); setGameState('select_level'); }}
+              className="inline-flex items-center space-x-2 text-xs font-bold text-[#FF6D00] hover:underline pt-1 cursor-pointer bg-transparent border-0"
+            >
+              <span>Masuk ke Laman Game</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Access Modul */}
+        <div className="premium-card rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden group premium-card-hover border border-blue-100">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#C8B6FB]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
+          <div className="w-14 h-14 bg-[#C8B6FB]/20 rounded-2xl flex items-center justify-center text-3xl shadow-inner shrink-0">📖</div>
+          <div className="space-y-2 text-center md:text-left">
+            <h3 className="font-heading text-xl font-bold text-gray-800">Modul Belajar Interaktif</h3>
+            <p className="text-xs text-gray-500">Pelajari apa itu grooming, tanda bahaya, dan langkah aman pelaporan via bacaan interaktif.</p>
+            <button
+              onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
+              className="inline-flex items-center space-x-2 text-xs font-bold text-[#b099f7] hover:underline pt-1 cursor-pointer bg-transparent border-0"
+            >
+              <span>Masuk ke Laman Materi</span>
+              <span>→</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Articles Section Preview */}
+      <div className="space-y-6">
+        <div className="flex justify-between items-end border-b border-blue-100 pb-3">
+          <div>
+            <h2 className="font-heading text-2xl font-bold text-gray-800">Artikel & Jurnal Edukasi</h2>
+            <p className="text-xs text-gray-400">Dapatkan wawasan seputar pola kejahatan digital terhadap anak</p>
+          </div>
+          <button
+            onClick={() => { setActivePage('materi'); setActiveMateriTab('jurnal'); }}
+            className="text-xs font-bold text-[#53B4FB] hover:underline cursor-pointer bg-transparent border-0"
+          >
+            Lihat Semua Artikel →
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {articles.map(art => (
+            <div
+              key={art.id}
+              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer"
+              onClick={() => setSelectedArticle(art)}
+            >
+              <div className="space-y-3">
+                <div className="text-[10px] font-bold text-blue-500 uppercase">{art.date}</div>
+                <h4 className="font-heading font-bold text-gray-800 leading-snug hover:text-[#53B4FB] transition-colors">{art.title}</h4>
+                <p className="text-xs text-gray-500 line-clamp-3 leading-relaxed">{art.summary}</p>
+              </div>
+              
+              <div className="mt-4 pt-3 border-t border-gray-50 flex items-center text-xs font-bold text-gray-700">
+                <span>Baca Selengkapnya</span>
+                <span className="ml-1 text-[#53B4FB]">→</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  );
+}

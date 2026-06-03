@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIGMA Level 2 Game (Simulated Construct 2)</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #ECEFFC;
+      color: #494949;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+    }
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 30px;
+      max-width: 460px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(83, 180, 251, 0.12);
+      border: 3px solid #FFAB41;
+      box-sizing: border-box;
+    }
+    h2 {
+      color: #FFAB41;
+      margin-top: 0;
+      font-size: 22px;
+      text-align: center;
+    }
+    .avatar {
+      font-size: 40px;
+      margin: 15px 0;
+      text-align: center;
+    }
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .chat-bubble {
+      background: #f0f4f8;
+      border-radius: 16px;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-left: 5px solid #FFAB41;
+      font-size: 13px;
+    }
+    .choice-btn {
+      display: block;
+      width: 100%;
+      padding: 12px 16px;
+      margin: 10px 0;
+      background: white;
+      border: 2px solid #C8B6FB;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.2s;
+      text-align: left;
+      color: #494949;
+      font-size: 12px;
+      box-sizing: border-box;
+    }
+    .choice-btn:hover {
+      background: #C8B6FB;
+      border-color: #a58cfc;
+    }
+    .feedback {
+      padding: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .right-feedback {
+      background-color: #E8F5E9;
+      border: 2px solid #4CAF50;
+      color: #2E7D32;
+    }
+    .wrong-feedback {
+      background-color: #FFEBEE;
+      border: 2px solid #FF5A5F;
+      color: #C62828;
+    }
+    .submit-btn {
+      width: 100%;
+      background: #FFAB41;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      border-bottom: 4px solid #D97E0C;
+      transition: all 0.1s;
+      margin-top: 15px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .submit-btn:active {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="intro-screen">
+    <h2>Construct 2 Simulator - Level 2</h2>
+    <div class="avatar">🦊</div>
+    <p style="text-align: center;">
+      <strong>Hadiah Misterius</strong><br>
+      Skenario: Teman online menawarkan top-up game bernilai tinggi secara gratis dan menuntut foto pribadi sebagai imbalan.
+    </p>
+    <button class="submit-btn" onclick="startScenario()">Mulai Simulasi Game</button>
+  </div>
+
+  <div class="card hidden" id="game-screen">
+    <h2>Game Level 2</h2>
+    <div class="chat-bubble">
+      <strong>Kak Aldi:</strong><br>
+      "Nih, udah aku top-up-in diamond gratis buat kamu. Sebagai gantinya, kirim foto selfie terbaru kamu dong sekarang buat profilku!"
+    </div>
+
+    <div id="choices-container">
+      <button class="choice-btn" onclick="choose(0)">
+        A. "Maaf Kak, aku tidak bisa terima hadiah gratis dari orang asing, dan aku dilarang mengirimkan fotoku."
+      </button>
+      <button class="choice-btn" onclick="choose(1)">
+        B. "Wah terima kasih banyak Kak! Ini fotoku pakai baju santai."
+      </button>
+    </div>
+
+    <div class="feedback hidden" id="feedback-box"></div>
+
+    <button class="submit-btn hidden" id="next-btn" onclick="finishLevel()">Selesaikan Level</button>
+  </div>
+
+  <script>
+    let safetyScore = 100;
+
+    function startScenario() {
+      document.getElementById('intro-screen').classList.add('hidden');
+      document.getElementById('game-screen').classList.remove('hidden');
+    }
+
+    function choose(choiceIdx) {
+      const fbBox = document.getElementById('feedback-box');
+      fbBox.classList.remove('hidden');
+      document.getElementById('choices-container').classList.add('hidden');
+      document.getElementById('next-btn').classList.remove('hidden');
+
+      if (choiceIdx === 0) {
+        safetyScore = 100;
+        fbBox.className = "feedback right-feedback";
+        fbBox.innerHTML = "<strong>Sikap yang Tepat (Aman)!</strong><br>Menolak gratifikasi digital gratis sangat tepat untuk menghindari jeratan 'hutang budi' yang biasa dieksploitasi pelaku grooming.";
+      } else {
+        safetyScore = 45;
+        fbBox.className = "feedback wrong-feedback";
+        fbBox.innerHTML = "<strong>Waspada (Berisiko)!</strong><br>Mengirimkan foto pribadi memberi peluang pelaku untuk menyalahgunakan visualmu sebagai alat manipulasi lanjutan.";
+      }
+    }
+
+    function finishLevel() {
+      window.parent.postMessage({
+        type: 'SIGMA_LEVEL_COMPLETED',
+        levelId: 2,
+        score: safetyScore
+      }, '*');
+    }
+  </script>
+</body>
+</html>
