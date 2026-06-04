@@ -20,7 +20,6 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
-            <span>🚀</span>
             <span>Strategi Monitoring Anak & Edukasi Digital</span>
           </div>
           
@@ -38,13 +37,13 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               onClick={() => setActivePage('game')}
               className="px-8 py-4 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-orange-200 transition-all cursor-pointer"
             >
-              🎮 Mulai Bermain Game
+            Mulai Bermain Game
             </button>
             <button
               onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
               className="px-8 py-4 bg-white hover:bg-blue-50 text-[#53B4FB] border-2 border-[#53B4FB] font-heading font-bold text-lg rounded-full transition-all shadow-sm cursor-pointer"
             >
-              📖 Baca Modul Belajar
+            Baca Modul Belajar
             </button>
           </div>
         </div>
@@ -76,7 +75,6 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
         {/* Card Penjelasan */}
         <div className="premium-card rounded-3xl p-8 space-y-4">
           <h3 className="font-heading text-2xl font-bold text-blue-600 flex items-center space-x-2">
-            <span>💡</span>
             <span>Tentang SIGMA</span>
           </h3>
           <p className="text-gray-600 leading-relaxed text-sm">
@@ -90,7 +88,6 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
         {/* Card Visi & Misi */}
         <div className="premium-card rounded-3xl p-8 space-y-4 border-l-4 border-l-[#C8B6FB]">
           <h3 className="font-heading text-2xl font-bold text-[#b099f7] flex items-center space-x-2">
-            <span>🎯</span>
             <span>Visi & Misi</span>
           </h3>
           

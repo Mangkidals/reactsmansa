@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logoImage from '../assets/hero.png';
 
 export default function Navbar({ activePage, setActivePage, setGameState }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
   const menuItems = [
-    { id: 'home', label: 'Beranda', icon: '🏠' },
-    { id: 'materi', label: 'Laman Materi', icon: '📖' },
-    { id: 'game', label: 'Laman Game', icon: '🎮' }
+    { id: 'home', label: 'Beranda'},
+    { id: 'materi', label: 'Laman Materi' },
+    { id: 'game', label: 'Laman Game' }
   ];
 
   return (
@@ -55,32 +57,55 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
               ))}
             </div>
 
+            {/* Mobile Hamburger Button */}
+            <div className="flex md:hidden items-center">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2.5 rounded-2xl text-gray-500 hover:text-[#53B4FB] hover:bg-blue-50/50 transition-all cursor-pointer border border-transparent active:scale-95"
+                aria-label="Toggle Menu"
+              >
+                {isOpen ? (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
             {/* Empty space to balance layout */}
             <div className="w-12 h-12 hidden md:block"></div>
 
           </div>
         </div>
-      </nav>
 
-      {/* Mobile navigation bottom bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-blue-100 z-40 px-2 py-2 flex justify-around shadow-[0_-4px_16px_rgba(0,0,0,0.05)]">
-        {menuItems.map(item => (
-          <button
-            key={item.id}
-            onClick={() => {
-              setActivePage(item.id);
-              if (item.id !== 'game') {
-                setGameState('select_level');
-              }
-            }}
-            className={`flex flex-col items-center py-1.5 px-3 rounded-xl transition-all ${activePage === item.id ? 'text-[#53B4FB] font-bold' : 'text-gray-400'
-              }`}
-          >
-            <span className="text-xl mb-0.5">{item.icon}</span>
-            <span className="text-[10px]">{item.label}</span>
-          </button>
-        ))}
-      </div>
+        {/* Mobile navigation dropdown */}
+        {isOpen && (
+          <div className="md:hidden border-t border-blue-100/50 bg-white/95 backdrop-blur-md px-4 py-4 flex flex-col space-y-2 shadow-lg animate-fade-in">
+            {menuItems.map(item => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  setActivePage(item.id);
+                  if (item.id !== 'game') {
+                    setGameState('select_level');
+                  }
+                  setIsOpen(false);
+                }}
+                className={`w-full px-5 py-3.5 rounded-2xl font-heading font-bold text-left transition-all duration-200 text-sm flex items-center space-x-3 cursor-pointer ${activePage === item.id
+                    ? 'bg-[#53B4FB] text-white shadow-md shadow-blue-200'
+                    : 'hover:bg-blue-50/70 text-[#494949]'
+                  }`}
+              >
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </nav>
     </>
   );
 }

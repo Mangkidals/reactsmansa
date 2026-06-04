@@ -23,20 +23,20 @@ export default function Materi({
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex flex-wrap justify-center gap-2 border-b border-blue-100 pb-1">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 border-b border-blue-100 pb-4">
         {[
-          { id: 'video', label: '🎬 Video Edukasi', color: 'border-b-[#53B4FB]' },
-          { id: 'modul', label: '📚 Buku Modul Interaktif', color: 'border-b-[#FFAB41]' },
-          { id: 'ahli', label: '👩‍🏫 Pandangan Para Ahli', color: 'border-b-[#C8B6FB]' },
-          { id: 'jurnal', label: '📝 Artikel & Jurnal Hukum', color: 'border-b-green-500' }
+          { id: 'video', label: 'Video Edukasi', activeClass: 'border-[#53B4FB] bg-[#53B4FB]/5 text-[#53B4FB]', inactiveClass: 'border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50' },
+          { id: 'modul', label: 'Buku Modul Interaktif', activeClass: 'border-[#FFAB41] bg-[#FFAB41]/5 text-[#FF6D00]', inactiveClass: 'border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50' },
+          { id: 'ahli', label: 'Pandangan Para Ahli', activeClass: 'border-[#C8B6FB] bg-[#C8B6FB]/5 text-[#8668ed]', inactiveClass: 'border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50' },
+          { id: 'jurnal', label: 'Artikel & Jurnal Hukum', activeClass: 'border-green-500 bg-green-500/5 text-green-600', inactiveClass: 'border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50' }
         ].map(tab => (
           <button
             key={tab.id}
             onClick={() => setActiveMateriTab(tab.id)}
-            className={`px-6 py-3 font-heading font-bold text-sm transition-all border-b-4 cursor-pointer ${
+            className={`px-4 py-3 font-heading font-bold text-xs sm:text-sm transition-all border-2 rounded-2xl text-center cursor-pointer shadow-sm ${
               activeMateriTab === tab.id
-                ? `border-b-4 ${tab.color} text-gray-800 scale-105`
-                : 'border-b-transparent text-gray-400 hover:text-gray-600'
+                ? tab.activeClass
+                : tab.inactiveClass
             }`}
           >
             {tab.label}
@@ -68,7 +68,6 @@ export default function Materi({
 
             <div className="lg:col-span-5 space-y-5">
               <div className="bg-[#FFAB41]/10 border border-[#FFAB41]/20 p-4 rounded-2xl flex items-center space-x-3 text-[#FF6D00] text-xs font-bold">
-                <span>📢</span>
                 <span>Menonton video membantu menyelesaikan Kuis Laman Game lebih cepat!</span>
               </div>
 

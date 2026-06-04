@@ -46,7 +46,7 @@ export default function Game({
             <div className="space-y-2">
               <h3 className="font-heading text-lg font-bold text-gray-800">Lengkapi Tes untuk Evaluasi</h3>
               <p className="text-xs text-gray-500">
-                Kerjakan <strong>Pretest</strong> sebelum mulai bermain, dan lakukan <strong>Posttest</strong> setelah kamu menamatkan seluruh skenario game. Perkembangan skormu akan tersimpan di dasbor monitoring!
+                Kerjakan <strong>Pre-test</strong> sebelum mulai bermain, dan lakukan <strong>Post-test</strong> setelah kamu menamatkan seluruh skenario game. Perkembangan skormu akan tersimpan di dasbor monitoring!
               </p>
             </div>
             
@@ -59,7 +59,7 @@ export default function Game({
                     : 'bg-[#53B4FB] border-blue-600 text-white hover:bg-blue-400 active:translate-y-0.5'
                 }`}
               >
-                {pretestScore !== null ? `✓ Pretest Selesai (${pretestScore})` : '📝 Mulai Pretest'}
+                {pretestScore !== null ? `✓ Pretest Selesai (${pretestScore})` : 'Mulai Pre-test'}
               </button>
               
               <button
@@ -73,7 +73,7 @@ export default function Game({
                     : 'bg-[#C8B6FB] border-[#a58cfc] text-[#494949] hover:bg-[#bfaefc] active:translate-y-0.5'
                 }`}
               >
-                {posttestScore !== null ? `✓ Posttest Selesai (${posttestScore})` : '🏆 Mulai Posttest'}
+                {posttestScore !== null ? `✓ Post-test Selesai (${posttestScore})` : 'Mulai Post-test'}
               </button>
             </div>
           </div>
@@ -404,7 +404,7 @@ export default function Game({
               Hebat! Kamu Telah Lulus!
             </h3>
             <p className="text-xs text-gray-500 leading-relaxed px-4">
-              Kamu telah menyelesaikan seluruh skenario game SIGMA dan mengisi Posttest evaluasi akhir.
+              Kamu telah menyelesaikan seluruh skenario game SIGMA dan mengisi Post-test evaluasi akhir.
             </p>
           </div>
 
