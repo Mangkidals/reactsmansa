@@ -46,12 +46,11 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
                       setGameState('select_level');
                     }
                   }}
-                  className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 text-sm flex items-center space-x-2 cursor-pointer ${activePage === item.id
+                  className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 text-sm flex items-center justify-center cursor-pointer ${activePage === item.id
                       ? 'bg-[#53B4FB] text-white shadow-md shadow-blue-200 scale-105'
                       : 'hover:bg-blue-50 text-[#494949]'
                     }`}
                 >
-                  <span>{item.icon}</span>
                   <span>{item.label}</span>
                 </button>
               ))}

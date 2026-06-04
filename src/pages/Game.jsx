@@ -103,12 +103,7 @@ export default function Game({
                       <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-full animate-pulse-glow">
                         BUKA
                       </span>
-                    ) : (
-                      <span className="bg-gray-100 text-gray-500 text-[10px] font-bold px-2.5 py-1 rounded-full flex items-center space-x-1">
-                        <span>🔒</span>
-                        <span>Terkunci</span>
-                      </span>
-                    )}
+                    ) : null}
                   </div>
 
                   <div className="space-y-4">
@@ -268,8 +263,6 @@ export default function Game({
                 <p className="text-[10px] text-gray-400">Mainkan game Construct 2 di bawah</p>
               </div>
             </div>
-            
-            <ExitButton onClick={exitGame} />
           </div>
 
           {/* Construct 2 Game Iframe Container */}
