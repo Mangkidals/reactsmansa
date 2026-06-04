@@ -46,7 +46,7 @@ export default function Game({
             <div className="space-y-2">
               <h3 className="font-heading text-lg font-bold text-gray-800">Lengkapi Tes untuk Evaluasi</h3>
               <p className="text-xs text-gray-500">
-                Kerjakan <strong>Pre-test</strong> sebelum mulai bermain, dan lakukan <strong>Post-test</strong> setelah kamu menamatkan seluruh skenario game. Perkembangan skormu akan tersimpan di dasbor monitoring!
+                Kerjakan <strong>Pre-test</strong> sebelum mulai bermain, dan lakukan <strong>Post-test</strong> setelah kamu menamatkan seluruh skenario game. Perkembangan skormu akan tersimpan untuk evaluasi hasil belajarmu!
               </p>
             </div>
             

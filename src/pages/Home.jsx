@@ -20,7 +20,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
-            <span>Strategi Monitoring Anak & Edukasi Digital</span>
+            <span>Strategi Identifikasi & Edukasi Digital</span>
           </div>
           
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
@@ -29,7 +29,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           </h1>
 
           <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
-            <strong>SIGMA</strong> (Strategi Identifikasi Grooming & Monitoring Anak) merupakan web game edukatif yang dirancang untuk membantu siswa dalam memahami, mengenali, dan mencegah perilaku manipulatif (cyber grooming) di dunia digital.
+            <strong>SIGMA</strong> (Strategi Identifikasi Grooming Anak) merupakan web game edukatif yang dirancang untuk membantu siswa dalam memahami, mengenali, dan mencegah perilaku manipulatif (cyber grooming) di dunia digital.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-2">
@@ -80,9 +80,6 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           <p className="text-gray-600 leading-relaxed text-sm">
             Melalui berbagai skenario dan tantangan di dalam permainan simulasi, siswa diajak untuk menganalisis situasi obrolan, menentukan keputusan yang tepat, serta meningkatkan kewaspadaan terhadap interaksi mencurigakan di media sosial maupun platform game.
           </p>
-          <p className="text-gray-600 leading-relaxed text-sm">
-            Selain berfungsi sebagai media edukasi mandiri, web ini juga menerapkan konsep <strong>monitoring pembelajaran</strong> yang memungkinkan siswa, guru, dan orang tua memantau tingkat pemahaman keamanan anak secara real-time.
-          </p>
         </div>
 
         {/* Card Visi & Misi */}
@@ -95,7 +92,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             <div>
               <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400">Visi</h4>
               <p className="text-xs text-gray-600 italic mt-0.5">
-                "Menjadi web game edukatif berbasis strategi dan monitoring anak yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming."
+                "Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming."
               </p>
             </div>
 
@@ -146,7 +143,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           <div className="absolute top-0 right-0 w-24 h-24 bg-[#C8B6FB]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
           <div className="w-14 h-14 bg-[#C8B6FB]/20 rounded-2xl flex items-center justify-center text-3xl shadow-inner shrink-0">📖</div>
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-heading text-xl font-bold text-gray-800">Modul Belajar Interaktif</h3>
+            <h3 className="font-heading text-xl font-bold text-gray-800">Modul Interaktif</h3>
             <p className="text-xs text-gray-500">Pelajari apa itu grooming, tanda bahaya, dan langkah aman pelaporan via bacaan interaktif.</p>
             <button
               onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}

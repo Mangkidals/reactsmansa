@@ -11,6 +11,14 @@ export default function Materi({
   expertOpinions,
   articles
 }) {
+  const handlePrevModulPage = () => {
+    setActiveModulPage(prev => (prev === 0 ? modulPages.length - 1 : prev - 1));
+  };
+
+  const handleNextModulPage = () => {
+    setActiveModulPage(prev => (prev === modulPages.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <div className="space-y-8 animate-fade-in">
       
@@ -78,17 +86,23 @@ export default function Materi({
 
               <div className="space-y-2">
                 <h4 className="font-bold text-xs text-gray-400 uppercase">Poin Utama Video:</h4>
-                <ul className="space-y-1.5 text-xs text-gray-600">
-                  <li className="flex items-center space-x-2">
-                    <span className="text-green-500">✔</span>
+                <ul className="space-y-2 text-xs text-gray-600">
+                  <li className="flex items-start space-x-2">
+                    <svg className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                     <span>Bahaya membagikan nama asli, alamat sekolah, dan nomor WhatsApp.</span>
                   </li>
-                  <li className="flex items-center space-x-2">
-                    <span className="text-green-500">✔</span>
+                  <li className="flex items-start space-x-2">
+                    <svg className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                     <span>Tanda mencurigakan jika diajak berteman terlalu instan.</span>
                   </li>
-                  <li className="flex items-center space-x-2">
-                    <span className="text-green-500">✔</span>
+                  <li className="flex items-start space-x-2">
+                    <svg className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                     <span>Bagaimana menolak pemberian hadiah top-up mencurigakan.</span>
                   </li>
                 </ul>
@@ -100,76 +114,121 @@ export default function Materi({
         {/* Tab 2: Buku Modul Interaktif */}
         {activeMateriTab === 'modul' && (
           <div className="max-w-3xl mx-auto space-y-6">
-            
-            <div className="bg-white rounded-3xl p-8 border border-blue-100 shadow-xl relative min-h-[300px] flex flex-col justify-between">
+            <div className="relative w-full px-4 sm:px-12">
               
-              <div className="absolute top-6 right-6 bg-[#C8B6FB] text-[#494949] font-heading font-semibold text-xs px-3 py-1 rounded-full">
-                Halaman {activeModulPage + 1} dari {modulPages.length}
-              </div>
-
-              <div className="absolute left-0 top-6 bottom-6 w-1.5 bg-blue-100/50 rounded-r-md"></div>
-
-              <div className="space-y-6 pl-4">
-                <div className="text-5xl">{modulPages[activeModulPage].img}</div>
-                <h3 className="font-heading text-2xl font-bold text-gray-800">
-                  {modulPages[activeModulPage].title}
-                </h3>
-                <p className="text-gray-600 leading-relaxed text-sm">
-                  {modulPages[activeModulPage].content}
-                </p>
-              </div>
-
-              <div className="flex justify-between items-center border-t border-gray-100 pt-6 mt-6">
-                <PrevButton
-                  onClick={() => setActiveModulPage(prev => Math.max(0, prev - 1))}
-                  disabled={activeModulPage === 0}
-                />
+              {/* Outer Slider Window */}
+              <div className="overflow-hidden rounded-3xl bg-white border border-blue-100 shadow-md">
                 
-                <div className="flex space-x-1.5">
-                  {modulPages.map((_, idx) => (
-                    <div
-                      key={idx}
-                      className={`w-2 h-2 rounded-full transition-colors ${
-                        idx === activeModulPage ? 'bg-[#53B4FB]' : 'bg-gray-200'
-                      }`}
-                    ></div>
-                  ))}
+                {/* Sliding Flex Container */}
+                <div
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${activeModulPage * 100}%)` }}
+                >
+                  {modulPages.map((page, idx) => {
+                    let pageIcon = null;
+                    if (idx === 0) {
+                      pageIcon = (
+                        <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center shadow-inner border border-blue-100/50">
+                          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                          </svg>
+                        </div>
+                      );
+                    } else if (idx === 1) {
+                      pageIcon = (
+                        <div className="w-14 h-14 bg-orange-50 text-[#FF6D00] rounded-2xl flex items-center justify-center shadow-inner border border-orange-100/50">
+                          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                          </svg>
+                        </div>
+                      );
+                    } else if (idx === 2) {
+                      pageIcon = (
+                        <div className="w-14 h-14 bg-red-50 text-[#FF5A5F] rounded-2xl flex items-center justify-center shadow-inner border border-red-100/50">
+                          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                          </svg>
+                        </div>
+                      );
+                    } else {
+                      pageIcon = (
+                        <div className="w-14 h-14 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center shadow-inner border border-green-100/50">
+                          <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div
+                        key={idx}
+                        className="w-full shrink-0 p-8 flex flex-col justify-between min-h-[300px]"
+                      >
+                        <div className="space-y-6">
+                          <div className="flex justify-between items-center">
+                            <span className="bg-[#C8B6FB]/20 text-[#8668ed] text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                              Halaman {idx + 1} dari {modulPages.length}
+                            </span>
+                            {pageIcon}
+                          </div>
+                          
+                          <div className="space-y-3">
+                            <h3 className="font-heading text-2xl font-bold text-gray-800 leading-snug">
+                              {page.title}
+                            </h3>
+                            <p className="text-gray-600 leading-relaxed text-sm">
+                              {page.content}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
 
-                <NextButton
-                  onClick={() => setActiveModulPage(prev => Math.min(modulPages.length - 1, prev + 1))}
-                  disabled={activeModulPage === modulPages.length - 1}
-                />
               </div>
 
-            </div>
+              {/* Left Arrow Button */}
+              <div className="absolute top-1/2 -translate-y-1/2 left-0 sm:left-2 z-20">
+                <button
+                  onClick={handlePrevModulPage}
+                  className="w-10 h-10 rounded-full bg-white border border-blue-100 flex items-center justify-center shadow-md active:scale-90 transition-all hover:bg-blue-50 text-gray-600 cursor-pointer"
+                  title="Sebelumnya"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+              </div>
 
-            {/* Icon guideline representation */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm space-y-4">
-              <h4 className="font-heading font-semibold text-xs uppercase tracking-wider text-gray-400 text-center">
-                Topik Panduan Edukasi Kami (Icons Guideline)
-              </h4>
-              <div className="grid grid-cols-4 sm:grid-cols-8 gap-4 text-center">
-                {[
-                  { label: "Cerita Anak", icon: "🎬" },
-                  { label: "Lagu", icon: "🎵" },
-                  { label: "Permainan", icon: "🎮" },
-                  { label: "Body Puzzle", icon: "🧩" },
-                  { label: "Boys & Girls", icon: "👫" },
-                  { label: "Good/Bad Touch", icon: "🤝" },
-                  { label: "Let's Shower", icon: "🚿" },
-                  { label: "Words & Dress", icon: "🧸" }
-                ].map((item, idx) => (
-                  <div key={idx} className="space-y-1 group">
-                    <div className="w-10 h-10 bg-[#C8B6FB] rounded-full mx-auto flex items-center justify-center text-lg shadow-sm group-hover:scale-110 transition-transform">
-                      {item.icon}
-                    </div>
-                    <p className="text-[9px] font-bold text-gray-500 leading-tight truncate">{item.label}</p>
-                  </div>
+              {/* Right Arrow Button */}
+              <div className="absolute top-1/2 -translate-y-1/2 right-0 sm:right-2 z-20">
+                <button
+                  onClick={handleNextModulPage}
+                  className="w-10 h-10 rounded-full bg-white border border-blue-100 flex items-center justify-center shadow-md active:scale-90 transition-all hover:bg-blue-50 text-gray-600 cursor-pointer"
+                  title="Selanjutnya"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Carousel Dots Indicators */}
+              <div className="flex justify-center items-center space-x-2 mt-5">
+                {modulPages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveModulPage(idx)}
+                    className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${
+                      idx === activeModulPage ? 'w-6 bg-[#FFAB41]' : 'w-2 bg-gray-300'
+                    }`}
+                  ></button>
                 ))}
               </div>
-            </div>
 
+            </div>
           </div>
         )}
 
@@ -178,8 +237,10 @@ export default function Materi({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {expertOpinions.map((opinion, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
-                <div className="space-y-2">
-                  <div className="text-3xl">{opinion.avatar}</div>
+                <div className="space-y-3">
+                  <div className="w-12 h-12 bg-blue-50 border border-blue-100/50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+                    {opinion.avatar}
+                  </div>
                   <h4 className="font-heading font-bold text-gray-800 leading-snug">{opinion.name}</h4>
                   <p className="text-[10px] text-blue-500 font-bold uppercase">{opinion.role}</p>
                   <p className="text-xs text-gray-500 italic leading-relaxed pt-2">

@@ -88,7 +88,7 @@ export function SubmitButton({ onClick, disabled }) {
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`px-8 py-3 rounded-full font-heading font-semibold text-[#494949] transition-all bg-[#53B4FB] hover:bg-[#349beb] border-4 border-[#4CAF50] active:scale-95 shadow-md ${
+      className={`px-8 py-3 rounded-full font-heading font-semibold text-[#494949] transition-all bg-[#53B4FB] hover:bg-[#349beb] active:scale-95 shadow-md ${
         disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
       }`}
     >
