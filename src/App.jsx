@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Materi from './pages/Materi';
 import Game from './pages/Game';
-import Monitoring from './pages/Monitoring';
 import { ExitButton } from './components/Button';
 
 /* ==========================================================================
@@ -72,7 +71,7 @@ const PRETEST_QUESTIONS = [
       "Mereka mengabaikan pesanmu ketika kamu menolak bermain."
     ],
     correctIndex: 1,
-    explanation: "Pelaku sering menggunakan kedok memberikan hadiah gratis (seperti diamond, skin, uang) dan menuntut komunikasi berpindah ke aplikasi privat (seperti WhatsApp/Discord) untuk menjebak korban."
+    explanation: "Pelaku sering menggunakan kedok memberikan hadiah gratis (seperti diamond, skin, uang) dan menuntut komunikasi berpindah ke aplikasi privat (seperti WhatsApp/Discord) untuk jebak korban."
   },
   {
     question: "Apa yang harus kamu lakukan jika orang asing yang baru dikenal secara online meminta foto pribadimu?",
@@ -236,14 +235,10 @@ const ARTICLES = [
 ];
 
 export default function App() {
-  const [activePage, setActivePage] = useState('home'); // home | materi | game | monitoring
-  const [settingsOpen, setSettingsOpen] = useState(false);
-  const [soundEnabled, setSoundEnabled] = useState(true);
-  const [studentName, setStudentName] = useState('Pelajar SIGMA');
-  const [tempName, setTempName] = useState('Pelajar SIGMA');
+  const [activePage, setActivePage] = useState('home'); // home | materi | game
 
   // Interactive Game State
-  const [gameState, setGameState] = useState('select_level'); // select_level | pretest | posttest | playing | level_cleared
+  const [gameState, setGameState] = useState('select_level'); // select_level | pretest | posttest | playing | level_cleared | pretest_finished | posttest_finished
   const [unlockedLevels, setUnlockedLevels] = useState([1]);
   const [completedLevels, setCompletedLevels] = useState([]);
   const [activeLevelId, setActiveLevelId] = useState(null);
@@ -280,6 +275,11 @@ export default function App() {
     setActiveLevelId(levelId);
     setActiveLevelSafetyScore(100);
     setGameState('playing');
+  };
+
+  const exitGame = () => {
+    setActiveLevelId(null);
+    setGameState('select_level');
   };
 
   const triggerLevelCompletion = (levelId, finalScore) => {
@@ -344,21 +344,6 @@ export default function App() {
     }
   };
 
-  const saveSettings = () => {
-    setStudentName(tempName);
-    setSettingsOpen(false);
-  };
-
-  const resetGameData = () => {
-    setUnlockedLevels([1]);
-    setCompletedLevels([]);
-    setPretestScore(null);
-    setPosttestScore(null);
-    setOverallSafetyScore(100);
-    setGameState('select_level');
-    setSettingsOpen(false);
-  };
-
   return (
     <div className="min-h-screen bg-[#ECEFFC] text-[#494949] flex flex-col font-body antialiased relative">
       
@@ -367,9 +352,6 @@ export default function App() {
         activePage={activePage}
         setActivePage={setActivePage}
         setGameState={setGameState}
-        studentName={studentName}
-        setTempName={setTempName}
-        setSettingsOpen={setSettingsOpen}
       />
 
       {/* Pages Switch Router */}
@@ -405,6 +387,7 @@ export default function App() {
             completedLevels={completedLevels}
             activeLevelId={activeLevelId}
             startLevel={startLevel}
+            exitGame={exitGame}
             triggerLevelCompletion={triggerLevelCompletion}
             gameLevels={GAME_LEVELS}
             pretestScore={pretestScore}
@@ -421,82 +404,10 @@ export default function App() {
             posttestQuestions={POSTTEST_QUESTIONS}
           />
         )}
-
-        {activePage === 'monitoring' && (
-          <Monitoring
-            studentName={studentName}
-            completedLevels={completedLevels}
-            overallSafetyScore={overallSafetyScore}
-            pretestScore={pretestScore}
-            posttestScore={posttestScore}
-            gameLevels={GAME_LEVELS}
-          />
-        )}
       </main>
 
       {/* Footer Component */}
       <Footer setActivePage={setActivePage} setGameState={setGameState} />
-
-      {/* MODAL: SETTINGS & CONFIGURATION */}
-      {settingsOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-3xl p-6 max-w-sm w-full border border-blue-100 shadow-2xl space-y-6 animate-scale-up">
-            
-            <div className="flex justify-between items-center">
-              <h3 className="font-heading text-xl font-bold text-gray-800">Pengaturan Profil</h3>
-              <ExitButton onClick={() => setSettingsOpen(false)} />
-            </div>
-
-            <div className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold text-gray-400 uppercase">Nama Siswa</label>
-                <input
-                  type="text"
-                  value={tempName}
-                  onChange={(e) => setTempName(e.target.value)}
-                  placeholder="Masukkan nama..."
-                  className="w-full px-4 py-2 text-xs rounded-xl border border-gray-200 outline-none focus:border-[#53B4FB]"
-                />
-              </div>
-
-              <div className="flex justify-between items-center py-2 border-b border-gray-50">
-                <div>
-                  <h4 className="text-xs font-bold text-gray-700">Audio / Musik</h4>
-                  <p className="text-[9px] text-gray-400">Bunyi klik dan musik latar game</p>
-                </div>
-                
-                <button
-                  onClick={() => setSoundEnabled(!soundEnabled)}
-                  className={`w-12 h-6 rounded-full p-0.5 transition-colors cursor-pointer ${
-                    soundEnabled ? 'bg-[#53B4FB]' : 'bg-gray-300'
-                  }`}
-                >
-                  <div className={`w-5 h-5 rounded-full bg-white transition-transform ${
-                    soundEnabled ? 'translate-x-6' : 'translate-x-0'
-                  }`}></div>
-                </button>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-gray-100 space-y-3">
-              <button
-                onClick={saveSettings}
-                className="w-full py-3 bg-[#53B4FB] hover:bg-blue-400 text-white font-heading font-bold text-xs rounded-full border-b-4 border-blue-600 active:translate-y-0.5 active:border-b-0 shadow-md cursor-pointer"
-              >
-                Simpan Perubahan
-              </button>
-
-              <button
-                onClick={resetGameData}
-                className="w-full py-3 bg-red-50 hover:bg-red-100 text-red-600 font-heading font-bold text-xs rounded-full border border-red-200 cursor-pointer"
-              >
-                Reset Semua Data & Progress
-              </button>
-            </div>
-
-          </div>
-        </div>
-      )}
 
       {/* MODAL: READ ARTICLE DETAILS */}
       {selectedArticle && (

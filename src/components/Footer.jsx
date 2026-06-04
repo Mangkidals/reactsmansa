@@ -12,7 +12,6 @@ export default function Footer({ setActivePage, setGameState }) {
           <button onClick={() => { setActivePage('home'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Beranda</button>
           <button onClick={() => { setActivePage('materi'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Materi</button>
           <button onClick={() => { setActivePage('game'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Laman Game</button>
-          <button onClick={() => { setActivePage('monitoring'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Monitoring</button>
         </div>
       </div>
     </footer>

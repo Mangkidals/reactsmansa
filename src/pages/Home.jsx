@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import heroImage from '../assets/hero.png';
+import mainheroImage from '../assets/mainhero.png';
 
 export default function Home({ setActivePage, setGameState, setActiveMateriTab, setSelectedArticle, articles }) {
+  const [activeArtIdx, setActiveArtIdx] = useState(0);
+
+  const handlePrevArticle = () => {
+    setActiveArtIdx(prev => (prev === 0 ? articles.length - 1 : prev - 1));
+  };
+
+  const handleNextArticle = () => {
+    setActiveArtIdx(prev => (prev === articles.length - 1 ? 0 : prev + 1));
+  };
+
   return (
     <div className="space-y-16 animate-fade-in">
       
@@ -42,7 +53,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
         <div className="lg:col-span-5 flex justify-center relative">
           <div className="absolute -inset-4 bg-blue-200/30 rounded-full blur-2xl z-0"></div>
           <img
-            src={heroImage}
+            src={mainheroImage}
             alt="SIGMA Hero Illustration"
             className="w-full max-w-[380px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
           />
@@ -152,7 +163,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
 
       </div>
 
-      {/* Articles Section Preview */}
+      {/* Articles Section Preview (Full Width Carousel Version) */}
       <div className="space-y-6">
         <div className="flex justify-between items-end border-b border-blue-100 pb-3">
           <div>
@@ -167,25 +178,89 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {articles.map(art => (
+        {/* Sliding Full-Width Carousel Container */}
+        <div className="relative w-full px-4 sm:px-12">
+          
+          {/* Outer Slider Window */}
+          <div className="overflow-hidden rounded-3xl bg-white border border-blue-100 shadow-md">
+            
+            {/* Sliding Flex Container */}
             <div
-              key={art.id}
-              className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer"
-              onClick={() => setSelectedArticle(art)}
+              className="flex transition-transform duration-500 ease-in-out"
+              style={{ transform: `translateX(-${activeArtIdx * 100}%)` }}
             >
-              <div className="space-y-3">
-                <div className="text-[10px] font-bold text-blue-500 uppercase">{art.date}</div>
-                <h4 className="font-heading font-bold text-gray-800 leading-snug hover:text-[#53B4FB] transition-colors">{art.title}</h4>
-                <p className="text-xs text-gray-500 line-clamp-3 leading-relaxed">{art.summary}</p>
-              </div>
-              
-              <div className="mt-4 pt-3 border-t border-gray-50 flex items-center text-xs font-bold text-gray-700">
-                <span>Baca Selengkapnya</span>
-                <span className="ml-1 text-[#53B4FB]">→</span>
-              </div>
+              {articles.map((art, idx) => (
+                <div
+                  key={art.id}
+                  className="w-full shrink-0 p-8 flex flex-col justify-between min-h-[240px] cursor-pointer hover:bg-gray-50/40 transition-colors group"
+                  onClick={() => setSelectedArticle(art)}
+                >
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-bold text-blue-500 uppercase tracking-wider">
+                        {art.date}
+                      </span>
+                      <span className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                        Artikel {idx + 1} dari {articles.length}
+                      </span>
+                    </div>
+                    <h3 className="font-heading font-bold text-[#494949] text-xl sm:text-2xl group-hover:text-[#53B4FB] transition-colors leading-snug">
+                      {art.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-gray-500 leading-relaxed line-clamp-3">
+                      {art.summary}
+                    </p>
+                  </div>
+                  
+                  <div className="mt-6 pt-4 border-t border-gray-50 flex items-center text-xs font-bold text-gray-700">
+                    <span>Baca Selengkapnya</span>
+                    <span className="ml-1 text-[#53B4FB] group-hover:translate-x-1.5 transition-transform duration-200">→</span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+
+          </div>
+
+          {/* Left Arrow Button */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 sm:left-2 z-20">
+            <button
+              onClick={(e) => { e.stopPropagation(); handlePrevArticle(); }}
+              className="w-10 h-10 rounded-full bg-white hover:bg-blue-50 border border-blue-100 flex items-center justify-center shadow-md hover:shadow-lg active:scale-90 transition-all cursor-pointer"
+              title="Artikel Sebelumnya"
+            >
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Right Arrow Button */}
+          <div className="absolute top-1/2 -translate-y-1/2 right-0 sm:right-2 z-20">
+            <button
+              onClick={(e) => { e.stopPropagation(); handleNextArticle(); }}
+              className="w-10 h-10 rounded-full bg-white hover:bg-blue-50 border border-blue-100 flex items-center justify-center shadow-md hover:shadow-lg active:scale-90 transition-all cursor-pointer"
+              title="Artikel Selanjutnya"
+            >
+              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Carousel Dots Indicators (Premium Morphing Pill) */}
+          <div className="flex justify-center items-center space-x-2 mt-5">
+            {articles.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveArtIdx(idx)}
+                className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${
+                  idx === activeArtIdx ? 'w-6 bg-[#53B4FB]' : 'w-2 bg-gray-300'
+                }`}
+              ></button>
+            ))}
+          </div>
+
         </div>
       </div>
 

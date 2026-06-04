@@ -21,7 +21,8 @@ export default function Game({
   submitTestAnswer,
   nextTestQuestion,
   pretestQuestions,
-  posttestQuestions
+  posttestQuestions,
+  exitGame
 }) {
   const activeLevel = gameLevels.find(lvl => lvl.id === activeLevelId);
 
@@ -268,7 +269,7 @@ export default function Game({
               </div>
             </div>
             
-            <ExitButton onClick={() => setGameState('select_level')} />
+            <ExitButton onClick={exitGame} />
           </div>
 
           {/* Construct 2 Game Iframe Container */}
@@ -291,7 +292,7 @@ export default function Game({
           {/* Sleek Action Controls below the Iframe (No instructions, fully professional) */}
           <div className="bg-white rounded-2xl p-4 border border-blue-100 shadow-sm flex flex-wrap justify-between items-center gap-4">
             <button
-              onClick={() => setGameState('select_level')}
+              onClick={exitGame}
               className="px-6 py-3 bg-white hover:bg-gray-50 text-gray-500 font-heading font-bold text-xs rounded-full border border-gray-200 cursor-pointer transition-colors shadow-sm"
             >
               ← Kembali ke Peta Level
@@ -347,6 +348,102 @@ export default function Game({
                 Level Berikutnya
               </button>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* GAME STATE 4: PRETEST FINISHED SCREEN */}
+      {gameState === 'pretest_finished' && (
+        <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
+          <div className="w-20 h-20 bg-blue-50 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner animate-bounce-slow">📝</div>
+          
+          <div className="space-y-2">
+            <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              Pretest Selesai
+            </span>
+            <h3 className="font-heading text-2xl font-bold text-gray-800">
+              Evaluasi Awal Selesai!
+            </h3>
+            <p className="text-xs text-gray-500 leading-relaxed px-4">
+              Terima kasih telah menyelesaikan Pretest. Hasil ini membantu mengukur pemahaman awalmu sebelum menjelajahi materi dan simulasi game SIGMA.
+            </p>
+          </div>
+
+          <div className="bg-blue-50/50 border border-blue-100 p-4 rounded-2xl space-y-1">
+            <span className="text-[9px] text-[#53B4FB] font-bold uppercase tracking-wider">Skor Pretest Kamu</span>
+            <div className="text-3xl font-heading font-bold text-blue-600">{pretestScore} / 100</div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 pt-4 justify-center">
+            <button
+              onClick={exitGame}
+              className="py-3 px-6 bg-white hover:bg-gray-50 text-gray-500 font-heading font-bold text-xs rounded-full border border-gray-200 cursor-pointer shadow-sm flex-1 text-center transition-colors"
+            >
+              Kembali ke Peta Level
+            </button>
+            <button
+              onClick={() => startLevel(1)}
+              className="py-3.5 px-6 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-xs rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer flex-1 text-center transition-all"
+            >
+              Mulai Main Level 1
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* GAME STATE 5: POSTTEST FINISHED SCREEN */}
+      {gameState === 'posttest_finished' && (
+        <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
+          <div className="w-20 h-20 bg-amber-50 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner animate-pulse-slow">🏆</div>
+          
+          <div className="space-y-2">
+            <span className="bg-[#C8B6FB] text-[#494949] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+              Posttest Selesai
+            </span>
+            <h3 className="font-heading text-2xl font-bold text-gray-800">
+              Hebat! Kamu Telah Lulus!
+            </h3>
+            <p className="text-xs text-gray-500 leading-relaxed px-4">
+              Kamu telah menyelesaikan seluruh skenario game SIGMA dan mengisi Posttest evaluasi akhir.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gray-50 border border-gray-100 p-4 rounded-2xl text-center">
+              <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Skor Pretest</span>
+              <span className="text-2xl font-heading font-bold text-gray-600">{pretestScore !== null ? `${pretestScore}` : '-'}</span>
+            </div>
+            <div className="bg-green-50 border border-green-100 p-4 rounded-2xl text-center">
+              <span className="text-[9px] text-green-700 font-bold uppercase tracking-wider block mb-1">Skor Posttest</span>
+              <span className="text-2xl font-heading font-bold text-green-600">{posttestScore}</span>
+            </div>
+          </div>
+
+          {pretestScore !== null && (
+            <div className="p-4 rounded-2xl text-xs text-left leading-relaxed bg-[#ECEFFC]/50 border border-blue-50 text-gray-600">
+              {posttestScore > pretestScore ? (
+                <p>
+                  🎉 <strong>Peningkatan yang bagus!</strong> Skormu meningkat sebesar <strong className="text-green-600">+{posttestScore - pretestScore} poin</strong> dari pretest. Ini membuktikan kamu telah memahami strategi identifikasi grooming digital dengan baik!
+                </p>
+              ) : posttestScore === pretestScore ? (
+                <p>
+                  ⭐ <strong>Skor Konsisten!</strong> Kamu berhasil mempertahankan pemahamanmu dengan baik. Tetap terapkan ilmu pertahanan diri siber ini di kehidupan sehari-hari ya!
+                </p>
+              ) : (
+                <p>
+                  📚 <strong>Terima kasih sudah mencoba!</strong> Pemahamanmu sudah baik, namun jangan ragu untuk kembali membaca materi atau mencoba ulang simulasi level game agar pertahanan dirimu semakin kuat.
+                </p>
+              )}
+            </div>
+          )}
+
+          <div className="pt-4">
+            <button
+              onClick={exitGame}
+              className="w-full py-3.5 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-xs rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer transition-all"
+            >
+              Kembali ke Peta Level
+            </button>
           </div>
         </div>
       )}

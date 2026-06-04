@@ -1,13 +1,11 @@
 import React from 'react';
 import logoImage from '../assets/hero.png';
-import { SettingButton } from './Button';
 
-export default function Navbar({ activePage, setActivePage, setGameState, studentName, setTempName, setSettingsOpen }) {
+export default function Navbar({ activePage, setActivePage, setGameState }) {
   const menuItems = [
     { id: 'home', label: 'Beranda', icon: '🏠' },
     { id: 'materi', label: 'Laman Materi', icon: '📖' },
-    { id: 'game', label: 'Laman Game', icon: '🎮' },
-    { id: 'monitoring', label: 'Monitoring Anak', icon: '📊' }
+    { id: 'game', label: 'Laman Game', icon: '🎮' }
   ];
 
   return (
@@ -57,17 +55,8 @@ export default function Navbar({ activePage, setActivePage, setGameState, studen
               ))}
             </div>
 
-            {/* Profile & Setting Panel Trigger */}
-            <div className="flex items-center space-x-2">
-              <div className="hidden lg:block text-right pr-2">
-                <p className="text-xs text-gray-400 font-medium leading-tight">Selamat Datang,</p>
-                <p className="text-xs font-bold text-gray-700 leading-tight mt-0.5">{studentName}</p>
-              </div>
-              <SettingButton onClick={() => {
-                setTempName(studentName);
-                setSettingsOpen(true);
-              }} />
-            </div>
+            {/* Empty space to balance layout */}
+            <div className="w-12 h-12 hidden md:block"></div>
 
           </div>
         </div>
