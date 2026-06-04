@@ -421,7 +421,6 @@ export default function App() {
                   {selectedArticle.title}
                 </h3>
               </div>
-              <ExitButton onClick={() => setSelectedArticle(null)} />
             </div>
 
             <div className="flex-grow overflow-y-auto py-4 text-xs leading-relaxed text-gray-600 space-y-3 pl-1 pr-1">
@@ -444,7 +443,7 @@ export default function App() {
             <div className="pt-4 border-t border-gray-100 flex justify-end shrink-0">
               <button
                 onClick={() => setSelectedArticle(null)}
-                className="px-6 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-600 font-heading font-bold text-xs rounded-full cursor-pointer"
+                className="px-6 py-2.5 bg-[#53B4FB] hover:bg-[#349beb] text-white font-heading font-bold text-xs rounded-full cursor-pointer transition-all shadow-md shadow-blue-100 active:scale-95"
               >
                 Tutup Bacaan
               </button>
