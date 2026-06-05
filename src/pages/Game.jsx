@@ -1,5 +1,4 @@
 import React from 'react';
-import { ExitButton, SubmitButton } from '../components/Button';
 
 export default function Game({
   gameState,
@@ -10,18 +9,6 @@ export default function Game({
   startLevel,
   triggerLevelCompletion,
   gameLevels,
-  pretestScore,
-  posttestScore,
-  startTest,
-  testQuestions,
-  currentTestIndex,
-  testSelectedChoice,
-  testSubmitted,
-  handleSelectTestChoice,
-  submitTestAnswer,
-  nextTestQuestion,
-  pretestQuestions,
-  posttestQuestions,
   exitGame
 }) {
   const activeLevel = gameLevels.find(lvl => lvl.id === activeLevelId);
@@ -41,40 +28,7 @@ export default function Game({
             </p>
           </div>
 
-          {/* Pretest & Posttest Banner */}
-          <div className="bg-white rounded-3xl p-6 border border-blue-100 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-            <div className="space-y-2">
-              <h3 className="font-heading text-lg font-bold text-gray-800">Lengkapi Tes untuk Evaluasi</h3>
-              <p className="text-xs text-gray-500">
-                Kerjakan <strong>Pre-test</strong> sebelum mulai bermain, dan lakukan <strong>Post-test</strong> setelah kamu menamatkan seluruh skenario game. Perkembangan skormu akan tersimpan untuk evaluasi hasil belajarmu!
-              </p>
-            </div>
 
-            <div className="flex flex-wrap gap-3 md:justify-end">
-              <button
-                onClick={() => startTest('pretest')}
-                className={`px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer ${pretestScore !== null
-                    ? 'bg-green-50 border-green-500 text-green-700 cursor-default'
-                    : 'bg-[#53B4FB] border-blue-600 text-white hover:bg-blue-400 active:translate-y-0.5'
-                  }`}
-              >
-                {pretestScore !== null ? `✓ Pretest Selesai (${pretestScore})` : 'Mulai Pre-test'}
-              </button>
-
-              <button
-                onClick={() => startTest('posttest')}
-                disabled={completedLevels.length < 3}
-                className={`px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer ${completedLevels.length < 3
-                    ? 'bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed'
-                    : posttestScore !== null
-                      ? 'bg-green-50 border-green-500 text-green-700'
-                      : 'bg-[#C8B6FB] border-[#a58cfc] text-[#494949] hover:bg-[#bfaefc] active:translate-y-0.5'
-                  }`}
-              >
-                {posttestScore !== null ? `✓ Post-test Selesai (${posttestScore})` : 'Mulai Post-test'}
-              </button>
-            </div>
-          </div>
 
           {/* Game Levels Map Layout */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -143,105 +97,7 @@ export default function Game({
         </div>
       )}
 
-      {/* GAME STATE 2: PRETEST & POSTTEST WIZARD */}
-      {(gameState === 'pretest' || gameState === 'posttest') && (
-        <div className="max-w-2xl mx-auto space-y-6">
 
-          <div className="bg-white rounded-2xl px-6 py-4 border border-blue-100 flex justify-between items-center shadow-sm">
-            <div>
-              <h3 className="font-heading font-bold text-gray-800 uppercase text-xs">
-                Evaluasi Pembelajaran: {gameState === 'pretest' ? 'Pretest' : 'Posttest'}
-              </h3>
-              <p className="text-[10px] text-gray-400">Jawab kuis berikut untuk mengevaluasi pemahaman</p>
-            </div>
-            <ExitButton onClick={() => setGameState('select_level')} />
-          </div>
-
-          <div className="w-full bg-gray-200 h-2 rounded-full overflow-hidden">
-            <div
-              className="bg-[#53B4FB] h-full transition-all duration-300"
-              style={{ width: `${((currentTestIndex + 1) / testQuestions.length) * 100}%` }}
-            ></div>
-          </div>
-
-          <div className="bg-white rounded-3xl p-8 border border-blue-100 shadow-xl space-y-6">
-
-            <div className="space-y-2">
-              <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
-                Pertanyaan {currentTestIndex + 1} dari {testQuestions.length}
-              </span>
-              <h3 className="font-heading text-lg font-bold text-gray-800 leading-snug">
-                {testQuestions[currentTestIndex].question}
-              </h3>
-            </div>
-
-            <div className="space-y-3">
-              {testQuestions[currentTestIndex].options.map((option, idx) => {
-                const isSelected = testSelectedChoice === idx;
-                const isCorrect = idx === testQuestions[currentTestIndex].correctIndex;
-
-                let optionStyle = 'border-gray-200 hover:bg-blue-50/50';
-                if (testSubmitted) {
-                  if (isCorrect) {
-                    optionStyle = 'border-[#4CAF50] bg-green-50 text-green-900 border-2'; // Right answer border
-                  } else if (isSelected) {
-                    optionStyle = 'border-[#FF5A5F] bg-red-50 text-red-900 border-2'; // Wrong answer border
-                  } else {
-                    optionStyle = 'border-gray-100 opacity-50';
-                  }
-                } else if (isSelected) {
-                  optionStyle = 'border-[#53B4FB] bg-blue-50/70 border-2';
-                }
-
-                return (
-                  <button
-                    key={idx}
-                    disabled={testSubmitted}
-                    onClick={() => handleSelectTestChoice(idx)}
-                    className={`w-full p-4 rounded-2xl border text-left text-xs leading-relaxed transition-all cursor-pointer flex items-center space-x-3 ${optionStyle}`}
-                  >
-                    <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center font-bold text-xs ${isSelected ? 'bg-[#53B4FB] text-white' : 'bg-gray-100 text-gray-500'
-                      }`}>
-                      {String.fromCharCode(65 + idx)}
-                    </div>
-                    <span>{option}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {testSubmitted && (
-              <div className={`p-5 rounded-2xl text-xs leading-relaxed border space-y-2 ${testSelectedChoice === testQuestions[currentTestIndex].correctIndex
-                  ? 'bg-green-50 border-[#4CAF50]/30 text-green-800'
-                  : 'bg-red-50 border-[#FF5A5F]/30 text-red-800'
-                }`}>
-                <h4 className="font-heading font-bold text-sm">
-                  {testSelectedChoice === testQuestions[currentTestIndex].correctIndex ? '🎉 Jawaban Benar!' : '❌ Jawaban Kurang Tepat'}
-                </h4>
-                <p>{testQuestions[currentTestIndex].explanation}</p>
-              </div>
-            )}
-
-            <div className="flex justify-between items-center border-t border-gray-100 pt-6 mt-6">
-              <ExitButton onClick={() => setGameState('select_level')} />
-
-              {testSubmitted ? (
-                <SubmitButton
-                  onClick={nextTestQuestion}
-                  disabled={false}
-                />
-              ) : (
-                <SubmitButton
-                  onClick={submitTestAnswer}
-                  disabled={testSelectedChoice === null}
-                />
-              )}
-            </div>
-
-          </div>
-
-        </div>
-      )}
 
       {/* GAME STATE 3: CONSTRUCT 2 IFRAME SCREEN */}
       {gameState === 'playing' && (
@@ -344,110 +200,7 @@ export default function Game({
         </div>
       )}
 
-      {/* GAME STATE 4: PRETEST FINISHED SCREEN */}
-      {gameState === 'pretest_finished' && (
-        <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
-          <div className="w-20 h-20 bg-blue-50 text-blue-500 rounded-full mx-auto flex items-center justify-center shadow-inner animate-bounce-slow">
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-          </div>
 
-          <div className="space-y-2">
-            <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-              Pretest Selesai
-            </span>
-            <h3 className="font-heading text-2xl font-bold text-gray-800">
-              Evaluasi Awal Selesai!
-            </h3>
-            <p className="text-xs text-gray-500 leading-relaxed px-4">
-              Terima kasih telah menyelesaikan Pretest. Hasil ini membantu mengukur pemahaman awalmu sebelum menjelajahi materi dan simulasi game SIGMA.
-            </p>
-          </div>
-
-          <div className="bg-blue-50/50 border border-blue-100 p-4 rounded-2xl space-y-1">
-            <span className="text-[9px] text-[#53B4FB] font-bold uppercase tracking-wider">Skor Pretest Kamu</span>
-            <div className="text-3xl font-heading font-bold text-blue-600">{pretestScore} / 100</div>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-3 pt-4 justify-center">
-            <button
-              onClick={exitGame}
-              className="py-3 px-6 bg-white hover:bg-gray-50 text-gray-500 font-heading font-bold text-xs rounded-full border border-gray-200 cursor-pointer shadow-sm flex-1 text-center transition-colors"
-            >
-              Kembali ke Peta Level
-            </button>
-            <button
-              onClick={() => startLevel(1)}
-              className="py-3.5 px-6 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-xs rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer flex-1 text-center transition-all"
-            >
-              Mulai Main Level 1
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* GAME STATE 5: POSTTEST FINISHED SCREEN */}
-      {gameState === 'posttest_finished' && (
-        <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
-          <div className="w-20 h-20 bg-amber-50 text-amber-500 rounded-full mx-auto flex items-center justify-center shadow-inner animate-pulse-slow">
-            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 14c2.21 0 4-1.79 4-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v5c0 2.21 1.79 4 4 4z" />
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 9H4.5A1.5 1.5 0 013 7.5V6A1.5 1.5 0 014.5 4.5H6m12 4.5h1.5a1.5 1.5 0 011.5 1.5V12a1.5 1.5 0 01-1.5 1.5H18M12 14v4m-4 4h8" />
-            </svg>
-          </div>
-
-          <div className="space-y-2">
-            <span className="bg-[#C8B6FB] text-[#494949] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
-              Posttest Selesai
-            </span>
-            <h3 className="font-heading text-2xl font-bold text-gray-800">
-              Hebat! Kamu Telah Lulus!
-            </h3>
-            <p className="text-xs text-gray-500 leading-relaxed px-4">
-              Kamu telah menyelesaikan seluruh skenario game SIGMA dan mengisi Post-test evaluasi akhir.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="bg-gray-50 border border-gray-100 p-4 rounded-2xl text-center">
-              <span className="text-[9px] text-gray-400 font-bold uppercase tracking-wider block mb-1">Skor Pretest</span>
-              <span className="text-2xl font-heading font-bold text-gray-600">{pretestScore !== null ? `${pretestScore}` : '-'}</span>
-            </div>
-            <div className="bg-green-50 border border-green-100 p-4 rounded-2xl text-center">
-              <span className="text-[9px] text-green-700 font-bold uppercase tracking-wider block mb-1">Skor Posttest</span>
-              <span className="text-2xl font-heading font-bold text-green-600">{posttestScore}</span>
-            </div>
-          </div>
-
-          {pretestScore !== null && (
-            <div className="p-4 rounded-2xl text-xs text-left leading-relaxed bg-[#ECEFFC]/50 border border-blue-50 text-gray-600">
-              {posttestScore > pretestScore ? (
-                <p>
-                  🎉 <strong>Peningkatan yang bagus!</strong> Skormu meningkat sebesar <strong className="text-green-600">+{posttestScore - pretestScore} poin</strong> dari pretest. Ini membuktikan kamu telah memahami strategi identifikasi grooming digital dengan baik!
-                </p>
-              ) : posttestScore === pretestScore ? (
-                <p>
-                  ⭐ <strong>Skor Konsisten!</strong> Kamu berhasil mempertahankan pemahamanmu dengan baik. Tetap terapkan ilmu pertahanan diri siber ini di kehidupan sehari-hari ya!
-                </p>
-              ) : (
-                <p>
-                  📚 <strong>Terima kasih sudah mencoba!</strong> Pemahamanmu sudah baik, namun jangan ragu untuk kembali membaca materi atau mencoba ulang simulasi level game agar pertahanan dirimu semakin kuat.
-                </p>
-              )}
-            </div>
-          )}
-
-          <div className="pt-4">
-            <button
-              onClick={exitGame}
-              className="w-full py-3.5 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-xs rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer transition-all"
-            >
-              Kembali ke Peta Level
-            </button>
-          </div>
-        </div>
-      )}
 
     </div>
   );
