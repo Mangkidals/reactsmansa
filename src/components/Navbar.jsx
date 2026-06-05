@@ -14,7 +14,7 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
     <>
       <nav className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-blue-100/50 shadow-sm transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-20 items-center">
+          <div className="flex h-20 items-center">
 
             {/* Logo Group with Construct Image Logo */}
             <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setActivePage('home')}>
@@ -36,7 +36,7 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
             </div>
 
             {/* Desktop Menu Links */}
-            <div className="hidden md:flex items-center space-x-1">
+            <div className="hidden md:flex items-center space-x-1 ml-auto">
               {menuItems.map(item => (
                 <button
                   key={item.id}
@@ -56,8 +56,8 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
               ))}
             </div>
 
-            {/* Mobile Hamburger Button */}
-            <div className="flex md:hidden items-center">
+            {/* Mobile Hamburger Button (pushed to right) */}
+            <div className="flex md:hidden items-center ml-auto">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="p-2.5 rounded-2xl text-gray-500 hover:text-[#53B4FB] hover:bg-blue-50/50 transition-all cursor-pointer border border-transparent active:scale-95"
@@ -74,9 +74,6 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
                 )}
               </button>
             </div>
-
-            {/* Empty space to balance layout */}
-            <div className="w-12 h-12 hidden md:block"></div>
 
           </div>
         </div>
