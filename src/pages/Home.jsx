@@ -58,8 +58,10 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           />
           
           <div className="absolute -bottom-2 -left-2 bg-white/90 backdrop-blur border border-blue-100 p-3 rounded-2xl shadow-lg flex items-center space-x-3 z-20">
-            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-              <span className="text-xl">🛡️</span>
+            <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
             </div>
             <div>
               <h4 className="text-xs font-bold text-gray-700">100% Aman</h4>
@@ -124,7 +126,12 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
         {/* Access Game */}
         <div className="premium-card rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden group premium-card-hover border border-blue-100">
           <div className="absolute top-0 right-0 w-24 h-24 bg-[#FFAB41]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
-          <div className="w-14 h-14 bg-[#FFAB41]/20 rounded-2xl flex items-center justify-center text-3xl shadow-inner shrink-0">🎮</div>
+          <div className="w-14 h-14 bg-[#FFAB41]/20 text-[#FF6D00] rounded-2xl flex items-center justify-center shadow-inner shrink-0">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <rect x="2" y="6" width="20" height="12" rx="3" />
+              <path d="M6 12h4M8 10v4M16 11h.01M18 13h.01" stroke="currentColor" strokeLinecap="round" strokeWidth="2.5" />
+            </svg>
+          </div>
           <div className="space-y-2 text-center md:text-left">
             <h3 className="font-heading text-xl font-bold text-gray-800">Uji Kewaspadaanmu!</h3>
             <p className="text-xs text-gray-500">Masuk ke ruang chat simulasi dan pelajari cara mengenali penipu atau pelaku kejahatan siber.</p>
@@ -141,7 +148,11 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
         {/* Access Modul */}
         <div className="premium-card rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden group premium-card-hover border border-blue-100">
           <div className="absolute top-0 right-0 w-24 h-24 bg-[#C8B6FB]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
-          <div className="w-14 h-14 bg-[#C8B6FB]/20 rounded-2xl flex items-center justify-center text-3xl shadow-inner shrink-0">📖</div>
+          <div className="w-14 h-14 bg-[#C8B6FB]/20 text-[#8668ed] rounded-2xl flex items-center justify-center shadow-inner shrink-0">
+            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
           <div className="space-y-2 text-center md:text-left">
             <h3 className="font-heading text-xl font-bold text-gray-800">Modul Interaktif</h3>
             <p className="text-xs text-gray-500">Pelajari apa itu grooming, tanda bahaya, dan langkah aman pelaporan via bacaan interaktif.</p>

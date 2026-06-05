@@ -21,7 +21,7 @@ export default function Materi({
 
   return (
     <div className="space-y-8 animate-fade-in">
-      
+
       {/* Header Laman */}
       <div className="text-center space-y-2">
         <h2 className="font-heading text-3xl sm:text-4xl font-bold text-gray-800">Laman Materi Edukasi</h2>
@@ -41,11 +41,10 @@ export default function Materi({
           <button
             key={tab.id}
             onClick={() => setActiveMateriTab(tab.id)}
-            className={`px-4 py-3 font-heading font-bold text-xs sm:text-sm transition-all border-2 rounded-2xl text-center cursor-pointer shadow-sm ${
-              activeMateriTab === tab.id
+            className={`px-4 py-3 font-heading font-bold text-xs sm:text-sm transition-all border-2 rounded-2xl text-center cursor-pointer shadow-sm ${activeMateriTab === tab.id
                 ? tab.activeClass
                 : tab.inactiveClass
-            }`}
+              }`}
           >
             {tab.label}
           </button>
@@ -113,12 +112,12 @@ export default function Materi({
 
         {/* Tab 2: Buku Modul Interaktif */}
         {activeMateriTab === 'modul' && (
-          <div className="max-w-3xl mx-auto space-y-6">
+          <div className="space-y-6">
             <div className="relative w-full px-4 sm:px-12">
-              
+
               {/* Outer Slider Window */}
               <div className="overflow-hidden rounded-3xl bg-white border border-blue-100 shadow-md">
-                
+
                 {/* Sliding Flex Container */}
                 <div
                   className="flex transition-transform duration-500 ease-in-out"
@@ -172,7 +171,7 @@ export default function Materi({
                             </span>
                             {pageIcon}
                           </div>
-                          
+
                           <div className="space-y-3">
                             <h3 className="font-heading text-2xl font-bold text-gray-800 leading-snug">
                               {page.title}
@@ -221,9 +220,8 @@ export default function Materi({
                   <button
                     key={idx}
                     onClick={() => setActiveModulPage(idx)}
-                    className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${
-                      idx === activeModulPage ? 'w-6 bg-[#FFAB41]' : 'w-2 bg-gray-300'
-                    }`}
+                    className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${idx === activeModulPage ? 'w-6 bg-[#FFAB41]' : 'w-2 bg-gray-300'
+                      }`}
                   ></button>
                 ))}
               </div>
@@ -266,7 +264,7 @@ export default function Materi({
                   <h4 className="font-heading font-bold text-gray-800 text-lg hover:text-[#53B4FB] transition-colors">{art.title}</h4>
                   <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{art.summary}</p>
                 </div>
-                
+
                 <div className="shrink-0 flex items-center space-x-2 text-xs font-bold text-[#53B4FB]">
                   <span>Buka Jurnal</span>
                   <span>→</span>

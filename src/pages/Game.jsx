@@ -28,11 +28,11 @@ export default function Game({
 
   return (
     <div className="space-y-8 animate-fade-in">
-      
+
       {/* GAME STATE 1: SELECT LEVEL MAP */}
       {gameState === 'select_level' && (
         <div className="space-y-10">
-          
+
           {/* Header Title */}
           <div className="text-center space-y-2">
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-gray-800">Laman Game & Kuis Edukasi</h2>
@@ -49,29 +49,27 @@ export default function Game({
                 Kerjakan <strong>Pre-test</strong> sebelum mulai bermain, dan lakukan <strong>Post-test</strong> setelah kamu menamatkan seluruh skenario game. Perkembangan skormu akan tersimpan untuk evaluasi hasil belajarmu!
               </p>
             </div>
-            
+
             <div className="flex flex-wrap gap-3 md:justify-end">
               <button
                 onClick={() => startTest('pretest')}
-                className={`px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer ${
-                  pretestScore !== null
+                className={`px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer ${pretestScore !== null
                     ? 'bg-green-50 border-green-500 text-green-700 cursor-default'
                     : 'bg-[#53B4FB] border-blue-600 text-white hover:bg-blue-400 active:translate-y-0.5'
-                }`}
+                  }`}
               >
                 {pretestScore !== null ? `✓ Pretest Selesai (${pretestScore})` : 'Mulai Pre-test'}
               </button>
-              
+
               <button
                 onClick={() => startTest('posttest')}
                 disabled={completedLevels.length < 3}
-                className={`px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer ${
-                  completedLevels.length < 3
+                className={`px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer ${completedLevels.length < 3
                     ? 'bg-gray-100 border-gray-300 text-gray-400 cursor-not-allowed'
                     : posttestScore !== null
-                    ? 'bg-green-50 border-green-500 text-green-700'
-                    : 'bg-[#C8B6FB] border-[#a58cfc] text-[#494949] hover:bg-[#bfaefc] active:translate-y-0.5'
-                }`}
+                      ? 'bg-green-50 border-green-500 text-green-700'
+                      : 'bg-[#C8B6FB] border-[#a58cfc] text-[#494949] hover:bg-[#bfaefc] active:translate-y-0.5'
+                  }`}
               >
                 {posttestScore !== null ? `✓ Post-test Selesai (${posttestScore})` : 'Mulai Post-test'}
               </button>
@@ -87,11 +85,10 @@ export default function Game({
               return (
                 <div
                   key={lvl.id}
-                  className={`bg-white rounded-3xl p-6 border shadow-sm transition-all duration-300 relative flex flex-col justify-between min-h-[340px] ${
-                    isUnlocked
+                  className={`bg-white rounded-3xl p-6 border shadow-sm transition-all duration-300 relative flex flex-col justify-between min-h-[340px] ${isUnlocked
                       ? 'border-blue-100 hover:shadow-xl hover:-translate-y-1'
                       : 'border-gray-200 opacity-70'
-                  }`}
+                    }`}
                 >
                   {/* Lock Status Badge */}
                   <div className="absolute top-4 right-4">
@@ -149,7 +146,7 @@ export default function Game({
       {/* GAME STATE 2: PRETEST & POSTTEST WIZARD */}
       {(gameState === 'pretest' || gameState === 'posttest') && (
         <div className="max-w-2xl mx-auto space-y-6">
-          
+
           <div className="bg-white rounded-2xl px-6 py-4 border border-blue-100 flex justify-between items-center shadow-sm">
             <div>
               <h3 className="font-heading font-bold text-gray-800 uppercase text-xs">
@@ -168,7 +165,7 @@ export default function Game({
           </div>
 
           <div className="bg-white rounded-3xl p-8 border border-blue-100 shadow-xl space-y-6">
-            
+
             <div className="space-y-2">
               <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
                 Pertanyaan {currentTestIndex + 1} dari {testQuestions.length}
@@ -182,7 +179,7 @@ export default function Game({
               {testQuestions[currentTestIndex].options.map((option, idx) => {
                 const isSelected = testSelectedChoice === idx;
                 const isCorrect = idx === testQuestions[currentTestIndex].correctIndex;
-                
+
                 let optionStyle = 'border-gray-200 hover:bg-blue-50/50';
                 if (testSubmitted) {
                   if (isCorrect) {
@@ -203,9 +200,8 @@ export default function Game({
                     onClick={() => handleSelectTestChoice(idx)}
                     className={`w-full p-4 rounded-2xl border text-left text-xs leading-relaxed transition-all cursor-pointer flex items-center space-x-3 ${optionStyle}`}
                   >
-                    <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center font-bold text-xs ${
-                      isSelected ? 'bg-[#53B4FB] text-white' : 'bg-gray-100 text-gray-500'
-                    }`}>
+                    <div className={`w-6 h-6 rounded-full shrink-0 flex items-center justify-center font-bold text-xs ${isSelected ? 'bg-[#53B4FB] text-white' : 'bg-gray-100 text-gray-500'
+                      }`}>
                       {String.fromCharCode(65 + idx)}
                     </div>
                     <span>{option}</span>
@@ -215,11 +211,10 @@ export default function Game({
             </div>
 
             {testSubmitted && (
-              <div className={`p-5 rounded-2xl text-xs leading-relaxed border space-y-2 ${
-                testSelectedChoice === testQuestions[currentTestIndex].correctIndex
+              <div className={`p-5 rounded-2xl text-xs leading-relaxed border space-y-2 ${testSelectedChoice === testQuestions[currentTestIndex].correctIndex
                   ? 'bg-green-50 border-[#4CAF50]/30 text-green-800'
                   : 'bg-red-50 border-[#FF5A5F]/30 text-red-800'
-              }`}>
+                }`}>
                 <h4 className="font-heading font-bold text-sm">
                   {testSelectedChoice === testQuestions[currentTestIndex].correctIndex ? '🎉 Jawaban Benar!' : '❌ Jawaban Kurang Tepat'}
                 </h4>
@@ -251,7 +246,7 @@ export default function Game({
       {/* GAME STATE 3: CONSTRUCT 2 IFRAME SCREEN */}
       {gameState === 'playing' && (
         <div className="space-y-6 animate-fade-in">
-          
+
           {/* Game Play Header */}
           <div className="bg-white rounded-2xl p-5 border border-blue-100 flex justify-between items-center shadow-sm">
             <div className="flex items-center space-x-3">
@@ -305,8 +300,12 @@ export default function Game({
       {/* LEVEL CLEARED SCREEN */}
       {gameState === 'level_cleared' && (
         <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
-          <div className="w-20 h-20 bg-green-100 rounded-full mx-auto flex items-center justify-center text-4xl">👑</div>
-          
+          <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full mx-auto flex items-center justify-center shadow-inner">
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 18l3-10 6 5 6-5 3 10H3z" />
+            </svg>
+          </div>
+
           <div className="space-y-2">
             <span className="bg-green-100 text-green-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
               Level {activeLevelId} Selesai
@@ -348,8 +347,12 @@ export default function Game({
       {/* GAME STATE 4: PRETEST FINISHED SCREEN */}
       {gameState === 'pretest_finished' && (
         <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
-          <div className="w-20 h-20 bg-blue-50 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner animate-bounce-slow">📝</div>
-          
+          <div className="w-20 h-20 bg-blue-50 text-blue-500 rounded-full mx-auto flex items-center justify-center shadow-inner animate-bounce-slow">
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+
           <div className="space-y-2">
             <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
               Pretest Selesai
@@ -387,8 +390,13 @@ export default function Game({
       {/* GAME STATE 5: POSTTEST FINISHED SCREEN */}
       {gameState === 'posttest_finished' && (
         <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
-          <div className="w-20 h-20 bg-amber-50 rounded-full mx-auto flex items-center justify-center text-4xl shadow-inner animate-pulse-slow">🏆</div>
-          
+          <div className="w-20 h-20 bg-amber-50 text-amber-500 rounded-full mx-auto flex items-center justify-center shadow-inner animate-pulse-slow">
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 14c2.21 0 4-1.79 4-4V5c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v5c0 2.21 1.79 4 4 4z" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 9H4.5A1.5 1.5 0 013 7.5V6A1.5 1.5 0 014.5 4.5H6m12 4.5h1.5a1.5 1.5 0 011.5 1.5V12a1.5 1.5 0 01-1.5 1.5H18M12 14v4m-4 4h8" />
+            </svg>
+          </div>
+
           <div className="space-y-2">
             <span className="bg-[#C8B6FB] text-[#494949] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide">
               Posttest Selesai
