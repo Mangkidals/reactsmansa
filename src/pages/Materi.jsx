@@ -61,7 +61,7 @@ export default function Materi({
               <div className="bg-[#0a1520] rounded-3xl overflow-hidden aspect-video shadow-2xl relative border-4 border-white group">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/P88k0oE-Htc"
+                  src="https://youtu.be/oltP1tl6V3g?si=X3_Dfa-DTinGfJoE"
                   title="Edukasi Cyber Grooming Anak"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
