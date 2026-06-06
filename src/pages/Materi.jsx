@@ -1,5 +1,6 @@
 import React from 'react';
 import { PrevButton, NextButton } from '../components/Button';
+import YouTube from 'react-youtube';
 
 export default function Materi({
   activeMateriTab,
@@ -60,8 +61,8 @@ export default function Materi({
             <div className="lg:col-span-7">
               <div className="bg-[#0a1520] rounded-3xl overflow-hidden aspect-video shadow-2xl relative border-4 border-white group">
                 <iframe
-                  className="w-full h-full"
-                  src="https://youtu.be/oltP1tl6V3g?si=X3_Dfa-DTinGfJoE"
+                  className="absolute inset-0 w-full h-full"
+                  src="https://www.youtube.com/embed/oltP1tl6V3g?rel=0"
                   title="Edukasi Cyber Grooming Anak"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
