@@ -6,8 +6,8 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
   
   const menuItems = [
     { id: 'home', label: 'Beranda'},
-    { id: 'materi', label: 'Laman Materi' },
-    { id: 'game', label: 'Laman Game' }
+        { id: 'game', label: 'Laman Game' },
+    { id: 'materi', label: 'Laman Materi' }
   ];
 
   return (
@@ -30,7 +30,7 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
                   SIGMA
                 </h1>
                 <p className="text-[9px] uppercase tracking-wider text-blue-500 font-bold leading-none mt-0.5">
-                  Cyber Grooming Shield
+                  Strategi Identifikasi Grooming & Monitoring Anak
                 </p>
               </div>
             </div>

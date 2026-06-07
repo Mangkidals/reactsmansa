@@ -1,6 +1,5 @@
 import React from 'react';
 import { PrevButton, NextButton } from '../components/Button';
-import YouTube from 'react-youtube';
 
 export default function Materi({
   activeMateriTab,

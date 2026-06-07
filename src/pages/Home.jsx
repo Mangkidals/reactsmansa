@@ -76,7 +76,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
         
         {/* Card Penjelasan */}
         <div className="premium-card rounded-3xl p-8 space-y-4">
-          <h3 className="font-heading text-2xl font-bold text-blue-600 flex items-center space-x-2">
+          <h3 className="font-heading text-2xl font-bold text-[#53B4FB] flex items-center space-x-2">
             <span>Tentang SIGMA</span>
           </h3>
           <p className="text-gray-600 leading-relaxed text-sm">
@@ -86,14 +86,14 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
 
         {/* Card Visi & Misi */}
         <div className="premium-card rounded-3xl p-8 space-y-4 border-l-4 border-l-[#C8B6FB]">
-          <h3 className="font-heading text-2xl font-bold text-[#b099f7] flex items-center space-x-2">
+          <h3 className="font-heading text-2xl font-bold text-[#53B4FB] flex items-center space-x-2">
             <span>Visi & Misi</span>
           </h3>
           
           <div className="space-y-4">
             <div>
               <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400">Visi</h4>
-              <p className="text-xs text-gray-600 italic mt-0.5">
+              <p className="text-xs text-gray-600 mt-0.5">
                 "Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming."
               </p>
             </div>
@@ -102,15 +102,15 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-1">Misi Utama</h4>
               <ul className="space-y-1.5 text-xs text-gray-600">
                 <li className="flex items-start space-x-2">
-                  <span className="text-[#FFAB41]">1.</span>
+                  <span className="text-[#000000]">1.</span>
                   <span>Menyajikan materi edukasi cyber grooming dalam bentuk permainan yang interaktif dan menyenangkan.</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="text-[#FFAB41]">2.</span>
+                  <span className="text-[#000000]">2.</span>
                   <span>Membantu siswa mengenali tanda, pola, dan tahapan perilaku cyber grooming di media sosial.</span>
                 </li>
                 <li className="flex items-start space-x-2">
-                  <span className="text-[#FFAB41]">3.</span>
+                  <span className="text-[#000000]">3.</span>
                   <span>Menumbuhkan sikap berani, peduli, dan tanggap untuk melindungi diri sendiri maupun teman sebaya.</span>
                 </li>
               </ul>
@@ -158,7 +158,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             <p className="text-xs text-gray-500">Pelajari apa itu grooming, tanda bahaya, dan langkah aman pelaporan via bacaan interaktif.</p>
             <button
               onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
-              className="inline-flex items-center space-x-2 text-xs font-bold text-[#b099f7] hover:underline pt-1 cursor-pointer bg-transparent border-0"
+              className="inline-flex items-center space-x-2 text-xs font-bold text-[#8668ed] hover:underline pt-1 cursor-pointer bg-transparent border-0"
             >
               <span>Masuk ke Laman Materi</span>
               <span>→</span>

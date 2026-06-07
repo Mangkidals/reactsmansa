@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import GuideModal from './components/GuideModal';
 import Home from './pages/Home';
 import Materi from './pages/Materi';
 import Game from './pages/Game';
@@ -126,6 +127,17 @@ export default function App() {
   const [activeLevelSafetyScore, setActiveLevelSafetyScore] = useState(100);
   const [overallSafetyScore, setOverallSafetyScore] = useState(100);
 
+  // Guide modal state
+  const [showGuide, setShowGuide] = useState(false);
+
+  // Auto-show guide on first visit
+  useEffect(() => {
+    const hasSeenGuide = localStorage.getItem('sigma_guide_seen');
+    if (!hasSeenGuide) {
+      setShowGuide(true);
+    }
+  }, []);
+
   // Articles & Modul states
   const [activeMateriTab, setActiveMateriTab] = useState('video'); // video | modul | ahli | jurnal
   const [activeModulPage, setActiveModulPage] = useState(0);
@@ -229,6 +241,22 @@ export default function App() {
       {/* Footer Component */}
       <Footer setActivePage={setActivePage} setGameState={setGameState} />
 
+      {/* Guide Modal */}
+      <GuideModal isOpen={showGuide} onClose={() => setShowGuide(false)} />
+
+      {/* Floating Help Button to reopen guide */}
+      {!showGuide && (
+        <button
+          onClick={() => setShowGuide(true)}
+          className="fixed bottom-6 right-6 z-40 w-12 h-12 md:w-14 md:h-14 bg-[#53B4FB] hover:bg-[#349beb] text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300 transition-all cursor-pointer active:scale-90 animate-float group"
+          title="Buka Panduan Penggunaan"
+        >
+          <svg className="w-6 h-6 md:w-7 md:h-7 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+          </svg>
+        </button>
+      )}
+
       {/* MODAL: READ ARTICLE DETAILS */}
       {selectedArticle && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
@@ -265,7 +293,7 @@ export default function App() {
                 onClick={() => setSelectedArticle(null)}
                 className="px-6 py-2.5 bg-[#53B4FB] hover:bg-[#349beb] text-white font-heading font-bold text-xs rounded-full cursor-pointer transition-all shadow-md shadow-blue-100 active:scale-95"
               >
-                Tutup Bacaan
+                Kembali
               </button>
             </div>
 
