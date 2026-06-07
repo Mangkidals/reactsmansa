@@ -95,59 +95,113 @@ export default function Materi({
       {/* Tab Contents */}
       <div className="pt-4">
 
-        {/* Tab 1: Video Edukasi */}
+        {/* Tab 1: Video Edukasi — Carousel */}
         {activeMateriTab === 'video' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            <div className="lg:col-span-7">
-              <div className="bg-[#0a1520] rounded-3xl overflow-hidden aspect-video shadow-2xl relative border-4 border-white group">
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/yEICaFnlXlg?rel=0"
-                  title="Edukasi Cyber Grooming Anak"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
+          <div className="space-y-6">
+
+            {/* Video + Info Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+              {/* Left: Video Carousel */}
+              <div className="lg:col-span-7 relative">
+                <div className="overflow-hidden rounded-3xl">
+                  <div
+                    className="flex transition-transform duration-500 ease-in-out"
+                    style={{ transform: `translateX(-${activeVideoIdx * 100}%)` }}
+                  >
+                    {videos.map((video) => (
+                      <div key={video.id} className="w-full shrink-0">
+                        <div className="bg-[#0a1520] rounded-3xl overflow-hidden aspect-video shadow-2xl relative border-4 border-white">
+                          <iframe
+                            className="absolute inset-0 w-full h-full"
+                            src={video.src}
+                            title={video.title}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
+                          ></iframe>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Arrow Buttons over the video */}
+                <button
+                  onClick={() => setActiveVideoIdx(prev => (prev === 0 ? videos.length - 1 : prev - 1))}
+                  className="absolute top-1/2 -translate-y-1/2 left-2 z-20 w-10 h-10 rounded-full bg-white/80 backdrop-blur hover:bg-white border border-gray-200 flex items-center justify-center shadow-lg active:scale-90 transition-all cursor-pointer"
+                  title="Video Sebelumnya"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setActiveVideoIdx(prev => (prev === videos.length - 1 ? 0 : prev + 1))}
+                  className="absolute top-1/2 -translate-y-1/2 right-2 z-20 w-10 h-10 rounded-full bg-white/80 backdrop-blur hover:bg-white border border-gray-200 flex items-center justify-center shadow-lg active:scale-90 transition-all cursor-pointer"
+                  title="Video Selanjutnya"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Disclaimer */}
+                <div className="mt-2 text-[10px] text-gray-400 italic text-center">
+                  *Video milik pihak ketiga untuk tujuan edukasi pencegahan eksploitasi online.
+                </div>
               </div>
-              <div className="mt-2 text-[10px] text-gray-400 italic text-center">
-                *Video milik pihak ketiga untuk tujuan edukasi pencegahan eksploitasi online.
+
+              {/* Right: Dynamic Info Panel */}
+              <div className="lg:col-span-5 space-y-5">
+                <div className="bg-[#FFAB41]/10 border border-[#FFAB41]/20 p-4 rounded-2xl flex items-center space-x-3 text-[#FF6D00] text-xs font-bold">
+                  <span>Menonton video membantu menyelesaikan Kuis Laman Game lebih cepat!</span>
+                </div>
+
+                {/* Badge */}
+                <span className="inline-block bg-[#53B4FB]/10 text-[#53B4FB] text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                  {videos[activeVideoIdx].badge} — Video {activeVideoIdx + 1} dari {videos.length}
+                </span>
+
+                {/* Title */}
+                <h3 className="font-heading text-2xl font-bold text-gray-800 transition-all duration-300">
+                  {videos[activeVideoIdx].title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-xs text-gray-500 leading-relaxed transition-all duration-300">
+                  {videos[activeVideoIdx].description}
+                </p>
+
+                {/* Key Points */}
+                <div className="space-y-2">
+                  <h4 className="font-bold text-xs text-gray-400 uppercase">Poin Utama Video:</h4>
+                  <ul className="space-y-2 text-xs text-gray-600">
+                    {videos[activeVideoIdx].points.map((point, pIdx) => (
+                      <li key={pIdx} className="flex items-start space-x-2">
+                        <svg className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
 
-            <div className="lg:col-span-5 space-y-5">
-              <div className="bg-[#FFAB41]/10 border border-[#FFAB41]/20 p-4 rounded-2xl flex items-center space-x-3 text-[#FF6D00] text-xs font-bold">
-                <span>Menonton video membantu menyelesaikan Kuis Laman Game lebih cepat!</span>
-              </div>
-
-              <h3 className="font-heading text-2xl font-bold text-gray-800">Video Edukasi: Apa sih Cyber Grooming itu?</h3>
-              <p className="text-xs text-gray-500 leading-relaxed">
-                Banyak anak tidak sadar bahwa kenalan baru mereka yang menyenangkan di game online atau media sosial sebenarnya adalah orang dewasa dengan niat jahat. Video ini menjelaskan cara mengenali rayuan palsu, ancaman, dan taktik grooming yang sering terjadi di dunia digital dengan bahasa yang mudah dipahami.
-              </p>
-
-              <div className="space-y-2">
-                <h4 className="font-bold text-xs text-gray-400 uppercase">Poin Utama Video:</h4>
-                <ul className="space-y-2 text-xs text-gray-600">
-                  <li className="flex items-start space-x-2">
-                    <svg className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Bahaya membagikan nama asli, alamat sekolah, dan nomor WhatsApp.</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <svg className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Tanda mencurigakan jika diajak berteman terlalu instan.</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <svg className="w-4 h-4 text-green-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span>Bagaimana menolak pemberian hadiah top-up mencurigakan.</span>
-                  </li>
-                </ul>
-              </div>
+            {/* Dot Indicators */}
+            <div className="flex justify-center items-center space-x-2">
+              {videos.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveVideoIdx(idx)}
+                  className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${idx === activeVideoIdx ? 'w-6 bg-[#53B4FB]' : 'w-2 bg-gray-300'
+                    }`}
+                ></button>
+              ))}
             </div>
+
           </div>
         )}
 
