@@ -1,5 +1,33 @@
 import React from 'react';
 
+function getLevelIcon(levelId, size = "w-7 h-7") {
+  switch (levelId) {
+    case 1:
+      // Skenario Pertemanan: Profile / Users Icon (Blue)
+      return (
+        <svg className={`${size} text-[#53B4FB]`} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+        </svg>
+      );
+    case 2:
+      // Skenario Gratifikasi: Gift Icon (Orange)
+      return (
+        <svg className={`${size} text-[#FF6D00]`} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+        </svg>
+      );
+    case 3:
+      // Skenario Pemerasan: Shield Exclamation / Warning (Red)
+      return (
+        <svg className={`${size} text-red-500`} fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.152c-3.196 0-6.1-1.249-8.25-3.286zm0 13.036h.008v.008H12v-.008z" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 export default function Game({
   gameState,
   setGameState,
@@ -47,19 +75,34 @@ export default function Game({
                   {/* Lock Status Badge */}
                   <div className="absolute top-4 right-4">
                     {isCompleted ? (
-                      <span className="bg-green-100 text-green-800 text-[10px] font-bold px-2.5 py-1 rounded-full">
-                        ✓ SELESAI
+                      <span className="inline-flex items-center space-x-1 bg-green-50 text-green-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-green-100">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                        <span>SELESAI</span>
                       </span>
                     ) : isUnlocked ? (
-                      <span className="bg-blue-100 text-blue-800 text-[10px] font-bold px-2.5 py-1 rounded-full animate-pulse-glow">
-                        BUKA
+                      <span className="inline-flex items-center space-x-1 bg-blue-50 text-blue-700 text-[10px] font-bold px-2.5 py-1 rounded-full border border-blue-100 animate-pulse-glow">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 10.5V6.75a4.5 4.5 0 119 0v3.75M3.75 20.25h16.5A2.25 2.25 0 0022.5 18V11.25A2.25 2.25 0 0020.25 9h-1.5V6.75a5.25 5.25 0 00-10.5 0v3.75c-1.242 0-2.25 1.008-2.25 2.25v6.75c0 1.242 1.008 2.25 2.25 2.25z" />
+                        </svg>
+                        <span>BUKA</span>
                       </span>
-                    ) : null}
+                    ) : (
+                      <span className="inline-flex items-center space-x-1 bg-gray-100 text-gray-400 text-[10px] font-bold px-2.5 py-1 rounded-full">
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                        <span>TERKUNCI</span>
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-4">
-                    <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
-                      {lvl.opponent.avatarChar}
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${
+                      lvl.id === 1 ? 'bg-blue-50' : lvl.id === 2 ? 'bg-orange-50' : 'bg-red-50'
+                    }`}>
+                      {getLevelIcon(lvl.id, "w-7 h-7")}
                     </div>
                     <div>
                       <h3 className="font-heading text-lg font-bold text-gray-800">{lvl.title}</h3>
@@ -83,9 +126,12 @@ export default function Game({
                     ) : (
                       <button
                         disabled
-                        className="w-full py-3 bg-gray-100 text-gray-400 font-heading font-bold text-sm rounded-full border-b-4 border-gray-200 cursor-not-allowed text-center"
+                        className="w-full py-3 bg-gray-100 text-gray-400 font-heading font-bold text-sm rounded-full border-b-4 border-gray-200 cursor-not-allowed text-center flex items-center justify-center space-x-1.5"
                       >
-                        Selesaikan Level {lvl.id - 1} Dulu
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                        </svg>
+                        <span>Selesaikan Level {lvl.id - 1} Dulu</span>
                       </button>
                     )}
                   </div>
@@ -106,8 +152,10 @@ export default function Game({
           {/* Game Play Header */}
           <div className="bg-white rounded-2xl p-5 border border-blue-100 flex justify-between items-center shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-xl">
-                {activeLevel.opponent.avatarChar}
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${
+                activeLevel.id === 1 ? 'bg-blue-50' : activeLevel.id === 2 ? 'bg-orange-50' : 'bg-red-50'
+              }`}>
+                {getLevelIcon(activeLevel.id, "w-5 h-5")}
               </div>
               <div>
                 <h3 className="font-heading font-bold text-gray-800 text-sm sm:text-base">{activeLevel.title}</h3>
@@ -127,7 +175,10 @@ export default function Game({
               ></iframe>
 
               <div className="absolute inset-0 bg-[#0a1520] flex flex-col items-center justify-center space-y-3 z-0 pointer-events-none text-gray-500">
-                <span className="text-3xl animate-spin">⏳</span>
+                <svg className="w-10 h-10 text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
                 <p className="text-xs">Memuat Game...</p>
               </div>
             </div>
@@ -137,16 +188,22 @@ export default function Game({
           <div className="bg-white rounded-2xl p-4 border border-blue-100 shadow-sm flex flex-wrap justify-between items-center gap-4">
             <button
               onClick={exitGame}
-              className="px-6 py-3 bg-white hover:bg-gray-50 text-gray-500 font-heading font-bold text-xs rounded-full border border-gray-200 cursor-pointer transition-colors shadow-sm"
+              className="flex items-center space-x-1.5 px-6 py-3 bg-white hover:bg-gray-50 text-gray-500 font-heading font-bold text-xs rounded-full border border-gray-200 cursor-pointer transition-colors shadow-sm"
             >
-              ← Kembali ke Peta Level
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+              <span>Kembali ke Peta Level</span>
             </button>
 
             <button
               onClick={() => triggerLevelCompletion(activeLevelId, 100)}
-              className="px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-heading font-bold text-xs rounded-full border-b-4 border-green-700 active:translate-y-0.5 active:border-b-0 shadow-md cursor-pointer transition-all"
+              className="flex items-center space-x-1.5 px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-heading font-bold text-xs rounded-full border-b-4 border-green-700 active:translate-y-0.5 active:border-b-0 shadow-md cursor-pointer transition-all"
             >
-              Tandai Level Selesai ✔
+              <span>Tandai Level Selesai</span>
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
             </button>
           </div>
 
@@ -184,16 +241,22 @@ export default function Game({
               onClick={() => {
                 setGameState('select_level');
               }}
-              className="flex-grow py-3.5 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-xs rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer"
+              className="flex-grow flex items-center justify-center space-x-1.5 py-3.5 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-xs rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer"
             >
-              Kembali ke Peta Level
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+              <span>Kembali ke Peta Level</span>
             </button>
             {activeLevelId < 3 && (
               <button
                 onClick={() => startLevel(activeLevelId + 1)}
-                className="px-6 py-3.5 bg-[#53B4FB] hover:bg-blue-400 text-white font-heading font-bold text-xs rounded-full border-b-4 border-blue-600 active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer"
+                className="flex items-center justify-center space-x-1.5 px-6 py-3.5 bg-[#53B4FB] hover:bg-blue-400 text-white font-heading font-bold text-xs rounded-full border-b-4 border-blue-600 active:translate-y-0.5 active:border-b-0 shadow-lg cursor-pointer"
               >
-                Level Berikutnya
+                <span>Level Berikutnya</span>
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                </svg>
               </button>
             )}
           </div>

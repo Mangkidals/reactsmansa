@@ -75,19 +75,16 @@ const EXPERT_OPINIONS = [
   {
     name: "Dr. Seto Mulyadi (Kak Seto)",
     role: "Ketua Lembaga Perlindungan Anak Indonesia",
-    avatar: "👨‍🏫",
     quote: "Kunci utama perlindungan anak di dunia digital adalah keterbukaan komunikasi. Anak harus merasa nyaman untuk bercerita tanpa rasa bersalah kepada orang tua ketika mereka menjumpai interaksi mencurigakan di internet."
   },
   {
     name: "Kompol R. Wahyu (Subdit Cyber Crime)",
     role: "Spesialis Kejahatan Digital",
-    avatar: "👮‍♂️",
     quote: "Pelaku cyber grooming sangat lihai memeras korban secara emosional. Anak-anak harus berani memutus komunikasi (block) dan tidak takut akan ancaman penyebaran data, karena pelaku justru memanfaatkan ketakutan tersebut."
   },
   {
     name: "Dra. Elly Risman, Psi.",
     role: "Psikolog Spesialis Parenting & Anak",
-    avatar: "👩‍⚕️",
     quote: "Pemberian hadiah top-up game instan adalah taktik psikologis pelaku agar anak merasa memiliki hutang budi moral. Sekolah harus aktif mengedukasi siswa untuk tegas menolak gratifikasi digital dari orang tidak dikenal."
   }
 ];
@@ -95,24 +92,51 @@ const EXPERT_OPINIONS = [
 const ARTICLES = [
   {
     id: 1,
-    title: "Mengapa Game Online Menjadi Lahan Empuk Cyber Grooming?",
-    date: "01 Juni 2026",
-    summary: "Game online memiliki room chat interaktif dan fitur pengiriman item yang sering dieksploitasi oleh pelaku untuk mendekati anak-anak dengan menyamar sebagai sesama gamer.",
-    content: "Penelitian menunjukkan bahwa lebih dari 60% anak-anak berinteraksi dengan orang tidak dikenal saat bermain game online multipemain. Fitur chatting, voice chat, dan pengiriman hadiah virtual (seperti diamond, skin, atau koin) mempermudah pelaku cyber grooming menyusup ke lingkungan bermain anak. Mereka menghabiskan waktu berhari-hari bahkan berbulan-bulan berpura-pura menjadi pelindung atau rekan bermain game yang hebat. Untuk mencegah hal ini, orang tua disarankan membatasi obrolan publik dan membiasakan anak bermain dengan teman sebaya yang terverifikasi."
+    title: "Ancaman Tersembunyi di Ruang Bermain Digital: Cyber Child Grooming dalam Game Online Anak",
+    date: "05 Juni 2026",
+    summary: "Meningkatnya popularitas game online dengan fitur obrolan suara dan teks membuka celah bagi pelaku kejahatan digital untuk mendekati anak-anak melalui metode grooming.",
+    content: "Meningkatnya popularitas game online yang dilengkapi fitur komunikasi suara dan teks membuat anak semakin sering berinteraksi dengan orang asing tanpa mengetahui identitas sebenarnya. Kondisi ini membuka peluang terjadinya cyber child grooming. Orang tua dan pendidik harus meningkatkan pengawasan dan mengedukasi anak-anak tentang batasan berbagi informasi pribadi di dunia virtual.",
+    url: "https://dkis.cirebonkota.go.id/artikel/ancaman-tersembunyi-di-ruang-bermain-digital-cyber-child-grooming-dalam-game-online-anak"
   },
   {
     id: 2,
-    title: "Panduan Orang Tua: Membaca Sinyal Isolasi Online pada Anak",
-    date: "28 Mei 2026",
-    summary: "Pelaku grooming selalu mencoba memisahkan anak dari pengawasan orang tuanya. Kenali tanda-tanda anak mulai menyembunyikan layar gadget dan bersikap cemas.",
-    content: "Salah satu indikasi kuat anak sedang masuk ke dalam lingkaran cyber grooming adalah perubahan perilaku yang drastis. Anak cenderung mengunci pintu kamar, langsung menutup layar handphone ketika dihampiri, cemas berlebihan saat mendengar notifikasi masuk, atau meminta uang saku ekstra dengan alasan tidak jelas (mungkin digunakan untuk menebus ancaman). Mengajarkan anak bahwa mereka tidak perlu menyembuyenikan rahasia internet dari orang tua adalah langkah awal pencegahan manipulasi digital."
+    title: "Praktik Cyber Grooming: Ketika Ruang Digital Tak Lagi Aman bagi Anak-Anak",
+    date: "03 Juni 2026",
+    summary: "Predator online kini memanfaatkan kelengahan pengawasan di ruang digital untuk membangun kepercayaan dengan anak-anak sebelum melakukan eksploitasi.",
+    content: "Ruang digital kini menyimpan ancaman nyata bagi anak-anak melalui praktik cyber grooming, di mana pelaku membangun kepercayaan korban secara perlahan sebelum melakukan tindakan eksploitasi. Diperlukan sinergi antara sekolah, keluarga, dan penyedia platform untuk mendeteksi dini pola perilaku manipulatif ini.",
+    url: "https://ukm-visi.undiksha.ac.id/praktik-cyber-grooming-ketika-ruang-digital-tak-lagi-aman-bagi-anak-anak/"
   },
   {
     id: 3,
-    title: "Langkah Hukum dan Saluran Pengaduan Cyber Grooming di Indonesia",
+    title: "Edukasi Bahaya Cyber Grooming: Kunci Melindungi Anak dari Predator Siber",
+    date: "30 Mei 2026",
+    summary: "Analisis mengenai urgensi pendampingan orang tua serta edukasi literasi digital bagi anak dalam mendeteksi ancaman manipulasi psikologis di internet.",
+    content: "Upaya pencegahan cyber grooming tidak hanya bertumpu pada aspek hukum, tetapi juga pada penguatan karakter anak dan edukasi literasi digital secara dini. Anak-anak perlu diajarkan untuk bersikap skeptis terhadap tawaran mencurigakan dari teman yang baru dikenal di platform online.",
+    url: "https://ukm-visi.undiksha.ac.id/praktik-cyber-grooming-ketika-ruang-digital-tak-lagi-aman-bagi-anak-anak/"
+  },
+  {
+    id: 4,
+    title: "LPSK Soroti Ancaman Eksploitasi Anak Melalui Cyber Grooming",
+    date: "25 Mei 2026",
+    summary: "Lembaga Perlindungan Saksi dan Korban (LPSK) menyoroti maraknya kasus child grooming dan pentingnya perlindungan hukum bagi korban eksploitasi seksual anak.",
+    content: "Lembaga Perlindungan Saksi dan Korban (LPSK) menegaskan komitmennya dalam mengawal kasus eksploitasi seksual anak yang bermula dari interaksi digital. Kasus cyber grooming memerlukan penanganan hukum yang sensitif terhadap anak agar hak-hak korban terlindungi sepenuhnya selama proses peradilan.",
+    url: "https://www.lpsk.go.id/berita/cml0i9g5y00013sxgciwhiudu"
+  },
+  {
+    id: 5,
+    title: "Anak Jadi Target Predator di Game Online, Ini Bahaya Cybergrooming yang Perlu Diketahui",
+    date: "20 Mei 2026",
+    summary: "Kenali bahaya cybergrooming di mana pelaku menyamar menjadi teman mabar anak, memberi hadiah virtual, hingga menjebak anak ke arah eksploitasi.",
+    content: "Game online sering kali menjadi pintu masuk bagi predator untuk mendekati anak-anak melalui taktik main bareng (mabar) dan pemberian item game gratis. Artikel ini mengulas bahaya eksploitasi anak di platform game online serta cara mengenali tanda-tanda ketika anak mulai dimanipulasi secara digital.",
+    url: "https://www.uib.ac.id/anak-jadi-target-predator-di-game-online-ini-bahaya-cybergrooming-yang-perlu-kamu-tahu/"
+  },
+  {
+    id: 6,
+    title: "Membongkar Modus Child Grooming Sebagai Pintu Masuk Eksploitasi Seksual Anak",
     date: "15 Mei 2026",
-    summary: "Ketahui ke mana harus melapor jika anak mengalami ancaman, intimidasi, atau eksploitasi online oleh pelaku cyber grooming di media sosial.",
-    content: "Di Indonesia, cyber grooming dan eksploitasi anak secara online melanggar UU ITE serta UU Perlindungan Anak dengan ancaman hukuman penjara hingga 15 tahun. Jika menemukan indikasi pemerasan visual atau ancaman, jangan menghapus chat tersebut. Simpan tangkapan layar (screenshot) nomor pelaku, nama akun, dan transaksi transfer jika ada. Laporkan segera melalui Hotline Sahabat Perempuan dan Anak (SAPA) di nomor telepon 129, WhatsApp di 08111-129-129, atau aduan konten Kementerian Kominfo."
+    summary: "Kajian hukum mengenai bagaimana game online sering dijadikan jebakan dan modus manipulasi pelaku untuk mendekati anak secara emosional dan seksual.",
+    content: "Modus child grooming merupakan pintu masuk utama bagi kejahatan eksploitasi seksual anak di ranah daring. Melalui analisis kasus hukum, dipaparkan bagaimana regulasi hukum di Indonesia menjerat pelaku cyber grooming dan langkah hukum konkret yang harus diambil oleh keluarga korban.",
+    url: "https://dntlawyers.com/ketika-game-online-menjadi-perangkap-membongkar-modus-child-grooming-sebagai-pintu-masuk-eksploitasi-seksual-anak/"
   }
 ];
 
@@ -184,7 +208,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#ECEFFC] text-[#494949] flex flex-col font-body antialiased relative">
-      
+
       {/* Navbar Component */}
       <Navbar
         activePage={activePage}
@@ -239,7 +263,7 @@ export default function App() {
       {selectedArticle && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
           <div className="bg-white rounded-3xl p-6 max-w-2xl w-full border border-blue-100 shadow-2xl max-h-[85vh] flex flex-col justify-between animate-scale-up">
-            
+
             <div className="flex justify-between items-center border-b border-gray-100 pb-3 shrink-0">
               <div>
                 <span className="text-[9px] font-bold text-[#53B4FB] uppercase">{selectedArticle.date}</span>
@@ -253,7 +277,7 @@ export default function App() {
               <p className="font-semibold text-gray-700 italic">
                 "{selectedArticle.summary}"
               </p>
-              
+
               {selectedArticle.content.split('\n\n').map((paragraph, index) => (
                 <p key={index}>{paragraph}</p>
               ))}

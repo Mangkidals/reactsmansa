@@ -1,4 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+const videos = [
+  {
+    id: 1,
+    src: 'https://www.youtube.com/embed/7bN4laaeGGw?rel=0',
+    title: 'Apa Itu Cyber Grooming? Kenali Bahayanya!',
+    badge: 'Pengenalan',
+    description:
+      'Video ini memperkenalkan konsep cyber grooming secara menyeluruh — mulai dari definisi, siapa saja pelakunya, hingga platform digital yang paling sering digunakan sebagai tempat kejahatan ini berlangsung.',
+    points: [
+      'Definisi dan arti cyber grooming bagi anak-anak',
+      'Platform yang paling rentan: game online & media sosial',
+      'Pola pendekatan awal yang dilakukan pelaku',
+    ],
+  },
+  {
+    id: 2,
+    src: 'https://www.youtube.com/embed/PKfVcMsQkMo?rel=0',
+    title: 'Tanda-Tanda Anak Menjadi Korban Grooming',
+    badge: 'Deteksi Dini',
+    description:
+      'Pelajari sinyal-sinyal peringatan yang harus diwaspadai orang tua maupun guru. Video ini membahas perubahan perilaku, pola komunikasi mencurigakan, dan bagaimana membuka percakapan yang aman dengan anak.',
+    points: [
+      'Perubahan perilaku anak yang perlu diwaspadai',
+      'Cara pelaku membangun kepercayaan secara bertahap',
+      'Tips orang tua membuka dialog yang aman dengan anak',
+    ],
+  },
+  {
+    id: 3,
+    src: 'https://www.youtube.com/embed/oVc2gC3-hNM?rel=0',
+    title: 'Cara Melindungi Diri dari Cyber Grooming',
+    badge: 'Pencegahan',
+    description:
+      'Panduan praktis bagi anak-anak dan remaja untuk melindungi diri di dunia digital. Video ini mengajarkan langkah konkret menolak, melaporkan, dan mencari bantuan saat merasa tidak nyaman.',
+    points: [
+      'Langkah menolak dengan tegas tanpa rasa takut',
+      'Cara melaporkan kepada orang tua dan pihak berwenang',
+      'Pengaturan privasi akun media sosial yang aman',
+    ],
+  },
+];
 
 export default function Materi({
   activeMateriTab,
@@ -7,6 +49,16 @@ export default function Materi({
   expertOpinions,
   articles
 }) {
+  const [activeArtIdx, setActiveArtIdx] = useState(0);
+  const [activeVideoIdx, setActiveVideoIdx] = useState(0);
+
+  const handlePrevArticle = () => {
+    setActiveArtIdx(prev => (prev === 0 ? articles.length - 1 : prev - 1));
+  };
+
+  const handleNextArticle = () => {
+    setActiveArtIdx(prev => (prev === articles.length - 1 ? 0 : prev + 1));
+  };
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -31,8 +83,8 @@ export default function Materi({
             key={tab.id}
             onClick={() => setActiveMateriTab(tab.id)}
             className={`px-4 py-3 font-heading font-bold text-xs sm:text-sm transition-all border-2 rounded-2xl text-center cursor-pointer shadow-sm ${activeMateriTab === tab.id
-                ? tab.activeClass
-                : tab.inactiveClass
+              ? tab.activeClass
+              : tab.inactiveClass
               }`}
           >
             {tab.label}
@@ -118,9 +170,9 @@ export default function Materi({
             {expertOpinions.map((opinion, idx) => (
               <div key={idx} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
-                  <div className="w-12 h-12 bg-blue-50 border border-blue-100/50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+                  {/* <div className="w-12 h-12 bg-blue-50 border border-blue-100/50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
                     {opinion.avatar}
-                  </div>
+                  </div> */}
                   <h4 className="font-heading font-bold text-gray-800 leading-snug">{opinion.name}</h4>
                   <p className="text-[10px] text-blue-500 font-bold uppercase">{opinion.role}</p>
                   <p className="text-xs text-gray-500 italic leading-relaxed pt-2">
@@ -134,25 +186,83 @@ export default function Materi({
 
         {/* Tab 4: Artikel & Jurnal Hukum */}
         {activeMateriTab === 'jurnal' && (
-          <div className="space-y-4">
-            {articles.map(art => (
+          <div className="relative w-full px-4 sm:px-12">
+            {/* Outer Slider Window */}
+            <div className="overflow-hidden rounded-3xl bg-white border border-blue-100 shadow-md">
+              {/* Sliding Flex Container */}
               <div
-                key={art.id}
-                className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
-                onClick={() => setSelectedArticle(art)}
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${activeArtIdx * 100}%)` }}
               >
-                <div className="space-y-1 max-w-3xl">
-                  <div className="text-[10px] font-bold text-gray-400">{art.date}</div>
-                  <h4 className="font-heading font-bold text-gray-800 text-lg hover:text-[#53B4FB] transition-colors">{art.title}</h4>
-                  <p className="text-xs text-gray-500 leading-relaxed line-clamp-2">{art.summary}</p>
-                </div>
+                {articles.map((art, idx) => (
+                  <div
+                    key={art.id}
+                    className="w-full shrink-0 p-8 flex flex-col justify-between min-h-[240px] cursor-pointer hover:bg-gray-50/40 transition-colors group"
+                    onClick={() => window.open(art.url, '_blank')}
+                  >
+                    <div className="space-y-4">
+                      <div className="flex justify-between items-center">
+                        <span className="text-[10px] font-bold text-blue-500 uppercase tracking-wider">
+                          {art.date}
+                        </span>
+                        <span className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                          Artikel {idx + 1} dari {articles.length}
+                        </span>
+                      </div>
+                      <h3 className="font-heading font-bold text-[#494949] text-xl sm:text-2xl group-hover:text-[#53B4FB] transition-colors leading-snug">
+                        {art.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-gray-500 leading-relaxed line-clamp-3">
+                        {art.summary}
+                      </p>
+                    </div>
 
-                <div className="shrink-0 flex items-center space-x-2 text-xs font-bold text-[#53B4FB]">
-                  <span>Buka Jurnal</span>
-                  <span>→</span>
-                </div>
+                    <div className="mt-6 pt-4 border-t border-gray-50 flex items-center text-xs font-bold text-gray-700">
+                      <span>Baca Selengkapnya</span>
+                      <span className="ml-1 text-[#53B4FB] group-hover:translate-x-1.5 transition-transform duration-200">→</span>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Left Arrow Button */}
+            <div className="absolute top-1/2 -translate-y-1/2 left-0 sm:left-2 z-20">
+              <button
+                onClick={(e) => { e.stopPropagation(); handlePrevArticle(); }}
+                className="w-10 h-10 rounded-full bg-white hover:bg-blue-50 border border-blue-100 flex items-center justify-center shadow-md hover:shadow-lg active:scale-90 transition-all cursor-pointer"
+                title="Artikel Sebelumnya"
+              >
+                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Right Arrow Button */}
+            <div className="absolute top-1/2 -translate-y-1/2 right-0 sm:right-2 z-20">
+              <button
+                onClick={(e) => { e.stopPropagation(); handleNextArticle(); }}
+                className="w-10 h-10 rounded-full bg-white hover:bg-blue-50 border border-blue-100 flex items-center justify-center shadow-md hover:shadow-lg active:scale-90 transition-all cursor-pointer"
+                title="Artikel Selanjutnya"
+              >
+                <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Carousel Dots Indicators */}
+            <div className="flex justify-center items-center space-x-2 mt-5">
+              {articles.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveArtIdx(idx)}
+                  className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${idx === activeArtIdx ? 'w-6 bg-[#53B4FB]' : 'w-2 bg-gray-300'
+                    }`}
+                ></button>
+              ))}
+            </div>
           </div>
         )}
 

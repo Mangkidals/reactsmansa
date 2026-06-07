@@ -15,14 +15,14 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
 
   return (
     <div className="space-y-16 animate-fade-in">
-      
+
       {/* Hero Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
             <span>Strategi Identifikasi & Edukasi Digital</span>
           </div>
-          
+
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
             Kenali <span className="text-[#53B4FB]">Cyber Grooming</span>,<br />
             Jaga Keamanan Digital Kita!
@@ -37,13 +37,13 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               onClick={() => setActivePage('game')}
               className="px-8 py-4 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-orange-200 transition-all cursor-pointer"
             >
-            Mulai Bermain Game
+              Mulai Bermain Game
             </button>
             <button
               onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
               className="px-8 py-4 bg-white hover:bg-blue-50 text-[#53B4FB] border-2 border-[#53B4FB] font-heading font-bold text-lg rounded-full transition-all shadow-sm cursor-pointer"
             >
-            Baca Modul Belajar
+              Baca Modul Belajar
             </button>
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             alt="SIGMA Hero Illustration"
             className="w-full max-w-[380px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
           />
-          
+
           <div className="absolute -bottom-2 -left-2 bg-white/90 backdrop-blur border border-blue-100 p-3 rounded-2xl shadow-lg flex items-center space-x-3 z-20">
             <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -73,7 +73,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
 
       {/* Core Penjelasan / Visi & Misi Card Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8">
-        
+
         {/* Card Penjelasan */}
         <div className="premium-card rounded-3xl p-8 space-y-4">
           <h3 className="font-heading text-2xl font-bold text-[#53B4FB] flex items-center space-x-2">
@@ -89,12 +89,12 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           <h3 className="font-heading text-2xl font-bold text-[#53B4FB] flex items-center space-x-2">
             <span>Visi & Misi</span>
           </h3>
-          
+
           <div className="space-y-4">
             <div>
               <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400">Visi</h4>
               <p className="text-xs text-gray-600 mt-0.5">
-                Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming. 
+                Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming.
               </p>
             </div>
 
@@ -122,7 +122,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
 
       {/* Quick Access Banners */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
+
         {/* Access Game */}
         <div className="premium-card rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden group premium-card-hover border border-blue-100">
           <div className="absolute top-0 right-0 w-24 h-24 bg-[#FFAB41]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
@@ -185,10 +185,10 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
 
         {/* Sliding Full-Width Carousel Container */}
         <div className="relative w-full px-4 sm:px-12">
-          
+
           {/* Outer Slider Window */}
           <div className="overflow-hidden rounded-3xl bg-white border border-blue-100 shadow-md">
-            
+
             {/* Sliding Flex Container */}
             <div
               className="flex transition-transform duration-500 ease-in-out"
@@ -198,7 +198,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
                 <div
                   key={art.id}
                   className="w-full shrink-0 p-8 flex flex-col justify-between min-h-[240px] cursor-pointer hover:bg-gray-50/40 transition-colors group"
-                  onClick={() => setSelectedArticle(art)}
+                  onClick={() => window.open(art.url, '_blank')}
                 >
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
@@ -216,7 +216,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
                       {art.summary}
                     </p>
                   </div>
-                  
+
                   <div className="mt-6 pt-4 border-t border-gray-50 flex items-center text-xs font-bold text-gray-700">
                     <span>Baca Selengkapnya</span>
                     <span className="ml-1 text-[#53B4FB] group-hover:translate-x-1.5 transition-transform duration-200">→</span>
@@ -259,9 +259,8 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               <button
                 key={idx}
                 onClick={() => setActiveArtIdx(idx)}
-                className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${
-                  idx === activeArtIdx ? 'w-6 bg-[#53B4FB]' : 'w-2 bg-gray-300'
-                }`}
+                className={`transition-all duration-300 rounded-full cursor-pointer h-2 ${idx === activeArtIdx ? 'w-6 bg-[#53B4FB]' : 'w-2 bg-gray-300'
+                  }`}
               ></button>
             ))}
           </div>
