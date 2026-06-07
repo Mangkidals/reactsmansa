@@ -49,6 +49,19 @@
       box-shadow: 0 0 25px rgba(83, 180, 251, 0.7);
     }
   }
+
+  @keyframes fab-bounce {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      box-shadow: 0 4px 15px rgba(83, 180, 251, 0.3);
+    }
+    50% {
+      transform: translateY(-6px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(83, 180, 251, 0.5);
+    }
+  }
+
+  --animate-fab-bounce: fab-bounce 2.5s ease-in-out infinite;
 }
 
 /* Custom CSS Base and Resets */

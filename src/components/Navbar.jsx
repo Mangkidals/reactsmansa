@@ -26,7 +26,7 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
                 />
               </div>
               <div>
-                <h1 className="font-heading text-xl font-bold tracking-tight text-[#494949]">
+                <h1 className="font-heading text-xl font-bold tracking-tight text-[#000000]">
                   SIGMA
                 </h1>
                 <p className="text-[9px] uppercase tracking-wider text-blue-500 font-bold leading-none mt-0.5">

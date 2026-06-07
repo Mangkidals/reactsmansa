@@ -10,8 +10,8 @@ export default function Footer({ setActivePage, setGameState }) {
         </div>
         <div className="flex space-x-4 text-xs font-bold text-gray-500">
           <button onClick={() => { setActivePage('home'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Beranda</button>
-          <button onClick={() => { setActivePage('materi'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Materi</button>
           <button onClick={() => { setActivePage('game'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Laman Game</button>
+              <button onClick={() => { setActivePage('materi'); setGameState('select_level'); }} className="hover:text-blue-500 cursor-pointer">Laman Materi</button>
         </div>
       </div>
     </footer>

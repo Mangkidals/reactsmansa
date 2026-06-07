@@ -94,7 +94,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             <div>
               <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400">Visi</h4>
               <p className="text-xs text-gray-600 mt-0.5">
-                "Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming."
+                Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming. 
               </p>
             </div>
 
@@ -133,7 +133,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             </svg>
           </div>
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-heading text-xl font-bold text-gray-800">Uji Kewaspadaanmu!</h3>
+            <h3 className="font-heading text-xl font-bold text-[#FF6D00]">Uji Kewaspadaanmu!</h3>
             <p className="text-xs text-gray-500">Masuk ke ruang chat simulasi dan pelajari cara mengenali penipu atau pelaku kejahatan siber.</p>
             <button
               onClick={() => { setActivePage('game'); setGameState('select_level'); }}
@@ -154,7 +154,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             </svg>
           </div>
           <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-heading text-xl font-bold text-gray-800">Modul Interaktif</h3>
+            <h3 className="font-heading text-xl font-bold text-[#8668ed]">Modul Interaktif</h3>
             <p className="text-xs text-gray-500">Pelajari apa itu grooming, tanda bahaya, dan langkah aman pelaporan via bacaan interaktif.</p>
             <button
               onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}

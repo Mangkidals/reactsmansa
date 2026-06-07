@@ -127,21 +127,15 @@ export default function App() {
   const [activeLevelSafetyScore, setActiveLevelSafetyScore] = useState(100);
   const [overallSafetyScore, setOverallSafetyScore] = useState(100);
 
-  // Guide modal state
-  const [showGuide, setShowGuide] = useState(false);
-
-  // Auto-show guide on first visit
-  useEffect(() => {
-    const hasSeenGuide = localStorage.getItem('sigma_guide_seen');
-    if (!hasSeenGuide) {
-      setShowGuide(true);
-    }
-  }, []);
-
   // Articles & Modul states
   const [activeMateriTab, setActiveMateriTab] = useState('video'); // video | modul | ahli | jurnal
   const [activeModulPage, setActiveModulPage] = useState(0);
   const [selectedArticle, setSelectedArticle] = useState(null);
+
+  // Guide Modal state — show on first visit
+  const [showGuide, setShowGuide] = useState(() => {
+    return !localStorage.getItem('sigma_guide_seen');
+  });
 
   // Construct 2 postMessage Event Listener
   useEffect(() => {
@@ -241,22 +235,6 @@ export default function App() {
       {/* Footer Component */}
       <Footer setActivePage={setActivePage} setGameState={setGameState} />
 
-      {/* Guide Modal */}
-      <GuideModal isOpen={showGuide} onClose={() => setShowGuide(false)} />
-
-      {/* Floating Help Button to reopen guide */}
-      {!showGuide && (
-        <button
-          onClick={() => setShowGuide(true)}
-          className="fixed bottom-6 right-6 z-40 w-12 h-12 md:w-14 md:h-14 bg-[#53B4FB] hover:bg-[#349beb] text-white rounded-full flex items-center justify-center shadow-lg shadow-blue-200 hover:shadow-xl hover:shadow-blue-300 transition-all cursor-pointer active:scale-90 animate-float group"
-          title="Buka Panduan Penggunaan"
-        >
-          <svg className="w-6 h-6 md:w-7 md:h-7 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
-          </svg>
-        </button>
-      )}
-
       {/* MODAL: READ ARTICLE DETAILS */}
       {selectedArticle && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
@@ -291,7 +269,7 @@ export default function App() {
             <div className="pt-4 border-t border-gray-100 flex justify-end shrink-0">
               <button
                 onClick={() => setSelectedArticle(null)}
-                className="px-6 py-2.5 bg-[#53B4FB] hover:bg-[#349beb] text-white font-heading font-bold text-xs rounded-full cursor-pointer transition-all shadow-md shadow-blue-100 active:scale-95"
+                className="px-6 py-2.5 bg-[#53B4FB] hover:bg-[#349beb] text-white font-heading  text-xs rounded-full cursor-pointer transition-all shadow-md shadow-blue-100 active:scale-95"
               >
                 Kembali
               </button>
@@ -300,6 +278,23 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {/* Floating Help Button */}
+      {!showGuide && (
+        <button
+          onClick={() => setShowGuide(true)}
+          className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-gradient-to-br from-[#53B4FB] to-[#349beb] hover:from-[#349beb] hover:to-[#2080d0] text-white rounded-full shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-300/50 flex items-center justify-center transition-colors duration-300 cursor-pointer active:scale-90 group md:bottom-8 md:right-8 animate-fab-bounce hover:animate-none"
+          title="Panduan Penggunaan"
+        >
+          <svg className="w-6 h-6 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827m0 3h.01" />
+            <circle cx="12" cy="12" r="9.5" />
+          </svg>
+        </button>
+      )}
+
+      {/* Guide Modal */}
+      <GuideModal isOpen={showGuide} onClose={() => setShowGuide(false)} />
 
     </div>
   );
