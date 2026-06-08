@@ -14,8 +14,8 @@ const GUIDE_STEPS = [
     bgGradient: "from-blue-50 to-indigo-50",
     tips: [
       "Web ini berisi materi edukasi dan game simulasi interaktif",
-      "Cocok untuk siswa SMP/SMA dan didampingi oleh guru",
-      "Baca materi terlebih dahulu sebelum bermain game"
+      "Direkomendasi untuk anak dibawah umur",
+      "Bermain game simulasi terlebih dahulu, lalu baca materi"
     ]
   },
   {
@@ -39,29 +39,10 @@ const GUIDE_STEPS = [
   {
     icon: (
       <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
-        <rect x="2" y="6" width="20" height="12" rx="3" />
-        <path d="M6 12h4M8 10v4M16 11h.01M18 13h.01" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
-      </svg>
-    ),
-    title: "Langkah 2: Mainkan Game Simulasi",
-    subtitle: "Laman Game",
-    description: "Uji pemahaman dan kewaspadaanmu melalui 3 level game simulasi chat interaktif. Setiap level menyajikan skenario berbeda tentang cyber grooming:",
-    color: "#FF6D00",
-    bgGradient: "from-orange-50 to-amber-50",
-    tips: [
-      "Level 1 — Siapa Teman Baruku? (skenario pertemanan)",
-      "Level 2 — Hadiah Misterius (skenario gratifikasi)",
-      "Level 3 — Rahasia Kita Berdua (skenario pemerasan)",
-      "Level harus diselesaikan secara berurutan untuk membuka level berikutnya"
-    ]
-  },
-  {
-    icon: (
-      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
       </svg>
     ),
-    title: "Langkah 3: Terapkan & Laporkan!",
+    title: "Langkah 2: Terapkan & Laporkan!",
     subtitle: "Tips Keamanan",
     description: "Setelah mempelajari materi dan menyelesaikan game, terapkan pengetahuanmu di kehidupan nyata. Ingat langkah keamanan berikut:",
     color: "#4CAF50",
@@ -71,6 +52,25 @@ const GUIDE_STEPS = [
       "Jangan terima hadiah/top-up dari orang tidak dikenal",
       "Ceritakan chat mencurigakan ke orang tua atau gurumu",
       "Hubungi Hotline SAPA KPPPA di 129 jika ada ancaman"
+    ]
+  },
+    {
+    icon: (
+      <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+        <rect x="2" y="6" width="20" height="12" rx="3" />
+        <path d="M6 12h4M8 10v4M16 11h.01M18 13h.01" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
+      </svg>
+    ),
+    title: "Langkah 3: Mainkan Game Simulasi",
+    subtitle: "Laman Game",
+    description: "Uji pemahaman dan kewaspadaanmu melalui 3 level game simulasi chat interaktif. Setiap level menyajikan skenario berbeda tentang cyber grooming:",
+    color: "#FF6D00",
+    bgGradient: "from-orange-50 to-amber-50",
+    tips: [
+      "Level 1 — Siapa Teman Baruku? (skenario pertemanan)",
+      "Level 2 — Hadiah Misterius (skenario gratifikasi)",
+      "Level 3 — Rahasia Kita Berdua (skenario pemerasan)",
+      "Level harus diselesaikan secara berurutan untuk membuka level berikutnya"
     ]
   }
 ];
@@ -159,10 +159,10 @@ export default function GuideModal({ isOpen, onClose }) {
         {/* Step Content */}
         <div
           className={`p-6 sm:p-8 transition-all duration-200 ${isAnimating
-              ? slideDirection === 'right'
-                ? 'opacity-0 translate-x-4'
-                : 'opacity-0 -translate-x-4'
-              : 'opacity-100 translate-x-0'
+            ? slideDirection === 'right'
+              ? 'opacity-0 translate-x-4'
+              : 'opacity-0 -translate-x-4'
+            : 'opacity-100 translate-x-0'
             }`}
         >
           {/* Step Header with Icon */}
@@ -174,12 +174,12 @@ export default function GuideModal({ isOpen, onClose }) {
               {step.icon}
             </div>
             <div className="min-w-0">
-              <p className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: step.color }}>
-                {step.subtitle}
-              </p>
               <h3 className="font-heading text-lg sm:text-xl font-bold text-gray-800 leading-snug">
                 {step.title}
               </h3>
+              <p className="text-[10px] font-bold uppercase tracking-widest mt-0.5" style={{ color: step.color }}>
+                {step.subtitle}
+              </p>
             </div>
           </div>
 
