@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function getLevelIcon(levelId, size = "w-7 h-7") {
   switch (levelId) {
@@ -40,6 +40,7 @@ export default function Game({
   exitGame
 }) {
   const activeLevel = gameLevels.find(lvl => lvl.id === activeLevelId);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -68,8 +69,8 @@ export default function Game({
                 <div
                   key={lvl.id}
                   className={`bg-white rounded-3xl p-6 border shadow-sm transition-all duration-300 relative flex flex-col justify-between min-h-[340px] ${isUnlocked
-                      ? 'border-blue-100 hover:shadow-xl hover:-translate-y-1'
-                      : 'border-gray-200 opacity-70'
+                    ? 'border-blue-100 hover:shadow-xl hover:-translate-y-1'
+                    : 'border-gray-200 opacity-70'
                     }`}
                 >
                   {/* Lock Status Badge */}
@@ -99,9 +100,8 @@ export default function Game({
                   </div>
 
                   <div className="space-y-4">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${
-                      lvl.id === 1 ? 'bg-blue-50' : lvl.id === 2 ? 'bg-orange-50' : 'bg-red-50'
-                    }`}>
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shadow-inner ${lvl.id === 1 ? 'bg-blue-50' : lvl.id === 2 ? 'bg-orange-50' : 'bg-red-50'
+                      }`}>
                       {getLevelIcon(lvl.id, "w-7 h-7")}
                     </div>
                     <div>
@@ -152,9 +152,8 @@ export default function Game({
           {/* Game Play Header */}
           <div className="bg-white rounded-2xl p-5 border border-blue-100 flex justify-between items-center shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${
-                activeLevel.id === 1 ? 'bg-blue-50' : activeLevel.id === 2 ? 'bg-orange-50' : 'bg-red-50'
-              }`}>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${activeLevel.id === 1 ? 'bg-blue-50' : activeLevel.id === 2 ? 'bg-orange-50' : 'bg-red-50'
+                }`}>
                 {getLevelIcon(activeLevel.id, "w-5 h-5")}
               </div>
               <div>
@@ -172,15 +171,17 @@ export default function Game({
                 className="w-full h-full border-0 z-10"
                 title={activeLevel.title}
                 allowFullScreen
+                onLoad={() => setIsLoading(false)}
               ></iframe>
-
-              <div className="absolute inset-0 bg-[#0a1520] flex flex-col items-center justify-center space-y-3 z-0 pointer-events-none text-gray-500">
-                <svg className="w-10 h-10 text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                <p className="text-xs">Memuat Game...</p>
-              </div>
+              {isLoading && (
+                <div className="absolute inset-0 bg-[#0a1520] flex flex-col items-center justify-center space-y-3 z-0 text-gray-500">
+                  <svg className="w-10 h-10 text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <p className="text-xs">Memuat Game...</p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -194,16 +195,6 @@ export default function Game({
                 <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
               </svg>
               <span>Kembali ke Peta Level</span>
-            </button>
-
-            <button
-              onClick={() => triggerLevelCompletion(activeLevelId, 100)}
-              className="flex items-center space-x-1.5 px-8 py-3 bg-green-500 hover:bg-green-600 text-white font-heading font-bold text-xs rounded-full border-b-4 border-green-700 active:translate-y-0.5 active:border-b-0 shadow-md cursor-pointer transition-all"
-            >
-              <span>Tandai Level Selesai</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-              </svg>
             </button>
           </div>
 

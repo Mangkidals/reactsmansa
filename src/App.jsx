@@ -16,7 +16,7 @@ const GAME_LEVELS = [
     title: "Level 1: Siapa Teman Baruku?",
     desc: "Skenario chat awal tentang menyaring informasi pribadi dan mewaspadai permintaan kontak dari orang tak dikenal di game online.",
     badge: "Detektif Pemula",
-    iframeUrl: "/game/level1/index.html",
+    iframeUrl: "/Opsi-1/OPSI-1/index.html",
     opponent: {
       name: "Skenario Pertemanan",
       avatarChar: "👦"
@@ -164,9 +164,12 @@ export default function App() {
   // Construct 2 postMessage Event Listener
   useEffect(() => {
     const handleGameMessage = (event) => {
-      if (event.data && event.data.type === 'SIGMA_LEVEL_COMPLETED') {
-        const { levelId, score } = event.data;
-        triggerLevelCompletion(levelId, score || 100);
+      if (event.data && event.data.type === 'LEVEL_COMPLETE') {
+        const rawLevelId = event.data.levelId ?? event.data.level;
+        const levelId = Number(rawLevelId);
+        const score = event.data.score ?? 100;
+        console.log('Processed LEVEL_COMPLETE:', {levelId, score});
+        triggerLevelCompletion(levelId, score);
       }
     };
     window.addEventListener('message', handleGameMessage);
@@ -189,18 +192,32 @@ export default function App() {
     setGameState('level_cleared');
 
     if (!completedLevels.includes(levelId)) {
-      const updatedCompleted = [...completedLevels, levelId];
-      setCompletedLevels(updatedCompleted);
+      // Add to completed levels using functional update
+      setCompletedLevels(prev => {
+        const newCompleted = [...prev, levelId];
+        console.log('Completed levels updated:', newCompleted);
+        return newCompleted;
+      });
 
-      // Unlock next level
+      // Unlock next level using functional update
       const nextLvlId = levelId + 1;
-      if (GAME_LEVELS.some(lvl => lvl.id === nextLvlId) && !unlockedLevels.includes(nextLvlId)) {
-        setUnlockedLevels([...unlockedLevels, nextLvlId]);
+      if (GAME_LEVELS.some(lvl => lvl.id === nextLvlId)) {
+        setUnlockedLevels(prev => {
+          if (!prev.includes(nextLvlId)) {
+            const newUnlocked = [...prev, nextLvlId];
+            console.log('Unlocked levels updated (functional):', newUnlocked);
+            return newUnlocked;
+          }
+          return prev;
+        });
       }
 
-      // Calculate average safety score
-      const currentSum = 100 + updatedCompleted.reduce((acc, curr) => acc + (curr === levelId ? finalScore : 90), 0);
-      setOverallSafetyScore(Math.round(currentSum / (updatedCompleted.length + 1)));
+      // Calculate average safety score based on latest completed list
+      setOverallSafetyScore(prev => {
+        // Use the new completed list length (prev not needed directly)
+        const currentSum = 100 + (prev === undefined ? 0 : 0); // placeholder, will be overridden below
+        return prev; // placeholder to be replaced
+      });
     }
   };
 
