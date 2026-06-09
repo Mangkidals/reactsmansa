@@ -141,10 +141,22 @@ const ARTICLES = [
 ];
 
 export default function App() {
-  const [activePage, setActivePage] = useState('home'); // home | materi | game
+  const [activePage, setActivePage] = useState(() => {
+    const stored = localStorage.getItem('sigma_active_page');
+    if (stored) return stored;
+    const path = window.location.pathname;
+    if (path.includes('game')) return 'game';
+    if (path.includes('materi')) return 'materi';
+    return 'home';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('sigma_active_page', activePage);
+  }, [activePage]);
 
   // Interactive Game State
   const [gameState, setGameState] = useState('select_level'); // select_level | playing | level_cleared
+
   const [unlockedLevels, setUnlockedLevels] = useState([1]);
   const [completedLevels, setCompletedLevels] = useState([]);
   const [activeLevelId, setActiveLevelId] = useState(null);
