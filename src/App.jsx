@@ -27,7 +27,7 @@ const GAME_LEVELS = [
     title: "Level 2: Hadiah Misterius",
     desc: "Skenario tentang menolak top-up diamonds/item game gratisan dari orang asing yang berujung pada pemerasan foto wajah.",
     badge: "Penjaga Privasi",
-    iframeUrl: "/game/level2/index.html",
+    // iframeUrl: "/game/level2/index.html",
     opponent: {
       name: "Skenario Gratifikasi",
       avatarChar: ""
@@ -38,7 +38,7 @@ const GAME_LEVELS = [
     title: "Level 3: Rahasia Kita Berdua",
     desc: "Skenario penolakan video call di kamar pribadi, menolak ancaman pemerasan data, dan melaporkan pelaku ke polisi siber.",
     badge: "Pahlawan Digital",
-    iframeUrl: "/game/level3/index.html",
+    // iframeUrl: "/game/level3/index.html",
     opponent: {
       name: "Skenario Pemerasan",
       avatarChar: ""
