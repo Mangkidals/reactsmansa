@@ -209,7 +209,7 @@ export default function Materi({
         {activeMateriTab === 'modul' && (
           <div className="w-full bg-gray-200 rounded-3xl overflow-hidden shadow-lg border border-blue-100" style={{ height: 'calc(100vh - 220px)', minHeight: '500px' }}>
             <iframe
-              src="https://drive.google.com/file/d/17OmlBHEUSbOGIGCulojxVmyUg0j_tpwS/view?usp=sharing"
+              src="https://drive.google.com/file/d/1KQgvIXeG02KI4PdZ15safxeJwBWDMePm/preview"
               className="w-full h-full border-0"
               title="Buku Modul SIGMA — Edukasi Cyber Grooming"
               allow="autoplay"
