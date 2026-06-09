@@ -1,11 +1,7 @@
 {
   "rewrites": [
     {
-      "source": "/Opsi-1/:path*",
-      "destination": "/Opsi-1/:path*"
-    },
-    {
-      "source": "/((?!Opsi-1|assets|favicon|icons).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
