@@ -141,18 +141,7 @@ const ARTICLES = [
 ];
 
 export default function App() {
-  const [activePage, setActivePage] = useState(() => {
-    const stored = localStorage.getItem('sigma_active_page');
-    if (stored) return stored;
-    const path = window.location.pathname;
-    if (path.includes('game')) return 'game';
-    if (path.includes('materi')) return 'materi';
-    return 'home';
-  });
-
-  useEffect(() => {
-    localStorage.setItem('sigma_active_page', activePage);
-  }, [activePage]);
+  const [activePage, setActivePage] = useState('home');
 
   // Interactive Game State
   const [gameState, setGameState] = useState('select_level'); // select_level | playing | level_cleared
@@ -224,11 +213,12 @@ export default function App() {
         });
       }
 
-      // Calculate average safety score based on latest completed list
+      // Update overall safety score as average of all completed level scores
       setOverallSafetyScore(prev => {
-        // Use the new completed list length (prev not needed directly)
-        const currentSum = 100 + (prev === undefined ? 0 : 0); // placeholder, will be overridden below
-        return prev; // placeholder to be replaced
+        // Number of levels completed before adding this one
+        const completedCount = completedLevels.length;
+        // Compute new average including the current level's score
+        return Math.round((prev * completedCount + finalScore) / (completedCount + 1));
       });
     }
   };
