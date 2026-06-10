@@ -121,7 +121,7 @@ export default function Game({
                         onClick={() => startLevel(lvl.id)}
                         className="w-full py-3 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-sm rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-md cursor-pointer text-center"
                       >
-                        {isCompleted ? 'Main Ulang Game' : 'Mulai Game'}
+                        {isCompleted ? 'Mainkan Kembali' : 'Mainkan Game'}
                       </button>
                     ) : (
                       <button

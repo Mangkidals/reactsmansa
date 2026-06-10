@@ -6,8 +6,8 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
   
   const menuItems = [
     { id: 'home', label: 'Beranda'},
-        { id: 'game', label: 'Laman Game' },
-    { id: 'materi', label: 'Laman Materi' }
+        { id: 'game', label: 'Mainkan Game' },
+    { id: 'materi', label: 'Baca Materi' }
   ];
 
   return (
@@ -26,11 +26,11 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
                 />
               </div>
               <div>
-                <h1 className="font-heading text-xl font-bold tracking-tight text-[#000000]">
+                <h1 className="font-heading text-xl font-bold tracking-tight text-[#494949]">
                   SIGMA
                 </h1>
                 <p className="text-[9px] uppercase tracking-wider text-blue-500 font-bold leading-none mt-0.5">
-                  Strategi Identifikasi Grooming & Monitoring Anak
+                  Web Game Edukatif & Interaktif
                 </p>
               </div>
             </div>

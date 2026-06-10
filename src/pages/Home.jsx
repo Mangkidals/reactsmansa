@@ -20,7 +20,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
-            <span>Strategi Identifikasi & Edukasi Digital</span>
+            <span>Strategi Identifikasi Grooming & Monitoring Anak</span>
           </div>
 
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
@@ -32,24 +32,24 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             <strong>SIGMA</strong> (Strategi Identifikasi Grooming Anak) merupakan web game edukatif yang dirancang untuk membantu siswa dalam memahami, mengenali, dan mencegah perilaku manipulatif (cyber grooming) di dunia digital.
           </p>
 
-          <div className="flex flex-wrap gap-4 pt-2">
+          <div className="flex flex-wrap gap-2 pt-2">
             <button
               onClick={() => setActivePage('game')}
               className="px-8 py-4 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-orange-200 transition-all cursor-pointer"
             >
-              Mulai Bermain Game
+              Mainkan Game
             </button>
             <button
               onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
-              className="px-8 py-4 bg-white hover:bg-blue-50 text-[#53B4FB] border-2 border-[#53B4FB] font-heading font-bold text-lg rounded-full transition-all shadow-sm cursor-pointer"
+              className="px-8 py-4 bg-[#53B4FB] hover:bg-[#4aa2e1] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#4290c8] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-blue-200 transition-all cursor-pointer"
             >
-              Baca Modul Belajar
+              Buka Modul
             </button>
           </div>
         </div>
 
         {/* Infinite-child Image Illustration */}
-        <div className="lg:col-span-5 flex justify-center relative">
+        <div className="lg:col-span-5 flex justify-center relative lg:order-none">
           <div className="absolute -inset-4 bg-blue-200/30 rounded-full blur-2xl z-0"></div>
           <img
             src={mainheroImage}
@@ -57,7 +57,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
             className="w-full max-w-[380px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
           />
 
-          <div className="absolute -bottom-2 -left-2 bg-white/90 backdrop-blur border border-blue-100 p-3 rounded-2xl shadow-lg flex items-center space-x-3 z-20">
+          {/* <div className="absolute -bottom-2 -left-2 bg-white/90 backdrop-blur border border-blue-100 p-3 rounded-2xl shadow-lg flex items-center space-x-3 z-20">
             <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -67,102 +67,122 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               <h4 className="text-xs font-bold text-gray-700">100% Aman</h4>
               <p className="text-[10px] text-gray-400">Direkomendasikan Guru</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
 
-      {/* Core Penjelasan / Visi & Misi Card Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-8">
+      {/* ═══ Bento Grid: Visi & Misi + Quick Access ═══ */}
+      <div className="bento-grid pt-8">
 
-        {/* Card Penjelasan */}
-        <div className="premium-card rounded-3xl p-8 space-y-4">
-          <h3 className="font-heading text-2xl font-bold text-[#53B4FB] flex items-center space-x-2">
-            <span>Tentang SIGMA</span>
-          </h3>
-          <p className="text-gray-600 leading-relaxed text-sm">
-            Melalui berbagai skenario dan tantangan di dalam permainan simulasi, siswa diajak untuk menganalisis situasi obrolan, menentukan keputusan yang tepat, serta meningkatkan kewaspadaan terhadap interaksi mencurigakan di media sosial maupun platform game.
-          </p>
+        {/* Cell 1 — Visi & Misi (tall, spans 2 rows on desktop) */}
+        <div className="bento-cell bento-cell-visi group">
+          {/* Decorative blobs */}
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#C8B6FB]/10 rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-700"></div>
+          <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#53B4FB]/[0.06] rounded-full -translate-x-8 translate-y-8 group-hover:scale-125 transition-transform duration-700"></div>
+
+          <div className="relative z-10 h-full flex flex-col">
+            {/* Badge */}
+            <div className="inline-flex items-center space-x-1.5 bg-[#C8B6FB]/15 border border-[#C8B6FB]/25 px-3 py-1 rounded-full text-[#8668ed] font-bold text-[10px] uppercase tracking-wider w-fit">
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.64 0 8.577 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.64 0-8.577-3.007-9.963-7.178z" />
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span>Visi & Misi</span>
+            </div>
+
+            {/* Heading */}
+            <h3 className="font-heading text-2xl font-bold text-[#494949] mt-4 leading-snug">
+              Arah & Tujuan <span className="text-[#8668ed]">SIGMA</span>
+            </h3>
+
+            {/* Content */}
+            <div className="space-y-5 mt-5 flex-grow">
+              {/* Visi Card */}
+              <div className="bg-gradient-to-br from-[#C8B6FB]/10 to-transparent p-4 rounded-2xl border border-[#C8B6FB]/15">
+                <h4 className="font-bold text-[10px] uppercase tracking-widest text-[#8668ed] flex items-center space-x-1.5 mb-1.5">
+                  <span className="w-1.5 h-1.5 bg-[#8668ed] rounded-full inline-block"></span>
+                  <span>Visi</span>
+                </h4>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming.
+                </p>
+              </div>
+
+              {/* Misi List */}
+              <div>
+                <h4 className="font-bold text-[10px] uppercase tracking-widest text-[#8668ed] flex items-center space-x-1.5 mb-3">
+                  <span className="w-1.5 h-1.5 bg-[#8668ed] rounded-full inline-block"></span>
+                  <span>Misi Utama</span>
+                </h4>
+                <ul className="space-y-3">
+                  {[
+                    'Menyajikan materi edukasi cyber grooming dalam bentuk permainan yang interaktif dan menyenangkan.',
+                    'Membantu siswa mengenali tanda, pola, dan tahapan perilaku cyber grooming di media sosial.',
+                    'Menumbuhkan sikap berani, peduli, dan tanggap untuk melindungi diri sendiri maupun teman sebaya.'
+                  ].map((misi, i) => (
+                    <li key={i} className="flex items-start space-x-3 group/item">
+                      <span className="shrink-0 w-6 h-6 bg-[#8668ed]/10 text-[#8668ed] rounded-lg flex items-center justify-center text-[10px] font-bold mt-0.5 group-hover/item:bg-[#8668ed] group-hover/item:text-white transition-colors duration-200">
+                        {i + 1}
+                      </span>
+                      <span className="text-xs text-gray-600 leading-relaxed">{misi}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Card Visi & Misi */}
-        <div className="premium-card rounded-3xl p-8 space-y-4 border-l-4 border-l-[#C8B6FB]">
-          <h3 className="font-heading text-2xl font-bold text-[#53B4FB] flex items-center space-x-2">
-            <span>Visi & Misi</span>
-          </h3>
+        {/* Cell 2 — Uji Kewaspadaan (top-right) */}
+        <div
+          className="bento-cell bento-cell-game group cursor-pointer"
+          onClick={() => { setActivePage('game'); setGameState('select_level'); }}
+        >
+          <div className="absolute top-0 right-0 w-28 h-28 bg-[#FFAB41]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-150 transition-transform duration-500"></div>
 
-          <div className="space-y-4">
+          <div className="relative z-10 h-full flex flex-col justify-between">
             <div>
-              <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400">Visi</h4>
-              <p className="text-xs text-gray-600 mt-0.5">
-                Menjadi web game edukatif berbasis strategi identifikasi yang inovatif dan interaktif dalam membangun kesadaran, kewaspadaan, serta kemampuan siswa mengenali dan mencegah perilaku cyber grooming.
+              <div className="w-14 h-14 bg-gradient-to-br from-[#FFAB41]/20 to-[#FF6D00]/10 text-[#FF6D00] rounded-2xl flex items-center justify-center shadow-inner mb-4 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <rect x="2" y="6" width="20" height="12" rx="3" />
+                  <path d="M6 12h4M8 10v4M16 11h.01M18 13h.01" stroke="currentColor" strokeLinecap="round" strokeWidth="2.5" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-xl font-bold text-[#FF6D00]">Uji Kewaspadaanmu!</h3>
+              <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                Masuk ke ruang chat simulasi dan pelajari cara mengenali penipu atau pelaku kejahatan siber.
               </p>
             </div>
-
-            <div>
-              <h4 className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-1">Misi Utama</h4>
-              <ul className="space-y-1.5 text-xs text-gray-600">
-                <li className="flex items-start space-x-2">
-                  <span className="text-[#000000]">1.</span>
-                  <span>Menyajikan materi edukasi cyber grooming dalam bentuk permainan yang interaktif dan menyenangkan.</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-[#000000]">2.</span>
-                  <span>Membantu siswa mengenali tanda, pola, dan tahapan perilaku cyber grooming di media sosial.</span>
-                </li>
-                <li className="flex items-start space-x-2">
-                  <span className="text-[#000000]">3.</span>
-                  <span>Menumbuhkan sikap berani, peduli, dan tanggap untuk melindungi diri sendiri maupun teman sebaya.</span>
-                </li>
-              </ul>
+            <div className="inline-flex items-center space-x-2 text-xs font-bold text-[#FF6D00] pt-4 group-hover:translate-x-1 transition-transform duration-200">
+              <span>Masuk ke Laman Game</span>
+              <span className="text-lg">→</span>
             </div>
           </div>
         </div>
 
-      </div>
+        {/* Cell 3 — Modul Interaktif (bottom-right) */}
+        <div
+          className="bento-cell bento-cell-modul group cursor-pointer"
+          onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
+        >
+          <div className="absolute top-0 right-0 w-24 h-24 bg-[#53B4FB]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-150 transition-transform duration-500"></div>
 
-      {/* Quick Access Banners */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-
-        {/* Access Game */}
-        <div className="premium-card rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden group premium-card-hover border border-blue-100">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-[#FFAB41]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
-          <div className="w-14 h-14 bg-[#FFAB41]/20 text-[#FF6D00] rounded-2xl flex items-center justify-center shadow-inner shrink-0">
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <rect x="2" y="6" width="20" height="12" rx="3" />
-              <path d="M6 12h4M8 10v4M16 11h.01M18 13h.01" stroke="currentColor" strokeLinecap="round" strokeWidth="2.5" />
-            </svg>
-          </div>
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-heading text-xl font-bold text-[#FF6D00]">Uji Kewaspadaanmu!</h3>
-            <p className="text-xs text-gray-500">Masuk ke ruang chat simulasi dan pelajari cara mengenali penipu atau pelaku kejahatan siber.</p>
-            <button
-              onClick={() => { setActivePage('game'); setGameState('select_level'); }}
-              className="inline-flex items-center space-x-2 text-xs font-bold text-[#FF6D00] hover:underline pt-1 cursor-pointer bg-transparent border-0"
-            >
-              <span>Masuk ke Laman Game</span>
-              <span>→</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Access Modul */}
-        <div className="premium-card rounded-3xl p-6 flex flex-col md:flex-row items-center md:items-start space-y-4 md:space-y-0 md:space-x-6 relative overflow-hidden group premium-card-hover border border-blue-100">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-[#C8B6FB]/10 rounded-full translate-x-8 -translate-y-8 group-hover:scale-125 transition-transform duration-300"></div>
-          <div className="w-14 h-14 bg-[#C8B6FB]/20 text-[#8668ed] rounded-2xl flex items-center justify-center shadow-inner shrink-0">
-            <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-          </div>
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="font-heading text-xl font-bold text-[#8668ed]">Modul Interaktif</h3>
-            <p className="text-xs text-gray-500">Pelajari apa itu grooming, tanda bahaya, dan langkah aman pelaporan via bacaan interaktif.</p>
-            <button
-              onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
-              className="inline-flex items-center space-x-2 text-xs font-bold text-[#8668ed] hover:underline pt-1 cursor-pointer bg-transparent border-0"
-            >
+          <div className="relative z-10 h-full flex flex-col justify-between">
+            <div>
+              <div className="w-14 h-14 bg-gradient-to-br from-[#53B4FB]/20 to-[#53B4FB]/5 text-[#53B4FB] rounded-2xl flex items-center justify-center shadow-inner mb-4 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+              </div>
+              <h3 className="font-heading text-xl font-bold text-[#4290c8]">Modul Interaktif</h3>
+              <p className="text-xs text-gray-500 mt-2 leading-relaxed">
+                Pelajari apa itu grooming, tanda bahaya, dan langkah aman pelaporan via bacaan interaktif.
+              </p>
+            </div>
+            <div className="inline-flex items-center space-x-2 text-xs font-bold text-[#4290c8] pt-4 group-hover:translate-x-1 transition-transform duration-200">
               <span>Masuk ke Laman Materi</span>
-              <span>→</span>
-            </button>
+              <span className="text-lg">→</span>
+            </div>
           </div>
         </div>
 
