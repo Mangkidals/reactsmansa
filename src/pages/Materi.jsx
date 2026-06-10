@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ScrollReveal from '../components/ScrollReveal';
+import { VideoSkeleton, PdfSkeleton } from '../components/Skeleton';
 
 const videos = [
   {
@@ -51,6 +53,20 @@ export default function Materi({
 }) {
   const [activeArtIdx, setActiveArtIdx] = useState(0);
   const [activeVideoIdx, setActiveVideoIdx] = useState(0);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [isPdfLoading, setIsPdfLoading] = useState(true);
+
+  // Reset loading state for new videos
+  useEffect(() => {
+    setIsVideoLoading(true);
+  }, [activeVideoIdx]);
+
+  // Reset loading state for PDF tab
+  useEffect(() => {
+    if (activeMateriTab === 'modul') {
+      setIsPdfLoading(true);
+    }
+  }, [activeMateriTab]);
 
   const handlePrevArticle = () => {
     setActiveArtIdx(prev => (prev === 0 ? articles.length - 1 : prev - 1));
@@ -61,18 +77,18 @@ export default function Materi({
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8">
 
       {/* Header Laman */}
-      <div className="text-center space-y-2">
+      <ScrollReveal animation="fade-down" duration={800} delay={100} className="text-center space-y-2">
         <h2 className="font-heading text-3xl sm:text-4xl font-bold text-gray-800">Laman Materi Edukasi</h2>
         <p className="text-sm text-gray-500 max-w-xl mx-auto">
           Pelajari pengetahuan dasar seputar cyber grooming melalui video, buku modul interaktif, dan pandangan ahli psikologi anak.
         </p>
-      </div>
+      </ScrollReveal>
 
       {/* Tab Navigation */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 border-b border-blue-100 pb-4">
+      <ScrollReveal animation="fade-up" duration={800} delay={150} className="grid grid-cols-2 md:grid-cols-4 gap-3 border-b border-blue-100 pb-4">
         {[
           { id: 'video', label: 'Video Edukasi', activeClass: 'border-[#53B4FB] bg-[#53B4FB]/5 text-[#53B4FB]', inactiveClass: 'border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50' },
           { id: 'modul', label: 'Buku Modul Interaktif', activeClass: 'border-[#FFAB41] bg-[#FFAB41]/5 text-[#FF6D00]', inactiveClass: 'border-transparent text-gray-400 hover:text-gray-600 hover:bg-gray-50' },
@@ -90,14 +106,14 @@ export default function Materi({
             {tab.label}
           </button>
         ))}
-      </div>
+      </ScrollReveal>
 
       {/* Tab Contents */}
       <div className="pt-4">
 
         {/* Tab 1: Video Edukasi — Carousel */}
         {activeMateriTab === 'video' && (
-          <div className="space-y-6">
+          <ScrollReveal animation="fade-up" duration={800} delay={200} className="space-y-6">
 
             {/* Video + Info Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -112,14 +128,20 @@ export default function Materi({
                     {videos.map((video, idx) => (
                       <div key={video.id} className="w-full shrink-0">
                         <div className="bg-[#0a1520] rounded-3xl overflow-hidden aspect-video shadow-2xl relative border-4 border-white">
+                          {isVideoLoading && idx === activeVideoIdx && (
+                            <div className="absolute inset-0 z-20">
+                              <VideoSkeleton />
+                            </div>
+                          )}
                           {idx === activeVideoIdx && (
                             <iframe
-                              className="absolute inset-0 w-full h-full"
+                              className={`absolute inset-0 w-full h-full transition-opacity duration-300 ${isVideoLoading ? 'opacity-0' : 'opacity-100'}`}
                               src={video.src}
                               title={video.title}
                               frameBorder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                               allowFullScreen
+                              onLoad={() => setIsVideoLoading(false)}
                             ></iframe>
                           )}
                         </div>
@@ -156,7 +178,7 @@ export default function Materi({
 
               {/* Right: Dynamic Info Panel */}
               <div className="lg:col-span-5 space-y-5">
-                <div className="bg-[#FFAB41]/10 border border-[#FFAB41]/20 p-4 rounded-2xl flex items-center space-x-3 text-[#FF6D00] text-xs font-bold">
+                <div className="bg-[#FFAB41]/10 border border-[#FFAB41]/20 p-4 rounded-2xl flex items-center space-x-3 text-[#FF6D00] text-xs font-bold animate-pulse-glow">
                   <span>Menonton video membantu menyelesaikan Kuis Laman Game lebih cepat!</span>
                 </div>
 
@@ -204,45 +226,48 @@ export default function Materi({
               ))}
             </div>
 
-          </div>
+          </ScrollReveal>
         )}
 
         {/* Tab 2: Buku Modul Interaktif — PDF Viewer */}
         {activeMateriTab === 'modul' && (
-          <div className="w-full bg-gray-200 rounded-3xl overflow-hidden shadow-lg border border-blue-100" style={{ height: 'calc(100vh - 220px)', minHeight: '500px' }}>
+          <ScrollReveal animation="zoom-in" duration={800} className="w-full relative rounded-3xl overflow-hidden shadow-lg border border-blue-100" style={{ height: 'calc(100vh - 220px)', minHeight: '500px' }}>
+            {isPdfLoading && (
+              <div className="absolute inset-0 z-20">
+                <PdfSkeleton />
+              </div>
+            )}
             <iframe
               src="https://drive.google.com/file/d/1KQgvIXeG02KI4PdZ15safxeJwBWDMePm/preview"
-              className="w-full h-full border-0"
+              className={`w-full h-full border-0 transition-opacity duration-300 ${isPdfLoading ? 'opacity-0' : 'opacity-100'}`}
               title="Buku Modul SIGMA — Edukasi Cyber Grooming"
               allow="autoplay"
               sandbox="allow-scripts allow-same-origin allow-popups"
+              onLoad={() => setIsPdfLoading(false)}
             ></iframe>
-          </div>
+          </ScrollReveal>
         )}
 
         {/* Tab 3: Pandangan Para Ahli */}
         {activeMateriTab === 'ahli' && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {expertOpinions.map((opinion, idx) => (
-              <div key={idx} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
+              <ScrollReveal key={idx} animation="fade-up" duration={700} delay={idx * 100} className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm flex flex-col justify-between space-y-4">
                 <div className="space-y-3">
-                  {/* <div className="w-12 h-12 bg-blue-50 border border-blue-100/50 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
-                    {opinion.avatar}
-                  </div> */}
                   <h4 className="font-heading font-bold text-gray-800 leading-snug">{opinion.name}</h4>
                   <p className="text-[10px] text-blue-500 font-bold uppercase">{opinion.role}</p>
                   <p className="text-xs text-gray-500 italic leading-relaxed pt-2">
                     "{opinion.quote}"
                   </p>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         )}
 
         {/* Tab 4: Artikel & Jurnal Hukum */}
         {activeMateriTab === 'jurnal' && (
-          <div className="relative w-full px-4 sm:px-12">
+          <ScrollReveal animation="fade-up" duration={800} className="relative w-full px-4 sm:px-12">
             {/* Outer Slider Window */}
             <div className="overflow-hidden rounded-3xl bg-white border border-blue-100 shadow-md">
               {/* Sliding Flex Container */}
@@ -319,7 +344,7 @@ export default function Materi({
                 ></button>
               ))}
             </div>
-          </div>
+          </ScrollReveal>
         )}
 
       </div>

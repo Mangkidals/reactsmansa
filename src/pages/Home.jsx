@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import heroImage from '../assets/hero.png';
 import mainheroImage from '../assets/mainhero.png';
+import ScrollReveal from '../components/ScrollReveal';
 
 export default function Home({ setActivePage, setGameState, setActiveMateriTab, setSelectedArticle, articles }) {
   const [activeArtIdx, setActiveArtIdx] = useState(0);
@@ -14,70 +15,62 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
   };
 
   return (
-    <div className="space-y-16 animate-fade-in">
+    <div className="space-y-16">
 
       {/* Hero Section */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-8 md:pt-12">
-        <div className="lg:col-span-7 space-y-6">
-          <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
-            <span>Strategi Identifikasi Grooming & Monitoring Anak</span>
-          </div>
+        <div className="lg:col-span-7">
+          <ScrollReveal animation="fade-right" duration={800} delay={100} className="space-y-6">
+            <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
+              <span>Strategi Identifikasi Grooming & Monitoring Anak</span>
+            </div>
 
-          {/* Mobile/Tablet Hero Image (Only visible on mobile/tablet - placed under the badge) */}
-          <div className="lg:hidden flex justify-center relative py-4">
-            <div className="absolute w-48 h-48 bg-blue-200/35 rounded-full blur-2xl z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-            <img
-              src={mainheroImage}
-              alt="SIGMA Hero Illustration"
-              className="w-2/3 sm:w-1/2 max-w-[220px] sm:max-w-[280px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
-            />
-          </div>
+            {/* Mobile/Tablet Hero Image (Only visible on mobile/tablet - placed under the badge) */}
+            <div className="lg:hidden flex justify-center relative py-4">
+              <div className="absolute w-48 h-48 bg-blue-200/35 rounded-full blur-2xl z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+              <img
+                src={mainheroImage}
+                alt="SIGMA Hero Illustration"
+                className="w-2/3 sm:w-1/2 max-w-[220px] sm:max-w-[280px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
+              />
+            </div>
 
-          <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
-            Kenali <span className="text-[#53B4FB]">Cyber Grooming</span>,<br />
-            Jaga Keamanan Digital Kita!
-          </h1>
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
+              Kenali <span className="text-[#53B4FB]">Cyber Grooming</span>,<br />
+              Jaga Keamanan Digital Kita!
+            </h1>
 
-          <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
-            <strong>SIGMA</strong> (Strategi Identifikasi Grooming Anak) merupakan web game edukatif yang dirancang untuk membantu siswa dalam memahami, mengenali, dan mencegah perilaku manipulatif (cyber grooming) di dunia digital.
-          </p>
+            <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
+              <strong>SIGMA</strong> (Strategi Identifikasi Grooming Anak) merupakan web game edukatif yang dirancang untuk membantu siswa dalam memahami, mengenali, dan mencegah perilaku manipulatif (cyber grooming) di dunia digital.
+            </p>
 
-          <div className="flex flex-wrap gap-2 pt-2">
-            <button
-              onClick={() => setActivePage('game')}
-              className="px-8 py-4 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-orange-200 transition-all cursor-pointer"
-            >
-              Mainkan Game
-            </button>
-            <button
-              onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
-              className="px-8 py-4 bg-[#53B4FB] hover:bg-[#4aa2e1] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#4290c8] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-blue-200 transition-all cursor-pointer"
-            >
-              Buka Modul
-            </button>
-          </div>
+            <div className="flex flex-wrap gap-2 pt-2">
+              <button
+                onClick={() => setActivePage('game')}
+                className="px-8 py-4 bg-[#FFAB41] hover:bg-[#FF6D00] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#D97E0C] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-orange-200 transition-all cursor-pointer"
+              >
+                Mainkan Game
+              </button>
+              <button
+                onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
+                className="px-8 py-4 bg-[#53B4FB] hover:bg-[#4aa2e1] text-white font-heading font-bold text-lg rounded-full border-b-4 border-[#4290c8] active:translate-y-0.5 active:border-b-0 shadow-lg shadow-blue-200 transition-all cursor-pointer"
+              >
+                Buka Modul
+              </button>
+            </div>
+          </ScrollReveal>
         </div>
 
         {/* Desktop Hero Image (Only visible on desktop) */}
         <div className="hidden lg:flex lg:col-span-5 justify-center relative">
-          <div className="absolute w-48 h-48 bg-blue-200/35 rounded-full blur-2xl z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-          <img
-            src={mainheroImage}
-            alt="SIGMA Hero Illustration"
-            className="w-full max-w-[380px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
-          />
-
-          {/* <div className="absolute -bottom-2 -left-2 bg-white/90 backdrop-blur border border-blue-100 p-3 rounded-2xl shadow-lg flex items-center space-x-3 z-20">
-            <div className="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <div>
-              <h4 className="text-xs font-bold text-gray-700">100% Aman</h4>
-              <p className="text-[10px] text-gray-400">Direkomendasikan Guru</p>
-            </div>
-          </div> */}
+          <ScrollReveal animation="fade-left" duration={800} delay={200}>
+            <div className="absolute w-48 h-48 bg-blue-200/35 rounded-full blur-2xl z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+            <img
+              src={mainheroImage}
+              alt="SIGMA Hero Illustration"
+              className="w-full max-w-[380px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
+            />
+          </ScrollReveal>
         </div>
       </div>
 
@@ -85,7 +78,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
       <div className="bento-grid pt-8">
 
         {/* Cell 1 — Visi & Misi (tall, spans 2 rows on desktop) */}
-        <div className="bento-cell bento-cell-visi group">
+        <ScrollReveal animation="fade-up" duration={800} delay={100} className="bento-cell bento-cell-visi group">
           {/* Decorative blobs */}
           <div className="absolute top-0 right-0 w-32 h-32 bg-[#C8B6FB]/10 rounded-full translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-700"></div>
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#53B4FB]/[0.06] rounded-full -translate-x-8 translate-y-8 group-hover:scale-125 transition-transform duration-700"></div>
@@ -141,10 +134,13 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               </div>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Cell 2 — Uji Kewaspadaan (top-right) */}
-        <div
+        <ScrollReveal
+          animation="fade-up"
+          duration={800}
+          delay={250}
           className="bento-cell bento-cell-game group cursor-pointer"
           onClick={() => { setActivePage('game'); setGameState('select_level'); }}
         >
@@ -168,10 +164,13 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               <span className="text-lg">→</span>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Cell 3 — Modul Interaktif (bottom-right) */}
-        <div
+        <ScrollReveal
+          animation="fade-up"
+          duration={800}
+          delay={400}
           className="bento-cell bento-cell-modul group cursor-pointer"
           onClick={() => { setActivePage('materi'); setActiveMateriTab('modul'); }}
         >
@@ -194,12 +193,12 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               <span className="text-lg">→</span>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
 
       </div>
 
       {/* Articles Section Preview (Full Width Carousel Version) */}
-      <div className="space-y-6">
+      <ScrollReveal animation="fade-up" duration={800} delay={100} className="space-y-6">
         <div className="flex justify-between items-end border-b border-blue-100 pb-3">
           <div>
             <h2 className="font-heading text-2xl font-bold text-gray-800">Artikel & Jurnal Edukasi</h2>
@@ -296,7 +295,7 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           </div>
 
         </div>
-      </div>
+      </ScrollReveal>
 
     </div>
   );

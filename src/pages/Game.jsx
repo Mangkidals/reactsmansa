@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import ScrollReveal from '../components/ScrollReveal';
+import { GameSkeleton } from '../components/Skeleton';
 
 function getLevelIcon(levelId, size = "w-7 h-7") {
   switch (levelId) {
@@ -42,6 +44,13 @@ export default function Game({
   const activeLevel = gameLevels.find(lvl => lvl.id === activeLevelId);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Reset loading state whenever entering the play mode or changing levels
+  useEffect(() => {
+    if (gameState === 'playing') {
+      setIsLoading(true);
+    }
+  }, [gameState, activeLevelId]);
+
   return (
     <div className="space-y-8 animate-fade-in">
 
@@ -50,23 +59,22 @@ export default function Game({
         <div className="space-y-10">
 
           {/* Header Title */}
-          <div className="text-center space-y-2">
+          <ScrollReveal animation="fade-down" duration={800} delay={100} className="text-center space-y-2">
             <h2 className="font-heading text-3xl sm:text-4xl font-bold text-gray-800">Laman Game & Kuis Edukasi</h2>
             <p className="text-sm text-gray-500 max-w-xl mx-auto">
               Mainkan game interaktif siber yang di-import langsung dari Construct 2. Selesaikan tiap level untuk melacak kemajuan belajarmu!
             </p>
-          </div>
-
+          </ScrollReveal>
 
           {/* Pretest & Posttest Banner — Opens Google Forms */}
-          <div className="bg-white rounded-3xl p-6 border border-blue-100 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+          <ScrollReveal animation="fade-up" duration={800} delay={150} className="bg-white rounded-3xl p-6 border border-blue-100 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <div className="space-y-2">
               <h3 className="font-heading text-lg font-bold text-gray-800">Lengkapi Tes untuk Evaluasi</h3>
               <p className="text-xs text-gray-500">
                 Kerjakan <strong>Pre-test</strong> sebelum mulai bermain, dan lakukan <strong>Post-test</strong> setelah kamu menamatkan seluruh skenario game. Perkembangan skormu akan tersimpan untuk evaluasi hasil belajarmu!
               </p>
             </div>
-            
+
             <div className="flex flex-wrap gap-3 md:justify-end">
               <a
                 href="https://forms.google.com/PRETEST_PLACEHOLDER"
@@ -79,7 +87,7 @@ export default function Game({
                 </svg>
                 <span>Mulai Pre-test</span>
               </a>
-              
+
               <a
                 href="https://forms.google.com/POSTTEST_PLACEHOLDER"
                 target="_blank"
@@ -92,17 +100,19 @@ export default function Game({
                 <span>Mulai Post-test</span>
               </a>
             </div>
-          </div>
-
+          </ScrollReveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {gameLevels.map(lvl => {
+            {gameLevels.map((lvl, index) => {
               const isUnlocked = unlockedLevels.includes(lvl.id);
               const isCompleted = completedLevels.includes(lvl.id);
 
               return (
-                <div
+                <ScrollReveal
                   key={lvl.id}
+                  animation="fade-up"
+                  duration={800}
+                  delay={200 + index * 120}
                   className={`bg-white rounded-3xl p-6 border shadow-sm transition-all duration-300 relative flex flex-col justify-between min-h-[340px] ${isUnlocked
                     ? 'border-blue-100 hover:shadow-xl hover:-translate-y-1'
                     : 'border-gray-200 opacity-70'
@@ -170,7 +180,7 @@ export default function Game({
                       </button>
                     )}
                   </div>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>
@@ -178,14 +188,12 @@ export default function Game({
         </div>
       )}
 
-
-
       {/* GAME STATE 3: CONSTRUCT 2 IFRAME SCREEN */}
       {gameState === 'playing' && (
         <div className="space-y-6 animate-fade-in">
 
           {/* Game Play Header */}
-          <div className="bg-white rounded-2xl p-5 border border-blue-100 flex justify-between items-center shadow-sm">
+          <ScrollReveal animation="fade-down" duration={600} className="bg-white rounded-2xl p-5 border border-blue-100 flex justify-between items-center shadow-sm">
             <div className="flex items-center space-x-3">
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center shadow-inner ${activeLevel.id === 1 ? 'bg-blue-50' : activeLevel.id === 2 ? 'bg-orange-50' : 'bg-red-50'
                 }`}>
@@ -196,31 +204,27 @@ export default function Game({
                 <p className="text-[10px] text-gray-400">Mainkan game Construct 2 di bawah</p>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
           {/* Construct 2 Game Iframe Container */}
-          <div className="bg-[#494949] p-3 rounded-3xl shadow-xl border border-gray-200 overflow-hidden relative">
+          <ScrollReveal animation="zoom-in" duration={800} className="bg-[#494949] p-3 rounded-3xl shadow-xl border border-gray-200 overflow-hidden relative">
             <div className="bg-[#0a1520] rounded-2xl overflow-hidden aspect-[16/9] w-full max-h-[600px] border border-gray-800 relative">
+              {isLoading && (
+                <div className="absolute inset-0 z-20">
+                  <GameSkeleton />
+                </div>
+              )}
               <iframe
                 src={activeLevel.iframeUrl}
-                className="w-full h-full border-0 z-10"
+                className={`w-full h-full border-0 z-10 transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                 title={activeLevel.title}
                 allowFullScreen
                 onLoad={() => setIsLoading(false)}
               ></iframe>
-              {isLoading && (
-                <div className="absolute inset-0 bg-[#0a1520] flex flex-col items-center justify-center space-y-3 z-0 text-gray-500">
-                  <svg className="w-10 h-10 text-blue-400 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                  </svg>
-                  <p className="text-xs">Memuat Game...</p>
-                </div>
-              )}
             </div>
-          </div>
+          </ScrollReveal>
 
-          {/* Sleek Action Controls below the Iframe (No instructions, fully professional) */}
+          {/* Sleek Action Controls below the Iframe */}
           <div className="bg-white rounded-2xl p-4 border border-blue-100 shadow-sm flex flex-wrap justify-between items-center gap-4">
             <button
               onClick={exitGame}
@@ -238,7 +242,7 @@ export default function Game({
 
       {/* LEVEL CLEARED SCREEN */}
       {gameState === 'level_cleared' && (
-        <div className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6 animate-fade-in">
+        <ScrollReveal animation="zoom-in" duration={600} className="max-w-md mx-auto bg-white rounded-3xl p-8 border border-blue-100 shadow-2xl text-center space-y-6">
           <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full mx-auto flex items-center justify-center shadow-inner">
             <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 18l3-10 6 5 6-5 3 10H3z" />
@@ -286,10 +290,8 @@ export default function Game({
               </button>
             )}
           </div>
-        </div>
+        </ScrollReveal>
       )}
-
-
 
     </div>
   );
