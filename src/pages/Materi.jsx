@@ -109,17 +109,19 @@ export default function Materi({
                     className="flex transition-transform duration-500 ease-in-out"
                     style={{ transform: `translateX(-${activeVideoIdx * 100}%)` }}
                   >
-                    {videos.map((video) => (
+                    {videos.map((video, idx) => (
                       <div key={video.id} className="w-full shrink-0">
                         <div className="bg-[#0a1520] rounded-3xl overflow-hidden aspect-video shadow-2xl relative border-4 border-white">
-                          <iframe
-                            className="absolute inset-0 w-full h-full"
-                            src={video.src}
-                            title={video.title}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowFullScreen
-                          ></iframe>
+                          {idx === activeVideoIdx && (
+                            <iframe
+                              className="absolute inset-0 w-full h-full"
+                              src={video.src}
+                              title={video.title}
+                              frameBorder="0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              allowFullScreen
+                            ></iframe>
+                          )}
                         </div>
                       </div>
                     ))}
