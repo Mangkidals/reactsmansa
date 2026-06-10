@@ -17,10 +17,20 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
     <div className="space-y-16 animate-fade-in">
 
       {/* Hero Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center pt-8 md:pt-12">
         <div className="lg:col-span-7 space-y-6">
           <div className="inline-flex items-center space-x-2 bg-blue-100/70 border border-blue-200 px-3 py-1 rounded-full text-blue-600 font-bold text-xs uppercase tracking-wider">
             <span>Strategi Identifikasi Grooming & Monitoring Anak</span>
+          </div>
+
+          {/* Mobile/Tablet Hero Image (Only visible on mobile/tablet - placed under the badge) */}
+          <div className="lg:hidden flex justify-center relative py-4">
+            <div className="absolute w-48 h-48 bg-blue-200/35 rounded-full blur-2xl z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+            <img
+              src={mainheroImage}
+              alt="SIGMA Hero Illustration"
+              className="w-2/3 sm:w-1/2 max-w-[220px] sm:max-w-[280px] h-auto object-contain z-10 animate-float drop-shadow-2xl"
+            />
           </div>
 
           <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
@@ -48,9 +58,9 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
           </div>
         </div>
 
-        {/* Infinite-child Image Illustration */}
-        <div className="lg:col-span-5 flex justify-center relative lg:order-none">
-          <div className="absolute -inset-4 bg-blue-200/30 rounded-full blur-2xl z-0"></div>
+        {/* Desktop Hero Image (Only visible on desktop) */}
+        <div className="hidden lg:flex lg:col-span-5 justify-center relative">
+          <div className="absolute w-48 h-48 bg-blue-200/35 rounded-full blur-2xl z-0 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
           <img
             src={mainheroImage}
             alt="SIGMA Hero Illustration"
