@@ -15295,6 +15295,25 @@ cr.shaders["glowvertical"] = {src: ["varying mediump vec2 vTex;",
 	preservesOpaqueness: false,
 	animated: false,
 	parameters: [["intensity", 0, 1]] }
+cr.shaders["vibrance"] = {src: ["varying mediump vec2 vTex;",
+"uniform lowp sampler2D samplerFront;",
+"uniform lowp float vibrance;",
+"void main(void)",
+"{",
+"lowp vec4 front = texture2D(samplerFront, vTex);",
+"lowp float average = front.r / 3.0 + front.g / 3.0 + front.b / 3.0;",
+"lowp float max_ = max(front.r, max(front.g, front.b));",
+"lowp float amount = (max_ - average) * (vibrance * -3.0);",
+"front.rgb = mix(front.rgb, vec3(max_), amount);",
+"gl_FragColor = front;",
+"}"
+].join("\n"),
+	extendBoxHorizontal: 0,
+	extendBoxVertical: 0,
+	crossSampling: false,
+	preservesOpaqueness: true,
+	animated: false,
+	parameters: [["vibrance", 0, 1]] }
 ;
 ;
 cr.plugins_.Browser = function(runtime)
@@ -23231,8 +23250,8 @@ cr.behaviors.solid = function(runtime)
 cr.getObjectRefTable = function () { return [
 	cr.plugins_.Browser,
 	cr.plugins_.Keyboard,
-	cr.plugins_.Sprite,
 	cr.plugins_.Text,
+	cr.plugins_.Sprite,
 	cr.plugins_.TextBox,
 	cr.plugins_.Tilemap,
 	cr.plugins_.Touch,
@@ -23244,6 +23263,7 @@ cr.getObjectRefTable = function () { return [
 	cr.behaviors.Sin,
 	cr.system_object.prototype.cnds.IsGroupActive,
 	cr.plugins_.Keyboard.prototype.cnds.IsKeyDown,
+	cr.plugins_.Touch.prototype.cnds.IsTouchingObject,
 	cr.behaviors.EightDir.prototype.acts.SimulateControl,
 	cr.plugins_.Sprite.prototype.acts.SetInstanceVar,
 	cr.behaviors.EightDir.prototype.cnds.IsMoving,
@@ -23274,6 +23294,7 @@ cr.getObjectRefTable = function () { return [
 	cr.system_object.prototype.acts.SubVar,
 	cr.system_object.prototype.acts.AddVar,
 	cr.plugins_.Sprite.prototype.acts.SetPos,
+	cr.plugins_.Touch.prototype.cnds.OnTapGestureObject,
 	cr.behaviors.lunarray_LiteTween.prototype.acts.Reverse,
 	cr.system_object.prototype.cnds.PickNth,
 	cr.plugins_.Text.prototype.acts.SetFontColor,
@@ -23284,8 +23305,11 @@ cr.getObjectRefTable = function () { return [
 	cr.plugins_.Touch.prototype.cnds.OnTouchObject,
 	cr.system_object.prototype.acts.SetTimescale,
 	cr.system_object.prototype.cnds.OnLayoutStart,
-	cr.system_object.prototype.cnds.CompareTime,
-	cr.plugins_.Touch.prototype.cnds.OnTapGestureObject,
-	cr.plugins_.Browser.prototype.acts.ExecJs
+	cr.system_object.prototype.acts.SetLayerScale,
+	cr.system_object.prototype.cnds.EveryTick,
+	cr.plugins_.Sprite.prototype.exps.X,
+	cr.plugins_.Sprite.prototype.exps.Y,
+	cr.plugins_.Browser.prototype.acts.ExecJs,
+	cr.system_object.prototype.cnds.IsMobile
 ];};
 

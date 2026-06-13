@@ -1,5 +1,5 @@
 ﻿{
-	"version": 1781027369,
+	"version": 1781362367,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -45,6 +45,15 @@
 		"images/objecttilemap9.png",
 		"images/ayah-sheet0.png",
 		"images/ayahtrigger-sheet0.png",
+		"images/mobilecontrolbtndown-sheet0.png",
+		"images/mobilecontrolbtnright-sheet0.png",
+		"images/mobilecontrolbtnleft-sheet0.png",
+		"images/mobilecontrolupbtn-sheet0.png",
+		"images/touchbtn-sheet0.png",
+		"images/playershadow-sheet0.png",
+		"images/kakak-sheet0.png",
+		"images/kakaktrigger-sheet0.png",
+		"images/popuphalaman-sheet0.png",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",

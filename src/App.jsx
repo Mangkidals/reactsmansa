@@ -16,7 +16,7 @@ const GAME_LEVELS = [
     title: "Level 1: Siapa Teman Baruku?",
     desc: "Skenario chat awal tentang menyaring informasi pribadi dan mewaspadai permintaan kontak dari orang tak dikenal di game online.",
     badge: "Detektif Pemula",
-    iframeUrl: "/Opsi-1/OPSI-1/index.html",
+    iframeUrl: "/OPSI-1/index.html",
     opponent: {
       name: "Skenario Pertemanan",
       avatarChar: ""
@@ -51,22 +51,22 @@ const GAME_LEVELS = [
 const MODUL_PAGES = [
   {
     title: "Mengenal Cyber Grooming",
-    img: "📚",
+    img: "",
     content: "Cyber grooming adalah proses ketika pelaku (biasanya orang dewasa di internet) mencoba berteman, membangun hubungan emosional, dan memanipulasi anak-anak atau remaja agar mempercayai mereka dengan tujuan jahat/eksploitasi di kemudian hari. Mereka bisa menyamar sebagai anak seusiamu dan menyukai game yang sama."
   },
   {
     title: "Tahapan Manipulasi Pelaku",
-    img: "🚨",
+    img: "",
     content: "Pelaku biasanya menggunakan tahapan terencana: (1) Menjalin pertemanan akrab lewat hobi yang sama, (2) Memberi hadiah gratis seperti top-up game agar korban merasa berutang budi, (3) Meminta memindahkan chat ke platform privat (WhatsApp/Discord), (4) Mulai mengisolasi dengan meminta merahasikan obrolan dari orang tua, (5) Meminta foto/video call sensitif, dan (6) Mengancam jika korban menolak."
   },
   {
     title: "Tanda Bahaya (Red Flags)",
-    img: "⚠️",
+    img: "",
     content: "Segera waspada jika teman online barumu melakukan hal berikut: (1) Meminta rahasia pertemanan dari orang tuamu, (2) Mendesak meminta nomor WA atau Instagram pribadimu, (3) Memberi diamond/skin gratis secara mendadak, (4) Marah atau memeras emosimu jika permintaannya ditolak, (5) Mengajak video call privat di ruang tertutup."
   },
   {
     title: "Cara Melindungi Diri & Melapor",
-    img: "🛡️",
+    img: "",
     content: "Langkah pertahanan terbaikmu: (1) Jangan pernah bagikan informasi pribadi (sekolah, nomor WA, alamat rumah, foto diri), (2) Jangan terima hadiah berharga dari orang asing, (3) Selalu ceritakan chat mencurigakan ke orang tua atau gurumu, (4) Blokir dan Laporkan akun mencurigakan ke CS Game, dan jika ada pemerasan, laporkan ke Polisi Cyber atau Hotline Sahabat Perempuan & Anak KPPPA di 129."
   }
 ];
