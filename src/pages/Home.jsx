@@ -35,12 +35,12 @@ export default function Home({ setActivePage, setGameState, setActiveMateriTab, 
               />
             </div>
 
-            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-[#494949]">
+            <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-[#494949]">
               Kenali <span className="text-[#53B4FB]">Cyber Grooming</span>,<br />
               Jaga Keamanan Digital Kita!
             </h1>
 
-            <p className="text-gray-600 text-lg leading-relaxed max-w-xl">
+            <p className="text-gray-600 text-md leading-relaxed max-w-xl">
               <strong>SIGMA</strong> (Strategi Identifikasi Grooming Anak) merupakan web game edukatif yang dirancang untuk membantu siswa dalam memahami, mengenali, dan mencegah perilaku manipulatif (cyber grooming) di dunia digital.
             </p>
 
