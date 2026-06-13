@@ -20,19 +20,25 @@
   --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
+
     50% {
       transform: translateY(-8px);
     }
   }
 
   @keyframes bounce-slow {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
       animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
     }
+
     50% {
       transform: translateY(-5px);
       animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -40,10 +46,13 @@
   }
 
   @keyframes pulse-glow {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 0.8;
       box-shadow: 0 0 15px rgba(83, 180, 251, 0.4);
     }
+
     50% {
       opacity: 1;
       box-shadow: 0 0 25px rgba(83, 180, 251, 0.7);
@@ -51,10 +60,13 @@
   }
 
   @keyframes fab-bounce {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0) scale(1);
       box-shadow: 0 4px 15px rgba(83, 180, 251, 0.3);
     }
+
     50% {
       transform: translateY(-6px) scale(1.05);
       box-shadow: 0 8px 25px rgba(83, 180, 251, 0.5);
@@ -62,6 +74,57 @@
   }
 
   --animate-fab-bounce: fab-bounce 2.5s ease-in-out infinite;
+}
+
+/* Background Animations and Utilities */
+@keyframes drift-slow {
+  0% { transform: translate3d(-20%, 0, 0); }
+  100% { transform: translate3d(120%, 0, 0); }
+}
+
+@keyframes drift-medium {
+  0% { transform: translate3d(120%, 0, 0); }
+  100% { transform: translate3d(-20%, 0, 0); }
+}
+
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+
+@keyframes blob-spin {
+  0%, 100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
+  33% { transform: translate(40px, -60px) scale(1.15) rotate(120deg); }
+  66% { transform: translate(-30px, 30px) scale(0.9) rotate(240deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.25; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(1.25); }
+}
+
+.animate-drift-slow {
+  animation: drift-slow 45s linear infinite;
+}
+
+.animate-drift-medium {
+  animation: drift-medium 35s linear infinite;
+}
+
+.animate-float-gentle {
+  animation: float-gentle 8s ease-in-out infinite;
+}
+
+.animate-blob-spin {
+  animation: blob-spin 28s ease-in-out infinite;
+}
+
+.animate-blob-spin-reverse {
+  animation: blob-spin 34s ease-in-out infinite reverse;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 10s ease-in-out infinite;
 }
 
 /* Custom CSS Base and Resets */
@@ -153,8 +216,13 @@ body {
 
 /* Guide Modal Animations */
 @keyframes guide-backdrop-enter {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes guide-modal-enter {
@@ -162,6 +230,7 @@ body {
     opacity: 0;
     transform: scale(0.92) translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
@@ -178,8 +247,15 @@ body {
 
 /* Fade In animation reusable */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
@@ -188,8 +264,15 @@ body {
 
 /* Scale Up animation for article modal */
 @keyframes scale-up {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .animate-scale-up {

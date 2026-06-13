@@ -207,25 +207,29 @@ export default function Game({
           </ScrollReveal>
 
           {/* Construct 2 Game Iframe Container */}
-          <ScrollReveal animation="zoom-in" duration={800} className="bg-[#494949] p-3 rounded-3xl shadow-xl border border-gray-200 overflow-hidden relative">
-            <div className="bg-[#0a1520] rounded-2xl overflow-hidden aspect-[16/9] w-full max-h-[600px] border border-gray-800 relative">
+          <ScrollReveal animation="zoom-in" duration={800} className="bg-white/85 backdrop-blur-md p-3 sm:p-4 rounded-3xl shadow-xl border border-blue-100/50 overflow-hidden relative">
+            <div className="bg-slate-50 rounded-2xl overflow-hidden aspect-[16/9] w-full max-h-[600px] border border-blue-100/30 relative">
               {isLoading && (
                 <div className="absolute inset-0 z-20">
                   <GameSkeleton />
                 </div>
               )}
               <iframe
+                id="game-iframe"
                 src={activeLevel.iframeUrl}
                 className={`w-full h-full border-0 z-10 transition-opacity duration-300 ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                 title={activeLevel.title}
+                allow="fullscreen"
                 allowFullScreen
+                webkitallowfullscreen="true"
+                mozallowfullscreen="true"
                 onLoad={() => setIsLoading(false)}
               ></iframe>
             </div>
           </ScrollReveal>
 
           {/* Sleek Action Controls below the Iframe */}
-          <div className="bg-white rounded-2xl p-4 border border-blue-100 shadow-sm flex flex-wrap justify-between items-center gap-4">
+          <div className="bg-white/80 backdrop-blur-md rounded-2xl p-4 border border-blue-100/50 shadow-sm flex flex-wrap justify-between items-center gap-4">
             <button
               onClick={exitGame}
               className="flex items-center space-x-1.5 px-6 py-3 bg-white hover:bg-gray-50 text-gray-500 font-heading font-bold text-xs rounded-full border border-gray-200 cursor-pointer transition-colors shadow-sm"

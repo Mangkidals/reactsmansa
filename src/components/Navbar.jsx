@@ -3,10 +3,10 @@ import logoImage from '../assets/hero.png';
 
 export default function Navbar({ activePage, setActivePage, setGameState }) {
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const menuItems = [
-    { id: 'home', label: 'Beranda'},
-        { id: 'game', label: 'Mainkan Game' },
+    { id: 'home', label: 'Beranda' },
+    { id: 'game', label: 'Mainkan Game' },
     { id: 'materi', label: 'Baca Materi' }
   ];
 
@@ -47,8 +47,8 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
                     }
                   }}
                   className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 text-sm flex items-center justify-center cursor-pointer ${activePage === item.id
-                      ? 'bg-[#53B4FB] text-white shadow-md shadow-blue-200 scale-105'
-                      : 'hover:bg-blue-50 text-[#494949]'
+                    ? 'bg-[#53B4FB] text-white shadow-md shadow-blue-200 scale-105'
+                    : 'hover:bg-blue-50 text-[#494949]'
                     }`}
                 >
                   <span>{item.label}</span>
@@ -92,8 +92,8 @@ export default function Navbar({ activePage, setActivePage, setGameState }) {
                   setIsOpen(false);
                 }}
                 className={`w-full px-5 py-3.5 rounded-2xl font-heading font-bold text-left transition-all duration-200 text-sm flex items-center space-x-3 cursor-pointer ${activePage === item.id
-                    ? 'bg-[#53B4FB] text-white shadow-md shadow-blue-200'
-                    : 'hover:bg-blue-50/70 text-[#494949]'
+                  ? 'bg-[#53B4FB] text-white shadow-md shadow-blue-200'
+                  : 'hover:bg-blue-50/70 text-[#494949]'
                   }`}
               >
                 <span>{item.label}</span>

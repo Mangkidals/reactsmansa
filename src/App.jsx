@@ -169,7 +169,7 @@ export default function App() {
         const rawLevelId = event.data.levelId ?? event.data.level;
         const levelId = Number(rawLevelId);
         const score = event.data.score ?? 100;
-        console.log('Processed LEVEL_COMPLETE:', {levelId, score});
+        console.log('Processed LEVEL_COMPLETE:', { levelId, score });
         triggerLevelCompletion(levelId, score);
       }
     };
@@ -225,8 +225,55 @@ export default function App() {
 
 
 
+  const wrapperClass = activePage === 'home' || activePage === 'game'
+    ? "min-h-screen bg-gradient-to-b from-[#BBE2FF] via-[#E2F1FF] to-white text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500"
+    : activePage === 'materi'
+    ? "min-h-screen bg-gradient-to-br from-[#F0F8FF] via-white to-[#EBF5FF] text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500"
+    : "min-h-screen bg-[#ECEFFC] text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500";
+
   return (
-    <div className="min-h-screen bg-[#ECEFFC] text-[#494949] flex flex-col font-body antialiased relative">
+    <div className={wrapperClass}>
+
+      {/* Background Decorators */}
+      {(activePage === 'home' || activePage === 'game') && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          {/* Cloud 1 */}
+          <div className="absolute top-[8%] w-full animate-drift-slow" style={{ animationDelay: '0s' }}>
+            <svg className="w-28 sm:w-36 h-10 fill-white/85" viewBox="0 0 100 40">
+              <path d="M 20, 30 a 10,10 0 0,1 0,-20 a 15,15 0 0,1 22,-5 a 20,20 0 0,1 33,5 a 12,12 0 0,1 10,10 a 10,10 0 0,1 -10,10 Z" />
+            </svg>
+          </div>
+          {/* Cloud 2 */}
+          <div className="absolute top-[22%] w-full animate-drift-medium" style={{ animationDelay: '-15s' }}>
+            <svg className="w-36 sm:w-48 h-12 fill-white/55" viewBox="0 0 100 40">
+              <path d="M 20, 30 a 10,10 0 0,1 0,-20 a 15,15 0 0,1 22,-5 a 20,20 0 0,1 33,5 a 12,12 0 0,1 10,10 a 10,10 0 0,1 -10,10 Z" />
+            </svg>
+          </div>
+          {/* Cloud 3 */}
+          <div className="absolute top-[48%] w-full animate-drift-slow" style={{ animationDelay: '-30s' }}>
+            <svg className="w-24 sm:w-32 h-8 fill-white/70" viewBox="0 0 100 40">
+              <path d="M 20, 30 a 10,10 0 0,1 0,-20 a 15,15 0 0,1 22,-5 a 20,20 0 0,1 33,5 a 12,12 0 0,1 10,10 a 10,10 0 0,1 -10,10 Z" />
+            </svg>
+          </div>
+        </div>
+      )}
+
+      {activePage === 'materi' && (
+        <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+          {/* Organic Blob 1 - Top Right */}
+          <svg className="absolute -top-20 -right-20 w-80 h-80 opacity-40 animate-blob-spin" viewBox="0 0 200 200">
+            <path fill="#53B4FB" d="M44.7,-60.8C58.3,-50.2,69,-36.8,74.2,-21.2C79.4,-5.6,79.1,12.3,73.1,28.2C67.1,44.2,55.3,58.3,40.3,66.8C25.3,75.3,7.1,78.2,-10.8,75.8C-28.8,73.4,-46.6,65.8,-59,52.8C-71.4,39.9,-78.4,21.7,-78.9,3.7C-79.5,-14.3,-73.6,-32.1,-62,-44.6C-50.5,-57.1,-33.4,-64.4,-16.9,-67.2C-0.3,-70,16.2,-68.3,44.7,-60.8Z" transform="translate(100, 100)" />
+          </svg>
+          {/* Organic Blob 2 - Middle Left */}
+          <svg className="absolute top-[35%] -left-24 w-72 h-72 opacity-30 animate-blob-spin-reverse" viewBox="0 0 200 200">
+            <path fill="#C8B6FB" d="M38.5,-52C51.1,-46.2,63.3,-37.2,69.5,-24.8C75.7,-12.3,75.9,3.5,71.2,17.4C66.5,31.4,56.9,43.3,44.7,51.8C32.6,60.2,18,65,-2.9,69C-23.7,73,-50.7,76.2,-65.4,66.4C-80,56.6,-82.3,33.8,-80.6,13.7C-78.8,-6.4,-73.1,-23.7,-62.4,-34C-51.7,-44.3,-36.1,-47.5,-23.1,-52.8C-10.1,-58.1,0.2,-65.6,10.6,-63.9C21.1,-62.3,25.9,-57.7,38.5,-52Z" transform="translate(100, 100)" />
+          </svg>
+          {/* Organic Blob 3 - Bottom Right */}
+          <svg className="absolute bottom-10 -right-16 w-80 h-80 opacity-25 animate-blob-spin" viewBox="0 0 200 200">
+            <path fill="#53B4FB" d="M47.7,-63.7C60.3,-53.7,68.1,-37.6,71.7,-21.2C75.3,-4.8,74.7,12,68.7,26.7C62.7,41.4,51.3,54,37,62.2C22.7,70.4,5.6,74.1,-11.2,71.7C-28,69.2,-44.4,60.6,-56.3,48.2C-68.2,35.8,-75.7,19.6,-77.2,2.5C-78.7,-14.7,-74.2,-32.8,-63.4,-44.7C-52.6,-56.6,-35.6,-62.4,-19.1,-65.9C-2.6,-69.3,13.3,-70.5,30.5,-69.1C47.7,-67.7,35,-73.7,47.7,-63.7Z" transform="translate(100, 100)" />
+          </svg>
+        </div>
+      )}
 
       {/* Navbar Component */}
       <Navbar
@@ -274,6 +321,25 @@ export default function App() {
           />
         )}
       </main>
+
+      {/* Grassy Hill divider for Home and Game pages */}
+      {(activePage === 'home' || activePage === 'game') && (
+        <div className="relative w-full z-0 -mt-16 pointer-events-none select-none">
+          <svg className="w-full h-16 sm:h-24 fill-[#A5DD9B]" viewBox="0 0 1440 100" preserveAspectRatio="none">
+            <path d="M0,60 C320,100 640,20 960,80 C1280,140 1440,60 1440,60 L1440,100 L0,100 Z" />
+          </svg>
+          {/* Flower Details */}
+          <div className="absolute bottom-4 left-[15%] w-3 h-3 bg-white rounded-full shadow-sm animate-float-gentle" style={{ animationDelay: '0s' }}>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-yellow-400 rounded-full"></div>
+          </div>
+          <div className="absolute bottom-8 left-[45%] w-2.5 h-2.5 bg-white rounded-full shadow-sm animate-float-gentle" style={{ animationDelay: '1.5s' }}>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.2 h-1.2 bg-yellow-400 rounded-full"></div>
+          </div>
+          <div className="absolute bottom-5 left-[78%] w-3.5 h-3.5 bg-white rounded-full shadow-sm animate-float-gentle" style={{ animationDelay: '0.8s' }}>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-yellow-400 rounded-full"></div>
+          </div>
+        </div>
+      )}
 
       {/* Footer Component */}
       <Footer setActivePage={setActivePage} setGameState={setGameState} />
