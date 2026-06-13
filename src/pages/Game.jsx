@@ -51,7 +51,9 @@ export default function Game({
     }
   }, [gameState, activeLevelId]);
 
-  // Handle fullscreen message from Construct 2 iframe and vice versa
+  // Handle fullscreen toggle: listen for postMessage from the Construct 2 iframe,
+  // then request/exit fullscreen on the iframe element itself.
+  // Also relay fullscreenchange back to the iframe so it can update its button icon.
   useEffect(() => {
     if (gameState !== 'playing') return;
 
@@ -60,76 +62,42 @@ export default function Game({
         const iframe = document.getElementById('game-iframe');
         if (!iframe) return;
 
-        const isFS = document.fullscreenElement || 
-                     document.webkitFullscreenElement || 
-                     document.mozFullScreenElement || 
-                     document.msFullscreenElement;
+        const isFS = document.fullscreenElement || document.webkitFullscreenElement;
 
         if (isFS) {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
-          } else if (document.webkitExitFullscreen) {
-            document.webkitExitFullscreen();
-          } else if (document.mozCancelFullScreen) {
-            document.mozCancelFullScreen();
-          } else if (document.msExitFullscreen) {
-            document.msExitFullscreen();
-          }
+          (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
         } else {
-          if (iframe.requestFullscreen) {
-            iframe.requestFullscreen();
-          } else if (iframe.webkitRequestFullscreen) {
-            iframe.webkitRequestFullscreen();
-          } else if (iframe.mozRequestFullScreen) {
-            iframe.mozRequestFullScreen();
-          } else if (iframe.msRequestFullscreen) {
-            iframe.msRequestFullscreen();
-          }
+          (iframe.requestFullscreen || iframe.webkitRequestFullscreen)?.call(iframe);
         }
       }
     };
 
     const handleFullscreenChange = () => {
       const iframe = document.getElementById('game-iframe');
-      if (!iframe || !iframe.contentWindow) return;
+      if (!iframe?.contentWindow) return;
 
-      const isFS = document.fullscreenElement === iframe || 
-                   document.webkitFullscreenElement === iframe || 
-                   document.mozFullScreenElement === iframe || 
-                   document.msFullscreenElement === iframe;
+      const isFS = document.fullscreenElement === iframe ||
+                   document.webkitFullscreenElement === iframe;
 
-      iframe.contentWindow.postMessage({
-        type: 'FULLSCREEN_STATE',
-        isFullscreen: isFS
-      }, '*');
+      iframe.contentWindow.postMessage({ type: 'FULLSCREEN_STATE', isFullscreen: isFS }, '*');
     };
 
     window.addEventListener('message', handleGameMessage);
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
 
     return () => {
       window.removeEventListener('message', handleGameMessage);
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
       document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
-      document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
-      document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
 
-      // Clean up fullscreen if leaving the page
-      const isFS = document.fullscreenElement || 
-                   document.webkitFullscreenElement || 
-                   document.mozFullScreenElement || 
-                   document.msFullscreenElement;
-      if (isFS) {
-        if (document.exitFullscreen) document.exitFullscreen();
-        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-        else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-        else if (document.msExitFullscreen) document.msExitFullscreen();
+      // Exit fullscreen when leaving the game page
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
       }
     };
   }, [gameState, activeLevelId]);
+
 
   return (
     <div className="space-y-8 animate-fade-in">

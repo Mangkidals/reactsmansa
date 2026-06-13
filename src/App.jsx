@@ -163,6 +163,8 @@ export default function App() {
   });
 
   // Construct 2 postMessage Event Listener
+  // Dependency array is empty: triggerLevelCompletion uses functional setters internally,
+  // so it never needs stale closure values — no need to re-register on every level change.
   useEffect(() => {
     const handleGameMessage = (event) => {
       if (event.data && event.data.type === 'LEVEL_COMPLETE') {
@@ -175,7 +177,8 @@ export default function App() {
     };
     window.addEventListener('message', handleGameMessage);
     return () => window.removeEventListener('message', handleGameMessage);
-  }, [completedLevels, unlockedLevels]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const startLevel = (levelId) => {
     setActiveLevelId(levelId);
