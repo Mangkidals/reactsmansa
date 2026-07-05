@@ -16,7 +16,7 @@ const GAME_LEVELS = [
     title: "Level 1: Siapa Teman Baruku?",
     desc: "Skenario chat awal tentang menyaring informasi pribadi dan mewaspadai permintaan kontak dari orang tak dikenal di game online.",
     badge: "Detektif Pemula",
-    iframeUrl: "/OPSI-1.1/index.html",
+    iframeUrl: `${import.meta.env.BASE_URL}OPSI-1.2/index.html`,
     opponent: {
       name: "Skenario Pertemanan",
       avatarChar: ""
