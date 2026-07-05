@@ -231,8 +231,8 @@ export default function App() {
   const wrapperClass = activePage === 'home' || activePage === 'game'
     ? "min-h-screen bg-gradient-to-b from-[#BBE2FF] via-[#E2F1FF] to-white text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500"
     : activePage === 'materi'
-    ? "min-h-screen bg-gradient-to-br from-[#F0F8FF] via-white to-[#EBF5FF] text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500"
-    : "min-h-screen bg-[#ECEFFC] text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500";
+      ? "min-h-screen bg-gradient-to-br from-[#F0F8FF] via-white to-[#EBF5FF] text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500"
+      : "min-h-screen bg-[#ECEFFC] text-[#494949] flex flex-col font-body antialiased relative overflow-x-hidden transition-all duration-500";
 
   return (
     <div className={wrapperClass}>

@@ -78,29 +78,65 @@
 
 /* Background Animations and Utilities */
 @keyframes drift-slow {
-  0% { transform: translate3d(-20%, 0, 0); }
-  100% { transform: translate3d(120%, 0, 0); }
+  0% {
+    transform: translate3d(-20%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(120%, 0, 0);
+  }
 }
 
 @keyframes drift-medium {
-  0% { transform: translate3d(120%, 0, 0); }
-  100% { transform: translate3d(-20%, 0, 0); }
+  0% {
+    transform: translate3d(120%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(-20%, 0, 0);
+  }
 }
 
 @keyframes float-gentle {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(2deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
 }
 
 @keyframes blob-spin {
-  0%, 100% { transform: translate(0px, 0px) scale(1) rotate(0deg); }
-  33% { transform: translate(40px, -60px) scale(1.15) rotate(120deg); }
-  66% { transform: translate(-30px, 30px) scale(0.9) rotate(240deg); }
+
+  0%,
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+
+  33% {
+    transform: translate(40px, -60px) scale(1.15) rotate(120deg);
+  }
+
+  66% {
+    transform: translate(-30px, 30px) scale(0.9) rotate(240deg);
+  }
 }
 
 @keyframes glow-pulse {
-  0%, 100% { opacity: 0.25; transform: scale(1); }
-  50% { opacity: 0.55; transform: scale(1.25); }
+
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scale(1.25);
+  }
 }
 
 .animate-drift-slow {

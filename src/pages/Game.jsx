@@ -77,7 +77,7 @@ export default function Game({
       if (!iframe?.contentWindow) return;
 
       const isFS = document.fullscreenElement === iframe ||
-                   document.webkitFullscreenElement === iframe;
+        document.webkitFullscreenElement === iframe;
 
       iframe.contentWindow.postMessage({ type: 'FULLSCREEN_STATE', isFullscreen: isFS }, '*');
     };
