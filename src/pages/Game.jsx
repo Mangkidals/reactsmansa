@@ -65,9 +65,32 @@ export default function Game({
         const isFS = document.fullscreenElement || document.webkitFullscreenElement;
 
         if (isFS) {
-          (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
+          // Exit fullscreen, lalu lepas orientation lock
+          (document.exitFullscreen || document.webkitExitFullscreen)?.call(document)
+            .then(() => {
+              if (screen.orientation?.unlock) {
+                screen.orientation.unlock();
+              }
+            })
+            .catch(() => {
+              if (screen.orientation?.unlock) {
+                screen.orientation.unlock();
+              }
+            });
         } else {
-          (iframe.requestFullscreen || iframe.webkitRequestFullscreen)?.call(iframe);
+          // Masuk fullscreen, lalu paksa orientasi landscape di mobile
+          const fsPromise = (iframe.requestFullscreen || iframe.webkitRequestFullscreen)?.call(iframe);
+          if (fsPromise) {
+            fsPromise
+              .then(() => {
+                if (screen.orientation?.lock) {
+                  screen.orientation.lock('landscape').catch(() => {
+                    // Screen orientation lock tidak didukung di semua browser — abaikan error
+                  });
+                }
+              })
+              .catch(() => {});
+          }
         }
       }
     };
@@ -78,6 +101,11 @@ export default function Game({
 
       const isFS = document.fullscreenElement === iframe ||
         document.webkitFullscreenElement === iframe;
+
+      // Jika keluar dari fullscreen, lepas orientation lock agar layar bisa kembali portrait
+      if (!isFS && screen.orientation?.unlock) {
+        screen.orientation.unlock();
+      }
 
       iframe.contentWindow.postMessage({ type: 'FULLSCREEN_STATE', isFullscreen: isFS }, '*');
     };
