@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import heroImage from '../assets/hero.png';
-import mainheroImage from '../assets/mainhero.png';
+import mainheroImage from '../assets/icons.png';
 import ScrollReveal from '../components/ScrollReveal';
 
 export default function Home({ setActivePage, setGameState, setActiveMateriTab, setSelectedArticle, articles }) {

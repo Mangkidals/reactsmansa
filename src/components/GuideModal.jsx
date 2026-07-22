@@ -30,7 +30,7 @@ const GUIDE_STEPS = [
     color: "#FF6D00",
     bgGradient: "from-orange-50 to-amber-50",
     tips: [
-      "Level 1 — Siapa Teman Baruku? (skenario pertemanan)",
+      "Level 1 — Edukasi Cyber Grooming (skenario pertemanan)",
       "Level 2 — Hadiah Misterius (skenario gratifikasi)",
       "Level 3 — Rahasia Kita Berdua (skenario pemerasan)",
       "Level harus diselesaikan secara berurutan untuk membuka level berikutnya"

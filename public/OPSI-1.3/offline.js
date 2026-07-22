@@ -1,5 +1,5 @@
-﻿{
-	"version": 1783525918,
+{
+	"version": 178352591,
 	"fileList": [
 		"data.js",
 		"c2runtime.js",
@@ -64,16 +64,6 @@
 		"images/windowtrigger-sheet0.png",
 		"images/submitbtn-sheet0.png",
 		"images/quizcontainer-sheet0.png",
-		"media/wii play - main theme - sirbaki (320k).m4a",
-		"media/wii play - main theme - sirbaki (320k).ogg",
-		"media/gurumin ost - t-t-t-terrible!.m4a",
-		"media/gurumin ost - t-t-t-terrible!.ogg",
-		"media/[vgm] busou shinki_ battle masters (psp) - shinki center.m4a",
-		"media/[vgm] busou shinki_ battle masters (psp) - shinki center.ogg",
-		"media/[ost] astro boy (playstation 2) [track 29] bay area.m4a",
-		"media/[ost] astro boy (playstation 2) [track 29] bay area.ogg",
-		"media/pangya portable ost daydream arr.m4a",
-		"media/pangya portable ost daydream arr.ogg",
 		"icon-16.png",
 		"icon-32.png",
 		"icon-114.png",

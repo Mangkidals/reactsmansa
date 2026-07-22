@@ -191,6 +191,50 @@
     </script>
 
 	<script>
+	// Listen for keyboard and click events forwarded from the parent React app
+	// This enables on-screen touch controls (D-pad + click) and keyboard forwarding
+	(function() {
+		window.addEventListener('message', function(e) {
+			if (!e.data || !e.data.type) return;
+
+			var canvas = document.getElementById('c2canvas');
+			if (!canvas) return;
+
+			if (e.data.type === 'KEYDOWN' || e.data.type === 'KEYUP') {
+				var eventType = e.data.type === 'KEYDOWN' ? 'keydown' : 'keyup';
+				var evt = new KeyboardEvent(eventType, {
+					key: e.data.key,
+					keyCode: e.data.keyCode,
+					which: e.data.which,
+					code: e.data.key,
+					bubbles: true,
+					cancelable: true
+				});
+				canvas.dispatchEvent(evt);
+				document.dispatchEvent(evt);
+			}
+
+			if (e.data.type === 'SIMULATE_CLICK') {
+				var rect = canvas.getBoundingClientRect();
+				var centerX = rect.width / 2;
+				var centerY = rect.height / 2;
+
+				['mousedown', 'mouseup', 'click'].forEach(function(type) {
+					var evt = new MouseEvent(type, {
+						clientX: rect.left + centerX,
+						clientY: rect.top + centerY,
+						bubbles: true,
+						cancelable: true,
+						view: window
+					});
+					canvas.dispatchEvent(evt);
+				});
+			}
+		});
+	})();
+	</script>
+
+	<script>
 	// Fullscreen toggle logic — bekerja standalone maupun di dalam iframe React
 	(function() {
 		var btn = document.getElementById('fs-toggle-btn');

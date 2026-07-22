@@ -13,7 +13,7 @@ import Game from './pages/Game';
 const GAME_LEVELS = [
   {
     id: 1,
-    title: "Level 1: Siapa Teman Baruku?",
+    title: "Level 1: Edukasi Cyber Grooming",
     desc: "Skenario chat awal tentang menyaring informasi pribadi dan mewaspadai permintaan kontak dari orang tak dikenal di game online.",
     badge: "Detektif Pemula",
     iframeUrl: "/OPSI-1.3/index.html",

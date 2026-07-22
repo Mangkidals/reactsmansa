@@ -89,7 +89,7 @@ export default function Game({
                   });
                 }
               })
-              .catch(() => {});
+              .catch(() => { });
           }
         }
       }
@@ -123,6 +123,72 @@ export default function Game({
       if (document.fullscreenElement || document.webkitFullscreenElement) {
         (document.exitFullscreen || document.webkitExitFullscreen)?.call(document);
       }
+    };
+  }, [gameState, activeLevelId]);
+
+  // Helper: send keyboard event to the Construct 2 iframe via postMessage
+  const sendKeyToIframe = (key, keyCode, isDown) => {
+    const iframe = document.getElementById('game-iframe');
+    if (!iframe?.contentWindow) return;
+    iframe.contentWindow.postMessage({
+      type: isDown ? 'KEYDOWN' : 'KEYUP',
+      key: key,
+      keyCode: keyCode,
+      which: keyCode
+    }, '*');
+  };
+
+  // Helper: simulate a mouse click at the center of the Construct 2 canvas
+  const simulateClickOnIframe = () => {
+    const iframe = document.getElementById('game-iframe');
+    if (!iframe?.contentWindow) return;
+    iframe.contentWindow.postMessage({
+      type: 'SIMULATE_CLICK'
+    }, '*');
+  };
+
+  // Forward keyboard events from parent window to the iframe
+  // This ensures keyboard works even when iframe doesn't have direct focus
+  useEffect(() => {
+    if (gameState !== 'playing') return;
+
+    const GAME_KEYS = new Set([
+      'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+      'Enter', ' ', 'Escape', 'w', 'a', 's', 'd',
+      'W', 'A', 'S', 'D', 'f', 'F'
+    ]);
+
+    const forwardKey = (e) => {
+      if (!GAME_KEYS.has(e.key)) return;
+
+      // Prevent page scrolling when arrow keys are pressed
+      if (e.key.startsWith('Arrow') || e.key === ' ') {
+        e.preventDefault();
+      }
+
+      const iframe = document.getElementById('game-iframe');
+      if (!iframe?.contentWindow) return;
+
+      // F key triggers a click on the game canvas
+      if ((e.key === 'f' || e.key === 'F') && e.type === 'keydown') {
+        iframe.contentWindow.postMessage({ type: 'SIMULATE_CLICK' }, '*');
+        return;
+      }
+
+      iframe.contentWindow.postMessage({
+        type: e.type === 'keydown' ? 'KEYDOWN' : 'KEYUP',
+        key: e.key,
+        keyCode: e.keyCode,
+        which: e.which
+      }, '*');
+    };
+
+    window.addEventListener('keydown', forwardKey);
+    window.addEventListener('keyup', forwardKey);
+
+    return () => {
+      window.removeEventListener('keydown', forwardKey);
+      window.removeEventListener('keyup', forwardKey);
     };
   }, [gameState, activeLevelId]);
 
@@ -282,6 +348,22 @@ export default function Game({
             </div>
           </ScrollReveal>
 
+          {/* Keyboard Hint for Desktop */}
+          <div className="hidden lg:flex items-center justify-center gap-3 text-xs text-gray-400 bg-gray-50 rounded-xl px-4 py-2 border border-gray-100">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+            </svg>
+            <span>Gunakan tombol <strong>W A S D</strong> pada keyboard untuk navigasi, dan tombol <strong>F</strong> untuk klik/interaksi.</span>
+          </div>
+
+          {/* iPhone/Mobile Rotation Hint */}
+          <div className="flex lg:hidden items-center justify-center gap-3 text-xs text-amber-600 bg-amber-50 rounded-xl px-4 py-2.5 border border-amber-200">
+            <svg className="w-5 h-5 shrink-0 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+            </svg>
+            <span>Untuk layar penuh, <strong>non-aktifkan kunci rotasi</strong> lalu <strong>miringkan handphone</strong> ke posisi landscape.</span>
+          </div>
+
           {/* Construct 2 Game Iframe Container */}
           <ScrollReveal animation="zoom-in" duration={800} className="bg-white/85 backdrop-blur-md p-3 sm:p-4 rounded-3xl shadow-xl border border-blue-100/50 overflow-hidden relative">
             <div className="bg-slate-50 rounded-2xl overflow-hidden aspect-[16/9] w-full max-h-[600px] border border-blue-100/30 relative">
@@ -299,8 +381,121 @@ export default function Game({
                 allowFullScreen
                 webkitallowfullscreen="true"
                 mozallowfullscreen="true"
-                onLoad={() => setIsLoading(false)}
+                onLoad={() => {
+                  setIsLoading(false);
+                  // Auto-focus the iframe so keyboard input works immediately
+                  const iframe = document.getElementById('game-iframe');
+                  if (iframe) iframe.focus();
+                }}
               ></iframe>
+
+              {/* Click overlay to focus the iframe on click (for laptop keyboard support) */}
+              {!isLoading && (
+                <div
+                  className="absolute inset-0 z-15 cursor-pointer"
+                  style={{ pointerEvents: 'none' }}
+                  onClick={() => {
+                    const iframe = document.getElementById('game-iframe');
+                    if (iframe) iframe.focus();
+                  }}
+                />
+              )}
+            </div>
+
+            {/* On-Screen Touch Controls for Tablet & Mobile */}
+            <div className="lg:hidden flex items-center justify-between px-2 sm:px-4 pt-3 gap-3">
+
+              {/* D-Pad (Arrow Buttons) */}
+              <div className="relative w-[120px] h-[120px] sm:w-[140px] sm:h-[140px] shrink-0">
+                {/* Up */}
+                <button
+                  className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border-2 border-gray-200 shadow-md flex items-center justify-center active:bg-blue-100 active:border-blue-300 active:scale-95 transition-all touch-manipulation select-none"
+                  onTouchStart={(e) => { e.preventDefault(); sendKeyToIframe('ArrowUp', 38, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKeyToIframe('ArrowUp', 38, false); }}
+                  onMouseDown={() => sendKeyToIframe('ArrowUp', 38, true)}
+                  onMouseUp={() => sendKeyToIframe('ArrowUp', 38, false)}
+                  aria-label="Atas"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+                  </svg>
+                </button>
+
+                {/* Down */}
+                <button
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border-2 border-gray-200 shadow-md flex items-center justify-center active:bg-blue-100 active:border-blue-300 active:scale-95 transition-all touch-manipulation select-none"
+                  onTouchStart={(e) => { e.preventDefault(); sendKeyToIframe('ArrowDown', 40, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKeyToIframe('ArrowDown', 40, false); }}
+                  onMouseDown={() => sendKeyToIframe('ArrowDown', 40, true)}
+                  onMouseUp={() => sendKeyToIframe('ArrowDown', 40, false)}
+                  aria-label="Bawah"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {/* Left */}
+                <button
+                  className="absolute top-1/2 -translate-y-1/2 left-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border-2 border-gray-200 shadow-md flex items-center justify-center active:bg-blue-100 active:border-blue-300 active:scale-95 transition-all touch-manipulation select-none"
+                  onTouchStart={(e) => { e.preventDefault(); sendKeyToIframe('ArrowLeft', 37, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKeyToIframe('ArrowLeft', 37, false); }}
+                  onMouseDown={() => sendKeyToIframe('ArrowLeft', 37, true)}
+                  onMouseUp={() => sendKeyToIframe('ArrowLeft', 37, false)}
+                  aria-label="Kiri"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                {/* Right */}
+                <button
+                  className="absolute top-1/2 -translate-y-1/2 right-0 w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border-2 border-gray-200 shadow-md flex items-center justify-center active:bg-blue-100 active:border-blue-300 active:scale-95 transition-all touch-manipulation select-none"
+                  onTouchStart={(e) => { e.preventDefault(); sendKeyToIframe('ArrowRight', 39, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKeyToIframe('ArrowRight', 39, false); }}
+                  onMouseDown={() => sendKeyToIframe('ArrowRight', 39, true)}
+                  onMouseUp={() => sendKeyToIframe('ArrowRight', 39, false)}
+                  aria-label="Kanan"
+                >
+                  <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="3">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Center dot */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-gray-100 border border-gray-200"></div>
+              </div>
+
+              {/* Action Buttons (Click / Enter / Space) */}
+              <div className="flex flex-col items-center gap-2 shrink-0">
+                {/* Main click/action button — simulates mouse click on canvas */}
+                <button
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#53B4FB] to-blue-600 text-white shadow-lg border-b-4 border-blue-700 flex items-center justify-center active:translate-y-0.5 active:border-b-0 active:shadow-md transition-all touch-manipulation select-none"
+                  onTouchStart={(e) => { e.preventDefault(); simulateClickOnIframe(); }}
+                  onMouseDown={() => simulateClickOnIframe()}
+                  aria-label="Klik"
+                >
+                  <div className="text-center">
+                    <svg className="w-6 h-6 sm:w-7 sm:h-7 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.042 21.672L13.684 16.6m0 0l-2.51 2.225.569-9.47 5.227 7.917-3.286-.672zM12 2.25V4.5m5.834.166l-1.591 1.591M20.25 10.5H18M7.757 14.743l-1.59 1.59M6 10.5H3.75m4.007-4.243l-1.59-1.59" />
+                    </svg>
+                    <span className="text-[9px] font-bold mt-0.5 block">KLIK</span>
+                  </div>
+                </button>
+
+                {/* Enter / Space button */}
+                <button
+                  className="w-14 h-10 sm:w-16 sm:h-11 rounded-xl bg-white border-2 border-gray-200 shadow-md flex items-center justify-center active:bg-green-100 active:border-green-300 active:scale-95 transition-all touch-manipulation select-none"
+                  onTouchStart={(e) => { e.preventDefault(); sendKeyToIframe('Enter', 13, true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); sendKeyToIframe('Enter', 13, false); }}
+                  onMouseDown={() => sendKeyToIframe('Enter', 13, true)}
+                  onMouseUp={() => sendKeyToIframe('Enter', 13, false)}
+                  aria-label="Enter"
+                >
+                  <span className="text-[10px] font-bold text-gray-600">ENTER</span>
+                </button>
+              </div>
             </div>
           </ScrollReveal>
 

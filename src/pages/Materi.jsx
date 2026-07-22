@@ -229,7 +229,7 @@ export default function Materi({
           </ScrollReveal>
         )}
 
-        {/* Tab 2: Buku Modul Interaktif — PDF Viewer */}
+        {/* Tab 2: Buku Modul Interaktif — Heyzine Flip-book */}
         {activeMateriTab === 'modul' && (
           <ScrollReveal animation="zoom-in" duration={800} className="w-full relative rounded-3xl overflow-hidden shadow-lg border border-blue-100" style={{ height: 'calc(100vh - 220px)', minHeight: '500px' }}>
             {isPdfLoading && (
@@ -238,11 +238,11 @@ export default function Materi({
               </div>
             )}
             <iframe
-              src="https://drive.google.com/file/d/1KQgvIXeG02KI4PdZ15safxeJwBWDMePm/preview"
+              src="https://heyzine.com/flip-book/120a324e60.html"
               className={`w-full h-full border-0 transition-opacity duration-300 ${isPdfLoading ? 'opacity-0' : 'opacity-100'}`}
               title="Buku Modul SIGMA — Edukasi Cyber Grooming"
-              allow="autoplay"
-              sandbox="allow-scripts allow-same-origin allow-popups"
+              allow="autoplay; fullscreen"
+              allowFullScreen
               onLoad={() => setIsPdfLoading(false)}
             ></iframe>
           </ScrollReveal>
