@@ -27,7 +27,7 @@ const GAME_LEVELS = [
     title: "Level 2: Hadiah Misterius",
     desc: "Skenario tentang menolak top-up diamonds/item game gratisan dari orang asing yang berujung pada pemerasan foto wajah.",
     badge: "Penjaga Privasi",
-    // iframeUrl: "/game/level2/index.html",
+    iframeUrl: "/OPSI-2.1/index.html",
     opponent: {
       name: "Skenario Gratifikasi",
       avatarChar: ""
