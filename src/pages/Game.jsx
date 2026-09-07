@@ -219,7 +219,7 @@ export default function Game({
 
             <div className="flex flex-wrap gap-3 md:justify-end">
               <a
-                href="https://forms.google.com/PRETEST_PLACEHOLDER"
+                href="https://forms.gle/BQfYraW5KtRRXmts6"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer bg-[#53B4FB] border-blue-600 text-white hover:bg-blue-400 active:translate-y-0.5 inline-flex items-center space-x-2 no-underline"
@@ -231,7 +231,7 @@ export default function Game({
               </a>
 
               <a
-                href="https://forms.google.com/POSTTEST_PLACEHOLDER"
+                href="https://forms.gle/hy9zchxBJ3S2dP8t9"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-5 py-3 rounded-xl font-heading text-xs font-bold border-b-4 transition-all cursor-pointer bg-[#FFAB41] border-[#D97E0C] text-white hover:bg-[#FF6D00] active:translate-y-0.5 inline-flex items-center space-x-2 no-underline"
