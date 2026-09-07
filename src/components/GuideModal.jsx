@@ -193,7 +193,7 @@ export default function GuideModal({ isOpen, onClose }) {
             {step.tips.map((tip, idx) => (
               <div
                 key={idx}
-                className="flex items-start space-x-3 bg-gray-50/80 hover:bg-gray-100/80 rounded-xl px-4 py-3 transition-colors"
+                className="flex items-start space-x-3 bg-gray-50/80 rounded-xl px-4 py-3"
               >
                 <div
                   className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white shrink-0 mt-0.5"
